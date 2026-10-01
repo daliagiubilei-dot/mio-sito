@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@300;400;600&family=Yanone+Kaffeesatz:wght@300;400;600&display=swap">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <script>try{var t=localStorage.getItem('dm-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 {% for item in ld %}<script type="application/ld+json">{{ item|tojson_ld }}</script>
 {% endfor %}
@@ -70,6 +70,6 @@
     <p>Privacy policy · Cookie policy</p>
   </div>
 </footer>
-<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+<script src="{{ asset('js/main.js') }}" defer></script>
 </body>
 </html>
