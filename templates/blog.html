@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top"><div class="wrap">
+  <p class="label">Blog</p>
+  <h1>Un articolo al mese</h1>
+  <p class="intro">Riflessioni su astrologia evolutiva, meditazione e crescita personale. Ogni mese un nuovo approfondimento, scritto per prendersi il tempo di leggere.</p>
+</div></section>
+<section class="block" style="padding-top:36px">
+  <div class="wrap">
+    <div class="blog-list">
+      {% for p in posts %}
+      <a class="post-card" href="{{ url_for('post', slug=p.slug) }}">
+        {% if p.cover %}<img class="post-thumb" src="{{ p.cover_url }}" alt="{{ p.cover_alt or p.title }}" loading="lazy">{% endif %}
+        <div class="post-meta"><span>{{ p.published_at|it_month }}</span>{% if p.category %}<span>{{ p.category }}</span>{% endif %}<span>{{ p.reading_min }} min di lettura</span>{% if p.is_sample %}<span class="chip">Articolo di esempio</span>{% endif %}</div>
+        <h2>{{ p.title }}</h2>
+        <p>{{ p.excerpt }}</p>
+        <span class="go">Leggi l'articolo →</span>
+      </a>
+      {% else %}
+      <div class="post-card soon"><h2 style="font-size:1.35rem;color:var(--muted)">Il primo articolo sarà pubblicato qui</h2></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

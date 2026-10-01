@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="fit-sec">
+  <div class="wrap">
+    <div class="contact ct-fit">
+      <div class="info">
+        <div class="ct-head">
+          <p class="label">Contatti</p>
+          <h1>Iniziamo da una conversazione</h1>
+          <p class="intro">Raccontami cosa stai vivendo: nel primo contatto capiamo insieme quale pratica è più adatta a te.</p>
+        </div>
+        <div class="ct-channels">
+          <div class="row"><span class="label">Telefono e WhatsApp</span><span class="val"><a href="tel:+39{{ site.phone_raw }}" style="color:inherit;text-decoration:none">{{ site.phone }}</a> <button class="btn-s" type="button" id="copyTel" data-tel="{{ site.phone_raw }}">Copia</button></span></div>
+          {% if site.instagram %}<div class="row"><span class="label">Instagram</span><span class="val"><a href="{{ site.instagram }}" target="_blank" rel="noopener">@daliamae_</a></span></div>{% endif %}
+        </div>
+        {% if sent %}<p class="ok" role="status">Grazie! Ho ricevuto la tua richiesta: ti ricontatto al più presto.</p>{% endif %}
+        {% if error %}<p class="ok" role="alert" style="color:#e9a39a">{{ error }}</p>{% endif %}
+        <form class="ask" method="post" action="{{ url_for('contatti') }}">
+          <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="ct-2">
+            <div><label for="f-nome">Nome</label><input id="f-nome" name="nome" required maxlength="120" autocomplete="name" value="{{ form.nome or '' }}"></div>
+            <div><label for="f-tel">Telefono o email</label><input id="f-tel" name="contatto" required maxlength="200" autocomplete="email" value="{{ form.contatto or '' }}"></div>
+          </div>
+          <div><label for="f-pratica">Mi interessa</label>
+          <select id="f-pratica" name="pratica">
+            {% for o in interests %}<option{% if o == form.pratica %} selected{% endif %}>{{ o }}</option>{% endfor %}
+          </select></div>
+          <div><label for="f-msg">Messaggio</label><textarea id="f-msg" name="messaggio" rows="2" maxlength="2000">{{ form.messaggio or '' }}</textarea></div>
+          <div class="ct-send"><label class="ct-priv"><input type="checkbox" id="f-priv" name="consenso" value="1" required> Acconsento al trattamento dei dati secondo l'informativa privacy.</label>
+          <button class="btn primary" type="submit">Invia richiesta</button></div>
+        </form>
+      </div>
+      <img src="{{ url_for('static', filename='img/contatti.jpg') }}" alt="Silhouette di una donna che cammina sulla riva al tramonto" loading="lazy">
+    </div>
+  </div>
+</section>
+{% endblock %}

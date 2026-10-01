@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap">
+    <img class="hero-logo" src="{{ url_for('static', filename='img/logo-daliamae.png') }}" alt="Logo Daliamae: fiore con spirale e goccia d'oro">
+<div>
+      <p class="label kicker">Dalia Giubilei · Operatrice olistica</p>
+      <h1><span class="l1">Smettila di seguire quel vuoto.</span><em>Abitalo.</em></h1>
+      <p class="lead">Uno spazio protetto dove corpo, anima e cielo si incontrano. Attraverso l'ascolto, la lettura dei simboli e il ritorno alla presenza, ti accompagno a riscoprire la tua autentica unicità.</p>
+      <div class="cta">
+        <a class="btn primary" href="{{ url_for('contatti') }}">Prenota un primo colloquio</a>
+        <a class="btn ghost" href="{{ url_for('percorsi') }}">Scopri i percorsi</a>
+      </div>
+      </div>
+    <figure class="hero-art">
+      <div class="brush">
+        <video id="heroVideo" src="{{ url_for('static', filename='video/hero-goccia.mp4') }}" poster="{{ url_for('static', filename='img/hero-poster.jpg') }}" autoplay muted loop playsinline preload="auto" aria-label="Una goccia d'oro luminosa cade nell'acqua e crea onde dorate"></video>
+        
+      </div>
+      <figcaption>Ti do il <b>benvenuto</b> in Daliamae</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Da dove vuoi iniziare</p>
+      <h2>Quattro pratiche, un unico cammino</h2>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="{{ url_for('service', slug='oroscopo-evolutivo') }}"><span class="glyph" aria-hidden="true">☉</span><h3>Oroscopo evolutivo</h3><p>Il tuo cielo di nascita come specchio del cammino interiore.</p><span class="go">Scopri →</span></a>
+      <a class="tile" href="{{ url_for('service', slug='meditazioni-guidate') }}"><span class="glyph" aria-hidden="true">◌</span><h3>Meditazioni guidate</h3><p>Silenzio, respiro e radicamento, da sola o in gruppo.</p><span class="go">Scopri →</span></a>
+      <a class="tile" href="{{ url_for('service', slug='percorso-individuale') }}"><span class="glyph" aria-hidden="true">⟡</span><h3>Percorsi 1:1</h3><p>Incontri individuali per riconoscere gli schemi e tornare al centro.</p><span class="go">Scopri →</span></a>
+      <a class="tile" href="{{ url_for('service', slug='massaggio-psicosomatico') }}"><span class="glyph" aria-hidden="true">❋</span><h3>Massaggio psicosomatico</h3><p>Il corpo come linguaggio, un tocco consapevole.</p><span class="go">Scopri →</span></a>
+    </div>
+    <div class="teaser">
+      <img src="{{ url_for('static', filename='img/dalia.jpg') }}" alt="Ritratto di Dalia Giubilei, operatrice olistica" loading="lazy">
+      <div class="txt">
+        <p class="label">Chi ti accompagna</p>
+        <h2 style="font-size:clamp(1.7rem,3vw,2.2rem)">Venticinque anni di vita "piena", poi il risveglio</h2>
+        <p>Dalia conosce la pressione delle responsabilità aziendali e familiari. Dal 2019 studia e pratica le discipline olistiche per offrire agli altri lo spazio che lei stessa ha cercato.</p>
+        <div class="cta" style="margin-top:6px"><a class="btn ghost" href="{{ url_for('chi_sono') }}">Conosci Dalia</a><a class="btn ghost" href="{{ url_for('visione') }}">La Visione</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top"><div class="wrap">
+  <p class="label">Errore 404</p>
+  <h1>Questa pagina non esiste</h1>
+  <p class="intro">Forse il link è cambiato. Puoi tornare alla home o scrivermi dalla pagina Contatti.</p>
+  <div class="cta" style="margin-top:20px"><a class="btn primary" href="{{ url_for('home') }}">Torna alla home</a><a class="btn ghost" href="{{ url_for('contatti') }}">Contatti</a></div>
+</div></section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% block title %}Parole chiave{% endblock %}
+{% block body %}
+<h1>Parole chiave del settore</h1>
+<p class="sub">Una per riga. Servono come promemoria per scrivere title, description, articoli e frasi AEO, e finiscono tra gli argomenti dichiarati a Google nei dati strutturati (le prime 14). Il cruscotto controlla quante volte compaiono nei testi.</p>
+<form method="post" class="card">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <textarea name="keywords" rows="18">{{ text }}</textarea>
+  <p class="help">Usale in modo naturale: Google premia i testi scritti per le persone, non le ripetizioni.</p>
+  <p><button class="btn" type="submit">Salva</button></p>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="fit-sec">
+  <div class="wrap fit faq-layout">
+    <div class="faq-side">
+      <p class="label">Domande frequenti</p>
+      <h1>Prima di iniziare</h1>
+      <p class="intro">Le risposte alle domande che le persone fanno più spesso prima del primo incontro.</p>
+      <div class="faq-tabs" role="tablist" aria-label="Argomenti">
+        {% for g in groups %}<button type="button" role="tab" id="t-{{ g.key }}" aria-controls="fp-{{ g.key }}" aria-selected="{{ 'true' if loop.first else 'false' }}" data-tab="{{ g.key }}"><span>{{ g.label }}</span><small>{{ g.faqs|length }} domande</small></button>{% endfor %}
+      </div>
+      <p class="faq-more">Non trovi la tua domanda? <a href="{{ url_for('contatti') }}">Scrivi a Dalia</a></p>
+    </div>
+    <div class="faq-main">
+      {% for g in groups %}<div class="faq-panel" role="tabpanel" id="fp-{{ g.key }}" aria-labelledby="t-{{ g.key }}"{% if not loop.first %} hidden{% endif %}>
+        {% for f in g.faqs %}<details name="faq-{{ g.key }}"{% if loop.first %} open{% endif %}><summary>{{ f.question }}</summary><div class="ans"><p>{{ f.answer }}</p></div></details>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

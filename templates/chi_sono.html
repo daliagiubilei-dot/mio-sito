@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="about-sec">
+  <div class="wrap about">
+    <img src="{{ url_for('static', filename='img/dalia.jpg') }}" alt="Ritratto di Dalia Giubilei, operatrice olistica">
+    <div class="txt">
+      <p class="label">Chi sono</p>
+      <h1 style="font-size:clamp(2.1rem,4vw,3rem)">Dalia Giubilei</h1>
+      <p class="role">Operatrice olistica</p>
+      <p>Dopo oltre venticinque anni trascorsi tra la gestione familiare, ruoli di responsabilità nel mondo aziendale e contesti ad alta intensità gestionale e finanziaria, la vita mi ha chiamata a un risveglio profondo.</p>
+      <p>Dal 2019 ho intrapreso un cammino costante di studio e seminari olistici. L'incontro con una comprensione più luminosa dell'esistenza ha ridefinito le mie priorità e ha trasformato l'esperienza maturata sul campo in un desiderio autentico: mettermi al servizio delle persone e del loro percorso interiore.</p>
+      <blockquote>Conosco la pressione, le responsabilità e il rumore. Per questo so quanto vale uno spazio in cui fermarsi.</blockquote>
+      <div class="facts">
+        <span class="chip">In formazione olistica dal 2019</span>
+        <span class="chip">25+ anni di esperienza professionale</span>
+        <span class="chip">Operatrice ai sensi della L. 4/2013</span>
+      </div>
+      <div class="cta"><a class="btn primary" href="{{ url_for('contatti') }}">Contatta Dalia</a></div>
+      </div>
+  </div>
+</section>
+{% endblock %}

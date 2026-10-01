@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top"><div class="wrap">
+  <p class="label">Eventi</p>
+  <h1>Meditazioni di gruppo e incontri</h1>
+  <p class="intro">Eventi olistici, meditazioni guidate di gruppo e incontri di consapevolezza con Dalia Giubilei.</p>
+</div></section>
+<section class="block" style="padding-top:36px">
+  <div class="wrap">
+    {% if events %}
+    <div class="blog-list">
+      {% for e in events %}
+      <article class="post-card">
+        <div class="post-meta"><span>{{ e.starts_at|it_datetime }}</span>{% if e.online %}<span>Online</span>{% endif %}{% if e.place %}<span>{{ e.place }}</span>{% endif %}{% if e.seats %}<span>{{ e.seats }} posti</span>{% endif %}</div>
+        <h2>{{ e.title }}</h2>
+        {% if e.description %}<p>{{ e.description }}</p>{% endif %}
+        <a class="btn ghost" href="{{ url_for('contatti', pratica='Meditazioni guidate') }}" style="justify-self:start">Chiedi informazioni</a>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">
+      <h2 style="font-size:1.4rem">I prossimi incontri saranno pubblicati qui</h2>
+      <p>Data, luogo e posti disponibili per ogni meditazione di gruppo. Nel frattempo gli aggiornamenti escono su Instagram.</p>
+      <a class="btn ghost" href="{{ site.instagram }}" target="_blank" rel="noopener">Segui @daliamae_</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="vis-hero">
+  <div class="vis-panel" role="img" aria-label="Erbe selvatiche e agave in controluce al tramonto">
+    <div class="vis-content">
+      <p class="label">La Visione</p>
+      <h1>Radicarsi nella terra, aprirsi alla luce.</h1>
+      <p class="big">Assistere e supportare il <em>cammino di consapevolezza</em> di chi sente che è arrivato il momento di tornare a sé.</p>
+      {% set a = aeo_first('la-visione') %}{% if a %}<p class="answer">{{ a.answer }}</p>{% endif %}
+      <div class="vis-principles">
+        <div><h2>Radicamento</h2><p>Tornare al corpo e al presente, il punto da cui ogni cambiamento può partire.</p></div>
+        <div><h2>Ascolto</h2><p>Dare spazio a ciò che senti senza giudizio, leggendo i simboli che la tua vita ti mostra.</p></div>
+        <div><h2>Luce</h2><p>Riconoscere la tua unicità e scegliere di esprimerla, un passo alla volta.</p></div>
+      </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

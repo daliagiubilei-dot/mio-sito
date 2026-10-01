@@ -1,0 +1,146 @@
+[
+ {
+  "question": "Che cosa fa un'operatrice olistica?",
+  "answer": "Un'operatrice olistica accompagna la persona verso il benessere e una maggiore consapevolezza di sé, considerando insieme corpo, emozioni e dimensione interiore. Lavora con pratiche come la meditazione guidata, la lettura dei simboli astrologici e il tocco consapevole. Non fa diagnosi e non prescrive trattamenti.",
+  "group": "op",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 1
+ },
+ {
+  "question": "Che differenza c'è tra un'operatrice olistica e uno psicologo?",
+  "answer": "Lo psicologo è un professionista sanitario iscritto a un Ordine, abilitato a diagnosi e psicoterapia. L'operatrice olistica opera ai sensi della Legge 4/2013 nel campo del benessere: offre ascolto, pratiche di consapevolezza e strumenti simbolici, senza finalità terapeutiche. Le due figure possono essere complementari.",
+  "group": "op",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 2
+ },
+ {
+  "question": "Le pratiche olistiche sostituiscono le cure mediche?",
+  "answer": "No. Le pratiche olistiche sono orientate al benessere e alla crescita personale e non sostituiscono diagnosi, terapie o trattamenti medici e psicologici. Se stai seguendo una cura, continua a farlo e parlane con il tuo medico. Il percorso olistico può affiancarsi, mai sostituirsi.",
+  "group": "op",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 3
+ },
+ {
+  "question": "Qual è la formazione di Dalia?",
+  "answer": "Dalia Giubilei studia le discipline olistiche dal 2019, con percorsi e seminari continui. Porta con sé oltre venticinque anni di esperienza in ruoli di responsabilità, familiari e aziendali, che le permettono di comprendere a fondo pressione e carichi quotidiani. Il dettaglio delle formazioni è nella pagina Chi sono.",
+  "group": "op",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 4
+ },
+ {
+  "question": "Che cos'è l'oroscopo evolutivo?",
+  "answer": "L'oroscopo evolutivo è una lettura del tema natale che lo interpreta come una mappa di potenzialità e schemi interiori, anziché come previsione di eventi. Aiuta a riconoscere le proprie inclinazioni, i blocchi ricorrenti e le direzioni di crescita, per vivere le scelte con più consapevolezza.",
+  "group": "pr",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/oroscopo-evolutivo"
+  ],
+  "sort": 5
+ },
+ {
+  "question": "Che differenza c'è tra oroscopo evolutivo e oroscopo classico?",
+  "answer": "L'oroscopo classico, come quello dei giornali, parla del segno solare e cerca di prevedere cosa accadrà. L'oroscopo evolutivo studia il tuo tema natale completo, calcolato su data, ora e luogo di nascita, e si concentra su chi sei e su come puoi crescere, non su cosa ti succederà.",
+  "group": "pr",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/oroscopo-evolutivo"
+  ],
+  "sort": 6
+ },
+ {
+  "question": "Serve esperienza per partecipare a una meditazione guidata?",
+  "answer": "No, non serve alcuna esperienza. Nella meditazione guidata la voce ti accompagna passo dopo passo attraverso il respiro, il radicamento e la visualizzazione. È adatta anche a chi non ha mai meditato: basta un luogo tranquillo, abiti comodi e il desiderio di dedicare del tempo a te.",
+  "group": "pr",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/meditazioni-guidate"
+  ],
+  "sort": 7
+ },
+ {
+  "question": "Il massaggio psicosomatico è un trattamento medico?",
+  "answer": "No. Il massaggio psicosomatico è una pratica di benessere che usa un tocco consapevole per aiutarti a percepire e sciogliere le tensioni legate alle emozioni. Non è un trattamento sanitario o fisioterapico: in presenza di dolori, patologie o disturbi è necessario rivolgersi prima al proprio medico.",
+  "group": "pr",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/massaggio-psicosomatico"
+  ],
+  "sort": 8
+ },
+ {
+  "question": "Come capisco quale pratica è adatta a me?",
+  "answer": "Non serve saperlo in anticipo. Nel primo contatto Dalia ascolta cosa stai vivendo e cosa cerchi, e insieme individuate la pratica più adatta: la lettura del tema natale per fare chiarezza, la meditazione per ritrovare calma, il percorso individuale per un cambiamento profondo, il massaggio per ripartire dal corpo.",
+  "group": "pr",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/percorso-individuale"
+  ],
+  "sort": 9
+ },
+ {
+  "question": "Come si prenota il primo incontro?",
+  "answer": "Puoi chiamare o scrivere su WhatsApp al 331 758 4001, oppure compilare il modulo nella pagina Contatti. Nel primo contatto capite insieme quale pratica è più adatta a te in questo momento e fissate data, orario e modalità dell'incontro.",
+  "group": "cf",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 10
+ },
+ {
+  "question": "Gli incontri si possono fare online?",
+  "answer": "La lettura dell'oroscopo evolutivo e i percorsi individuali di consapevolezza si prestano anche all'incontro online, in videochiamata, ovunque tu sia in Italia. Il massaggio psicosomatico si svolge invece solo in presenza. Le modalità disponibili si concordano al momento della prenotazione.",
+  "group": "cf",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/percorso-individuale",
+   "percorsi/oroscopo-evolutivo"
+  ],
+  "sort": 11
+ },
+ {
+  "question": "Quanto dura un incontro e quanto costa?",
+  "answer": "Durata e tariffa dipendono dalla pratica scelta: una lettura del tema natale, una meditazione di gruppo e un percorso individuale di più incontri hanno tempi e costi diversi. Le condizioni vengono comunicate in modo chiaro prima di fissare l'appuntamento, senza impegno.",
+  "group": "cf",
+  "pages": [
+   "domande-frequenti"
+  ],
+  "sort": 12
+ },
+ {
+  "question": "Cosa serve per la lettura dell'oroscopo evolutivo?",
+  "answer": "Servono data, ora e luogo di nascita. L'ora è importante perché determina l'ascendente e le case astrologiche. Se non la conosci con precisione, puoi cercarla nell'estratto dell'atto di nascita presso il Comune; in alternativa si lavora comunque sulle posizioni dei pianeti, con una lettura meno dettagliata.",
+  "group": "cf",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/oroscopo-evolutivo"
+  ],
+  "sort": 13
+ },
+ {
+  "question": "Quello che racconto resta riservato?",
+  "answer": "Sì. Ciò che condividi durante gli incontri resta riservato, e i tuoi dati personali, compresi quelli di nascita, vengono trattati nel rispetto del Regolamento europeo sulla privacy (GDPR) e usati solo per preparare e svolgere il tuo percorso.",
+  "group": "cf",
+  "pages": [
+   "domande-frequenti",
+   "percorsi/percorso-individuale"
+  ],
+  "sort": 14
+ },
+ {
+  "question": "Cos'è un percorso olistico di consapevolezza?",
+  "answer": "Un percorso olistico di consapevolezza è un accompagnamento che considera insieme corpo, emozioni e dimensione interiore. Non cerca risposte fuori, ma aiuta a riconoscere gli schemi che si ripetono e a ritrovare il proprio centro, con pratiche semplici da portare nella vita di ogni giorno.",
+  "group": "",
+  "pages": [
+   "la-visione"
+  ],
+  "sort": 100
+ }
+]

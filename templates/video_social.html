@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top"><div class="wrap">
+  <p class="label">Video Social</p>
+  <h1>Video Social</h1>
+  <p class="intro">Brevi video di meditazione, astrologia evolutiva e momenti dei nostri incontri. Qui trovi una selezione; tutti gli altri escono sui social.</p>
+</div></section>
+<section class="block" style="padding-top:36px">
+  <div class="wrap">
+    <div class="vgrid">
+      {% for v in videos %}
+      <article class="vcard">
+        <div class="vframe"><video src="{{ v.file_url }}"{% if v.poster_url %} poster="{{ v.poster_url }}"{% endif %} controls playsinline preload="none" aria-label="{{ v.title }}"></video></div>
+        <h2>{{ v.title }}</h2>
+        {% if v.description %}<p>{{ v.description }}</p>{% endif %}
+      </article>
+      {% else %}
+      <article class="vcard soon"><div class="vframe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg></div><h2>Video in arrivo</h2></article>
+      {% endfor %}
+    </div>
+    <div class="vsocial">
+      {% if site.tiktok %}<a class="btn primary" href="{{ site.tiktok }}" target="_blank" rel="noopener">Altri video su TikTok</a>{% endif %}
+      {% if site.instagram %}<a class="btn ghost" href="{{ site.instagram }}" target="_blank" rel="noopener">Altri contenuti su Instagram</a>{% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

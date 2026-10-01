@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ e.title }}{% endblock %}
+{% block body %}
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+  <div><h1>{{ e.title }}</h1>
+  {% if key == 'pagine' %}<p class="sub">Title, meta description e parole chiave di ogni pagina del sito.</p>
+  {% elif key == 'aeo' %}<p class="sub">Domande e risposte dirette che motori di risposta e assistenti AI possono citare. Compaiono nelle pagine che scegli e nel file <code>/llms.txt</code>.</p>{% endif %}</div>
+  {% if not e.no_create %}<a class="btn" href="{{ url_for('admin.create', key=key) }}">+ Nuovo</a>{% endif %}
+</div>
+<table style="margin-top:14px">
+  <tr>{% for name, label in e.cols %}<th>{{ label }}</th>{% endfor %}<th></th></tr>
+  {% for r in rows %}<tr>
+    {% for name, label in e.cols %}<td>{{ cell(r, name) }}</td>{% endfor %}
+    <td><div class="row-actions"><a href="{{ url_for('admin.edit', key=key, oid=r.id) }}">Modifica</a>
+    {% if not e.no_delete %}<form method="post" action="{{ url_for('admin.delete', key=key, oid=r.id) }}" onsubmit="return confirm('Eliminare definitivamente?')"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><button class="btn danger small" type="submit">Elimina</button></form>{% endif %}</div></td>
+  </tr>{% else %}<tr><td colspan="{{ e.cols|length + 1 }}">Ancora nessun elemento.</td></tr>{% endfor %}
+</table>
+{% if ideas %}
+<h2>Idee di domande da coprire</h2>
+<p class="sub">Domande che le persone cercano nel tuo settore. Clicca per creare la bozza e scrivere la risposta con le tue parole.</p>
+<div class="ideas">{% for i in ideas %}<a href="{{ url_for('admin.create', key='aeo', q=i) }}">{{ i }}</a>{% endfor %}</div>
+{% endif %}
+{% endblock %}

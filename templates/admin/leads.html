@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% block title %}Richieste{% endblock %}
+{% block body %}
+<h1>Richieste dal modulo Contatti</h1>
+<p class="sub">Chi ha compilato il modulo nella pagina Contatti, dalla più recente.</p>
+{% for r in rows %}
+<div class="card" style="{{ 'opacity:.6' if r.handled else '' }}">
+  <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div><b>{{ r.name }}</b> · {{ r.contact }}<br><span class="help">{{ r.created_at.strftime('%d/%m/%Y %H:%M') }} · {{ r.interest }}</span></div>
+    <div class="row-actions">
+      <form method="post" action="{{ url_for('admin.lead_toggle', lid=r.id) }}"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><button class="btn ghost small" type="submit">{{ 'Riapri' if r.handled else 'Segna come gestita' }}</button></form>
+      <form method="post" action="{{ url_for('admin.lead_delete', lid=r.id) }}" onsubmit="return confirm('Eliminare questa richiesta?')"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><button class="btn danger small" type="submit">Elimina</button></form>
+    </div>
+  </div>
+  {% if r.message %}<p style="margin-bottom:0;white-space:pre-wrap">{{ r.message }}</p>{% endif %}
+</div>
+{% else %}<div class="card">Nessuna richiesta ancora.</div>{% endfor %}
+{% endblock %}

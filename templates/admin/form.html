@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ e.title }}{% endblock %}
+{% block body %}
+<p><a href="{{ url_for('admin.listing', key=key) }}">← {{ e.title }}</a></p>
+<h1>{% if obj %}Modifica {{ e.one }}{% else %}Nuovo: {{ e.one }}{% endif %}</h1>
+{% if key == 'pagine' and obj %}<p class="sub">Pagina: <b>{{ obj.label }}</b> (<code>/{{ obj.slug if obj.slug != 'home' else '' }}</code>)</p>{% endif %}
+<form method="post" class="card">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  {% for f in fields %}
+    {% set v = values.get(f.name, '') %}
+    {% if f.kind == 'bool' %}
+      <label class="check"><input type="checkbox" name="{{ f.name }}" value="1"{% if v %} checked{% endif %}> {{ f.label }}</label>
+    {% elif f.kind == 'pages' %}
+      <label>{{ f.label }}</label>
+      <div class="pages">{% for slug, label in page_choices %}<label><input type="checkbox" name="{{ f.name }}" value="{{ slug }}"{% if slug in selected %} checked{% endif %}> {{ label }}</label>{% endfor %}</div>
+    {% else %}
+      <label for="f-{{ f.name }}">{{ f.label }}{% if f.required %} *{% endif %}</label>
+      {% if f.kind in ('textarea', 'html') %}
+        <textarea id="f-{{ f.name }}" name="{{ f.name }}" rows="{{ f.rows or 4 }}"{% if f.kind == 'html' %} class="mono"{% endif %}{% if f.counter or f.words %} data-counter="{{ f.counter or 0 }}" data-words="{{ 1 if f.words else 0 }}"{% endif %}>{{ v }}</textarea>
+      {% elif f.kind == 'select' %}
+        <select id="f-{{ f.name }}" name="{{ f.name }}">{% for val, lab in f.choices %}<option value="{{ val }}"{% if v == val %} selected{% endif %}>{{ lab }}</option>{% endfor %}</select>
+      {% elif f.kind == 'date' %}<input id="f-{{ f.name }}" type="date" name="{{ f.name }}" value="{{ v }}">
+      {% elif f.kind == 'datetime' %}<input id="f-{{ f.name }}" type="datetime-local" name="{{ f.name }}" value="{{ v }}"{% if f.required %} required{% endif %}>
+      {% elif f.kind == 'int' %}<input id="f-{{ f.name }}" type="number" name="{{ f.name }}" value="{{ v }}">
+      {% else %}<input id="f-{{ f.name }}" type="text" name="{{ f.name }}" value="{{ v }}"{% if f.maxlength %} maxlength="{{ f.maxlength }}"{% endif %}{% if f.counter %} data-counter="{{ f.counter }}" data-words="0"{% endif %}{% if f.required %} required{% endif %}>
+      {% endif %}
+      {% if f.counter or f.words %}<div class="counter" data-for="f-{{ f.name }}"></div>{% endif %}
+      {% if f.help %}<p class="help">{{ f.help }}</p>{% endif %}
+    {% endif %}
+  {% endfor %}
+  <p style="margin-top:22px"><button class="btn" type="submit">Salva</button> <a class="btn ghost" href="{{ url_for('admin.listing', key=key) }}">Annulla</a></p>
+</form>
+<script>
+document.querySelectorAll('[data-counter]').forEach(function(el){
+  var out=document.querySelector('.counter[data-for="'+el.id+'"]');if(!out)return;
+  var words=el.dataset.words==='1',max=parseInt(el.dataset.counter,10);
+  function upd(){
+    var n=words?(el.value.trim()?el.value.trim().split(/\s+/).length:0):el.value.length;
+    var ok=words?(n>=40&&n<=60):(n>0&&n<=max);
+    out.textContent=words?(n+' parole (ideale 40–60)'):(n+' caratteri (massimo consigliato '+max+')');
+    out.className='counter '+(ok?'good':'bad');
+  }
+  el.addEventListener('input',upd);upd();
+});
+</script>
+{% endblock %}

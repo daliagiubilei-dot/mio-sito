@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="post">
+  <header class="post-head">
+    <p class="label">Blog{% if post.category %} · {{ post.category }}{% endif %}</p>
+    <h1>{{ post.title }}</h1>
+    <div class="post-meta" style="margin-top:18px"><span>Dalia Giubilei</span><span>{{ post.published_at|it_month }}</span><span>{{ post.reading_min }} min di lettura</span>{% if post.is_sample %}<span class="chip">Articolo di esempio</span>{% endif %}</div>
+    <p class="post-lead">{{ post.lead or post.excerpt }}</p>
+  </header>
+  {% if post.cover %}
+  <figure class="post-cover">
+    <img src="{{ post.cover_url }}" alt="{{ post.cover_alt or post.title }}">
+    {% if post.cover_caption %}<figcaption>{{ post.cover_caption|safe }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+  <div class="post-body">
+    {{ post.body_html|safe }}
+    <div class="post-cta">
+      <h2>Vuoi esplorare questi temi insieme?</h2>
+      <p>Nei percorsi individuali e nella lettura dell'oroscopo evolutivo ci prendiamo il tempo di ascoltare ciò che ritorna.</p>
+      <a class="btn primary" href="{{ url_for('contatti') }}">Prenota un primo colloquio</a>
+    </div>
+    <p class="post-legal">Questo articolo ha finalità culturali e di riflessione personale. Non sostituisce in alcun modo consulti o trattamenti medici o psicologici.</p>
+    <a class="post-back" href="{{ url_for('blog') }}">← Tutti gli articoli</a>
+  </div>
+</article>
+{% endblock %}

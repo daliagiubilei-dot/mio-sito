@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}Pannello{% endblock %} – Daliamae</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+<div class="top">
+  <strong>Daliamae</strong>
+  {% set ep = request.endpoint %}
+  <a href="{{ url_for('admin.dashboard') }}"{% if ep == 'admin.dashboard' %} class="on"{% endif %}>Cruscotto</a>
+  <a href="{{ url_for('admin.listing', key='pagine') }}">SEO pagine</a>
+  <a href="{{ url_for('admin.listing', key='aeo') }}">Frasi AEO</a>
+  <a href="{{ url_for('admin.keywords') }}">Parole chiave</a>
+  <a href="{{ url_for('admin.listing', key='blog') }}">Blog</a>
+  <a href="{{ url_for('admin.listing', key='video') }}">Video</a>
+  <a href="{{ url_for('admin.listing', key='eventi') }}">Eventi</a>
+  <a href="{{ url_for('admin.leads') }}">Richieste</a>
+  <a href="{{ url_for('home') }}" target="_blank" rel="noopener">Vai al sito ↗</a>
+  <form method="post" action="{{ url_for('admin.logout') }}"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><button class="btn ghost small" style="color:#d9ab5a;border-color:#d9ab5a" type="submit">Esci</button></form>
+</div>
+<div class="wrap">
+{% with msgs = get_flashed_messages(with_categories=true) %}{% for cat, m in msgs %}<div class="flash {{ cat }}">{{ m }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}
+</div>
+</body>
+</html>

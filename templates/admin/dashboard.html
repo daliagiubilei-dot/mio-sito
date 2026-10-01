@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}Cruscotto{% endblock %}
+{% block body %}
+<h1>Cruscotto</h1>
+<p class="sub">Controlli rapidi su SEO e AEO, e richieste arrivate dal sito.</p>
+<div class="stats">
+  <div class="stat"><b>{{ stats.leads }}</b><span>richieste da gestire</span></div>
+  <div class="stat"><b>{{ stats.aeo }}</b><span>frasi chiave AEO</span></div>
+  <div class="stat"><b>{{ stats.posts }}</b><span>articoli pubblicati</span></div>
+  <div class="stat"><b>{{ stats.videos }}</b><span>video pubblicati</span></div>
+  <div class="stat"><b>{{ stats.events }}</b><span>eventi</span></div>
+</div>
+
+<h2>SEO delle pagine</h2>
+{% if seo_issues %}
+<div class="card"><p style="margin-top:0">{{ seo_issues|length }} pagine su {{ npages }} da rivedere:</p>
+<table><tr><th>Pagina</th><th>Cosa sistemare</th><th></th></tr>
+{% for p, msg in seo_issues %}<tr><td>{{ p.label }}</td><td><span class="pill warn">{{ msg }}</span></td><td><a href="{{ url_for('admin.edit', key='pagine', oid=p.id) }}">Modifica</a></td></tr>{% endfor %}
+</table></div>
+{% else %}<div class="card"><span class="pill ok">Tutte le {{ npages }} pagine hanno title, description e parole chiave in ordine</span></div>{% endif %}
+
+<h2>Frasi chiave AEO</h2>
+<div class="card">
+  {% if off_words %}
+  <p style="margin-top:0">Risposte fuori dalla lunghezza ideale (circa 40–60 parole):</p>
+  <ul>{% for f in off_words %}<li><a href="{{ url_for('admin.edit', key='aeo', oid=f.id) }}">{{ f.question }}</a> – {{ f.words }} parole</li>{% endfor %}</ul>
+  {% else %}<p style="margin-top:0"><span class="pill ok">Tutte le risposte hanno una lunghezza adatta</span></p>{% endif %}
+  {% if no_faq %}
+  <p>Pagine che non hanno ancora nessuna domanda associata:</p>
+  <ul>{% for p in no_faq %}<li>{{ p.label }}</li>{% endfor %}</ul>
+  {% endif %}
+  <p><a class="btn small" href="{{ url_for('admin.create', key='aeo') }}">Aggiungi una frase chiave</a></p>
+</div>
+
+<h2>Parole chiave nei testi del sito</h2>
+<div class="card">
+  <p class="sub" style="margin-top:0">Quante volte compare ciascuna parola chiave in title, description, frasi AEO e articoli. In giallo: non compare ancora.</p>
+  <div class="kw">{% for k, n in usage %}<span class="{{ 'zero' if n == 0 else '' }}">{{ k }} · {{ n }}</span>{% endfor %}</div>
+  <p><a href="{{ url_for('admin.keywords') }}">Modifica l'elenco</a></p>
+</div>
+{% endblock %}

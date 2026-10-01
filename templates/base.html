@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ meta.title }}</title>
+<meta name="description" content="{{ meta.description }}">
+{% if meta.keywords %}<meta name="keywords" content="{{ meta.keywords }}">{% endif %}
+<meta name="author" content="Dalia Giubilei">
+<meta name="robots" content="{{ meta.robots }}">
+<meta name="theme-color" content="#171c1b">
+<link rel="canonical" href="{{ meta.canonical }}">
+<meta property="og:type" content="{{ meta.og_type }}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:url" content="{{ meta.canonical }}">
+<meta property="og:image" content="{{ meta.image }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta.title }}">
+<meta name="twitter:description" content="{{ meta.description }}">
+<meta name="twitter:image" content="{{ meta.image }}">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@300;400;600&family=Yanone+Kaffeesatz:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script>try{var t=localStorage.getItem('dm-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+{% for item in ld %}<script type="application/ld+json">{{ item|tojson_ld }}</script>
+{% endfor %}
+</head>
+<body>
+{% macro nav(endpoints, label) -%}
+<a href="{{ url_for(endpoints[0]) }}"{% if request.endpoint in endpoints %} aria-current="page"{% endif %}>{{ label }}</a>
+{%- endmacro %}
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo-round.png') }}" alt="" width="38" height="38">Daliamae</a>
+    <div class="tools">
+      <button class="btn-s" id="themeBtn" type="button">Tema</button>
+    </div>
+    <nav aria-label="Principale">
+      {{ nav(['home'], 'Home') }}{{ nav(['visione'], 'La Visione') }}{{ nav(['chi_sono'], 'Chi Sono') }}{{ nav(['percorsi','service'], 'Pratiche & Percorsi') }}{{ nav(['archetipi'], 'Archetipi') }}{{ nav(['eventi'], 'Eventi') }}{{ nav(['blog','post'], 'Blog') }}{{ nav(['video_social'], 'Video Social') }}{{ nav(['domande'], 'Domande') }}{{ nav(['contatti'], 'Contatti') }}
+    </nav>
+  </div>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--fg);font-family:var(--display);font-weight:400;font-size:1.1rem">Daliamae</strong> · Dalia Giubilei, operatrice olistica · P.IVA {{ site.vat }}</p>
+    <p class="foot-links">
+      <a href="{{ url_for('service', slug='oroscopo-evolutivo') }}">Oroscopo evolutivo</a> ·
+      <a href="{{ url_for('service', slug='meditazioni-guidate') }}">Meditazione guidata</a> ·
+      <a href="{{ url_for('service', slug='percorso-individuale') }}">Percorsi di crescita personale</a> ·
+      <a href="{{ url_for('service', slug='massaggio-psicosomatico') }}">Massaggio psicosomatico</a> ·
+      <a href="{{ url_for('eventi') }}">Eventi olistici</a>
+    </p>
+    <nav class="social" aria-label="Social">
+      {% if site.instagram %}<a href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="Instagram @daliamae_" title="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>{% endif %}
+      {% if site.tiktok %}<a href="{{ site.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok @daliamae77" title="TikTok"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.3 5 4.5"/></svg></a>{% endif %}
+      {% if site.facebook %}<a href="{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>{% endif %}
+    </nav>
+    <p class="legal">Attività professionale ai sensi della Legge 14 gennaio 2013, n. 4. Le pratiche proposte sono finalizzate al benessere della persona e non sostituiscono in alcun modo diagnosi, terapie o trattamenti medici o psicologici.</p>
+    <p>Privacy policy · Cookie policy</p>
+  </div>
+</footer>
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

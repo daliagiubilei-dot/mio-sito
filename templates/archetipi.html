@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="arch-bg" id="p-archetipi">
+<section class="fit-sec">
+  <div class="wrap fit">
+    <div class="arch-head">
+      <div class="fit-head">
+        <p class="label">Archetipi astrologici</p>
+        <h1>Dodici archetipi, dodici modi di stare al mondo</h1>
+        <p class="intro">Nell'astrologia evolutiva ogni segno è un archetipo: una forza interiore da riconoscere e integrare, più che un destino da subire.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtra per elemento">
+        <button type="button" data-el="tutti" aria-pressed="true">Tutti</button>
+        <button type="button" data-el="Fuoco" aria-pressed="false">Fuoco</button>
+        <button type="button" data-el="Terra" aria-pressed="false">Terra</button>
+        <button type="button" data-el="Aria" aria-pressed="false">Aria</button>
+        <button type="button" data-el="Acqua" aria-pressed="false">Acqua</button>
+      </div>
+    </div>
+    <div class="zodiac" id="zodiac">
+      {% for s in signs %}<article class="sign" data-el="{{ s.element }}"><div class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></div><h3>{{ s.name }}</h3><span class="arc">{{ s.archetype }}</span><p>{{ s.text }}</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+</div>
+{% endblock %}
