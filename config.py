@@ -10,9 +10,12 @@ IS_PROD = bool(os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("RAILWAY_
 
 def _database_url():
     url = os.environ.get("DATABASE_URL", "").strip()
-    # Railway/Heroku possono fornire "postgres://", SQLAlchemy vuole "postgresql://"
+    # Railway/Heroku possono fornire "postgres://", SQLAlchemy vuole "postgresql+psycopg2://"
     if url.startswith("postgres://"):
-        url = "postgresql://" + url[len("postgres://"):]
+        url = "postgresql+psycopg2://" + url[len("postgres://"):]
+    elif url.startswith("postgresql://"):
+        # Converti postgresql:// in postgresql+psycopg2:// per usare esplicitamente psycopg2
+        url = "postgresql+psycopg2://" + url[len("postgresql://"):]
     if not url:
         if IS_PROD:
             raise RuntimeError("DATABASE_URL mancante: collega il database PostgreSQL al servizio su Railway.")
@@ -69,3 +72,4 @@ SITE = {
     # Facebook: compare nel sito solo se imposti FACEBOOK_URL
     "facebook": os.environ.get("FACEBOOK_URL", "").strip(),
 }
+
