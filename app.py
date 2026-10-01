@@ -6,6 +6,7 @@ Avvio su Railway:  gunicorn app:app   (vedi Procfile)
 import hmac
 import json
 import logging
+import os
 import secrets
 import smtplib
 import threading
@@ -77,9 +78,18 @@ def create_app():
         rows = AeoPhrase.query.filter_by(published=True).order_by(AeoPhrase.sort, AeoPhrase.id).all()
         return [r for r in rows if slug in r.pages]
 
+    def asset(path):
+        """Indirizzo di un file statico con un numero di versione: quando il file cambia, i browser lo ricaricano
+        subito invece di tenere in memoria per giorni la versione vecchia."""
+        url = url_for("static", filename=path)
+        try:
+            return "%s?v=%d" % (url, os.path.getmtime(os.path.join(app.static_folder, path)))
+        except OSError:
+            return url
+
     @app.context_processor
     def inject():
-        return {"site": SITE, "csrf_token": csrf_token,
+        return {"site": SITE, "csrf_token": csrf_token, "asset": asset,
                 "aeo_first": lambda slug: (faqs_for(slug) or [None])[0]}
 
     # ------------------------------------------------------------------ sicurezza di base

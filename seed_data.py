@@ -1,9 +1,9 @@
 """Riempie il database al primo avvio con i contenuti del prototipo."""
 import json
 import os
-from datetime import date, datetime
+from datetime import date
 
-from models import db, PageSEO, AeoPhrase, Post, Video, Setting
+from models import db, PageSEO, AeoPhrase, Video, Setting
 from seo import PAGE_DEFAULTS, CORE_KEYWORDS
 
 SEED_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seed")
@@ -16,7 +16,7 @@ def _read(name):
 
 def _first_time(key):
     """True solo la prima volta per ogni gruppo di contenuti. Poi il gruppo non viene più ricreato,
-    nemmeno se Dalia elimina tutto dal pannello (altrimenti l'articolo di esempio tornerebbe a ogni riavvio)."""
+    nemmeno se Dalia elimina tutto dal pannello (altrimenti i contenuti eliminati tornerebbero a ogni riavvio)."""
     flag = "seeded_" + key
     if Setting.query.filter_by(key=flag).first():
         return False
@@ -35,26 +35,6 @@ def seed_if_empty():
             for item in json.loads(_read("aeo.json")):
                 db.session.add(AeoPhrase(question=item["question"], answer=item["answer"], group=item["group"],
                                          page_slugs=",".join(item["pages"]), sort=item["sort"], published=True))
-        if _first_time("posts") and Post.query.count() == 0:
-            db.session.add(Post(
-                slug="metempsicosi", title="Metempsicosi: l'anima che attraversa le vite",
-                category="Astrologia evolutiva", reading_min=6, published_at=date(2026, 10, 1),
-                excerpt=("Da Pitagora ai Veda, l'idea che l'anima ritorni è una delle intuizioni più antiche "
-                         "dell'umanità. Che cosa significa davvero «metempsicosi» e che cosa può dirci oggi, "
-                         "senza bisogno di crederci per forza."),
-                lead=("Da Pitagora ai Veda, l'idea che l'anima ritorni è una delle intuizioni più antiche "
-                      "dell'umanità. Proviamo a capire che cosa dice davvero, e che cosa può dirci oggi."),
-                body_html=_read("metempsicosi.html"),
-                cover="img/metempsicosi.svg",
-                cover_alt=("Illustrazione: una spirale dorata con una farfalla al centro e cinque luci lungo il "
-                           "percorso, simbolo dell'anima che attraversa le vite"),
-                cover_caption=("In greco antico <em>psyché</em> significa sia «anima» sia «farfalla»: per questo la "
-                               "farfalla è da sempre il simbolo dell'anima che si trasforma."),
-                meta_title="Metempsicosi: cos'è e cosa dice l'astrologia evolutiva – Daliamae",
-                meta_description=("Cos'è la metempsicosi, la differenza con la reincarnazione e il legame con i Nodi "
-                                  "Lunari dell'astrologia evolutiva. Tre domande per riflettere."),
-                keywords="metempsicosi, reincarnazione, nodi lunari, astrologia evolutiva, oroscopo evolutivo",
-                published=True, is_sample=True))
         if _first_time("videos") and Video.query.count() == 0:
             db.session.add(Video(
                 title="Come nasce Daliamae", sort=1, upload_date=date(2026, 10, 1),
