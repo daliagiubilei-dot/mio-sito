@@ -134,3 +134,15 @@ class Lead(db.Model):
     consent = db.Column(db.Boolean, default=False)
     handled = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=_now)
+
+
+class Subscriber(db.Model):
+    """Iscritti alla newsletter (con la prova del consenso)."""
+    __tablename__ = "subscribers"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(200), unique=True, nullable=False)
+    source = db.Column(db.String(200), default="")             # pagina da cui si è iscritto
+    consent_version = db.Column(db.String(40), default="")
+    mailchimp_status = db.Column(db.String(80), default="")
+    mailchimp_error = db.Column(db.String(300), default="")
+    created_at = db.Column(db.DateTime, default=_now)

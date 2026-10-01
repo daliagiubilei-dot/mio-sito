@@ -29,12 +29,48 @@ Il markup FAQ viene scritto solo nelle pagine in cui le domande sono davvero vis
    - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}` (riferimento al database; "Postgres" è il nome del servizio database)
    - `SECRET_KEY` = una stringa lunga e casuale
    - `ADMIN_PASSWORD` = la password per entrare in `/admin` (lunga!)
-   - (facoltative) `ADMIN_USERNAME` (default `dalia`), `SITE_URL` (es. `https://www.tuodominio.it`), `FACEBOOK_URL`,
-     e per le email di avviso `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_TO`
+   - (facoltative) `ADMIN_USERNAME` (default `dalia`), `SITE_URL` (es. `https://www.tuodominio.it`), `FACEBOOK_URL`
+   - Per ricevere via email le richieste del modulo contatti vedi la sezione **Email di avviso** qui sotto.
 5. *Settings → Networking → Generate Domain* (poi, se vuoi, *Custom Domain*).
 6. Al primo avvio le tabelle vengono create e riempite con i contenuti del prototipo. Controlla `/healthz`.
 
 Dopo aver collegato il dominio vero, imposta `SITE_URL`: serve a canonical, sitemap e dati strutturati.
+
+## Email di avviso (nomi di chi scrive dal sito)
+
+Ogni richiesta dal modulo Contatti viene sempre salvata nel database (la vedi in `/admin/richieste`). Per riceverla anche
+**via email** a Dalia:
+
+> Su Railway i piani Free, Trial e Hobby **bloccano l'invio di posta via SMTP** (Gmail, Aruba, ecc.). Serve un servizio
+> che invia via web: qui è previsto **Resend**. L'SMTP funziona solo dal piano Pro di Railway.
+
+1. Crea un account gratuito su resend.com e, in *API Keys*, crea una chiave.
+2. In Railway, servizio del sito → **Variables**:
+   - `RESEND_API_KEY` = la chiave
+   - `MAIL_TO` = l'email di Dalia (più indirizzi separati da virgola)
+   - `MAIL_FROM` = `Daliamae <onboarding@resend.dev>` per provare (Resend la lascia usare solo per scrivere all'email
+     con cui ti sei registrata). Per scrivere da un indirizzo tuo, in Resend aggiungi e verifica il dominio
+     (es. `Daliamae <info@tuodominio.it>`).
+3. Salva: Railway ripubblica. Compila il modulo dal sito per provare. Se non arriva, guarda i log del servizio
+   (`Resend ha rifiutato l'email` indica il motivo) e controlla la cartella spam.
+
+L'email contiene nome, recapito, interesse e messaggio, e premendo "Rispondi" si risponde alla persona.
+
+## Newsletter (Mailchimp)
+
+Nel piede di ogni pagina c'è il modulo di iscrizione, con una **spunta di consenso** dedicata. Ogni indirizzo viene
+salvato nel database (con la versione del consenso accettato) e, se Mailchimp è collegato, inviato all'Audience in
+modalità *pending*: Mailchimp spedisce l'email di conferma e la persona entra nell'elenco solo dopo il clic
+(doppio consenso). Gli iscritti si vedono in `/admin/newsletter`, con elenco scaricabile in CSV.
+
+1. In Mailchimp: crea un'**Audience** e copia il suo *Audience ID* (Audience → Settings → Audience name and defaults).
+2. Crea una chiave API (Profilo → Extras → API keys). Finisce con `-us21` o simile: va copiata per intero.
+3. In Railway → **Variables**: `MAILCHIMP_API_KEY` = la chiave, `MAILCHIMP_LIST_ID` = l'Audience ID.
+4. Mailchimp richiede in ogni email l'indirizzo fisico del mittente e il link per annullare l'iscrizione
+   (li gestisce dalle impostazioni dell'Audience).
+
+Disiscrizioni: avvengono dal link nelle email di Mailchimp. Se elimini un iscritto da `/admin/newsletter`, toglilo
+anche da Mailchimp. Le newsletter si scrivono e si inviano da Mailchimp, non da questo sito.
 
 ## Mettere il codice su GitHub
 

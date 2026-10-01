@@ -10,11 +10,10 @@ IS_PROD = bool(os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("RAILWAY_
 
 def _database_url():
     url = os.environ.get("DATABASE_URL", "").strip()
-    # Railway/Heroku possono fornire "postgres://", SQLAlchemy vuole "postgresql+psycopg2://"
+    # Railway/Heroku possono fornire "postgres://" o "postgresql://": indichiamo esplicitamente il driver psycopg2
     if url.startswith("postgres://"):
         url = "postgresql+psycopg2://" + url[len("postgres://"):]
     elif url.startswith("postgresql://"):
-        # Converti postgresql:// in postgresql+psycopg2:// per usare esplicitamente psycopg2
         url = "postgresql+psycopg2://" + url[len("postgresql://"):]
     if not url:
         if IS_PROD:
@@ -50,12 +49,19 @@ class Config:
     # Indirizzo pubblico (es. https://www.daliamae.it). Se vuoto si usa quello della richiesta.
     SITE_URL = os.environ.get("SITE_URL", "").rstrip("/")
 
-    # Email di avviso quando arriva una richiesta dal modulo contatti (facoltativa)
+    # Email di avviso quando arriva una richiesta dal modulo contatti (facoltativa).
+    # MAIL_TO = indirizzo di Dalia (più indirizzi separati da virgola).
+    # Metodo consigliato su Railway: Resend (RESEND_API_KEY + MAIL_FROM). L'SMTP funziona solo dal piano Pro.
+    MAIL_TO = os.environ.get("MAIL_TO", "")
+    RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+    MAIL_FROM = os.environ.get("MAIL_FROM", "Daliamae <onboarding@resend.dev>")
+    # Newsletter con Mailchimp (facoltativa). L'indirizzo finisce comunque nel database, anche se non è collegato.
+    MAILCHIMP_API_KEY = os.environ.get("MAILCHIMP_API_KEY", "")     # es. abcd1234-us21
+    MAILCHIMP_LIST_ID = os.environ.get("MAILCHIMP_LIST_ID", "")     # ID dell'Audience
     SMTP_HOST = os.environ.get("SMTP_HOST", "")
     SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
     SMTP_USER = os.environ.get("SMTP_USER", "")
     SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
-    MAIL_TO = os.environ.get("MAIL_TO", "")
 
 
 # Dati del brand (compaiono nel sito e nei dati strutturati per Google)
@@ -72,4 +78,3 @@ SITE = {
     # Facebook: compare nel sito solo se imposti FACEBOOK_URL
     "facebook": os.environ.get("FACEBOOK_URL", "").strip(),
 }
-

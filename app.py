@@ -8,22 +8,22 @@ import json
 import logging
 import os
 import secrets
-import smtplib
 import threading
 import time
 from collections import defaultdict
 from datetime import datetime
-from email.message import EmailMessage
 
 from flask import (Flask, abort, flash, jsonify, make_response, redirect, render_template, request,
                    session, url_for)
 from markupsafe import Markup
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+import mailer
+import newsletter
 import seo
 from config import Config, SITE
 from content import FAQ_GROUPS, INTERESTS, SERVICES, SIGNS
-from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Video, db, static_or_url
+from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, Video, db, static_or_url
 from seed_data import seed_if_empty
 
 log = logging.getLogger("daliamae")
@@ -89,7 +89,7 @@ def create_app():
 
     @app.context_processor
     def inject():
-        return {"site": SITE, "csrf_token": csrf_token, "asset": asset,
+        return {"site": SITE, "csrf_token": csrf_token, "asset": asset, "nl_consent": newsletter.CONSENT_TEXT,
                 "aeo_first": lambda slug: (faqs_for(slug) or [None])[0]}
 
     # ------------------------------------------------------------------ sicurezza di base
@@ -262,26 +262,42 @@ def create_app():
         return render("contatti.html", "contatti", crumb="Contatti", form=form, error=error,
                       sent=bool(request.args.get("inviato")), interests=INTERESTS)
 
-    def notify(lead):
-        """Avvisa Dalia via email (solo se le variabili SMTP sono impostate)."""
-        if not (Config.SMTP_HOST and Config.MAIL_TO):
-            return
+    @app.route("/newsletter", methods=["POST"])
+    def newsletter_signup():
+        form = request.form
+        back = request.referrer or url_for("home")
+        if form.get("website"):                                   # campo trappola per i bot
+            return redirect(url_for("newsletter_thanks"))
+        email = (form.get("email") or "").strip().lower()[:200]
+        if too_many("nl:" + (request.remote_addr or "?"), limit=5):
+            flash("Troppi tentativi: riprova tra qualche minuto.", "err")
+            return redirect(back)
+        if not newsletter.EMAIL_RE.match(email) or not form.get("consenso"):
+            flash("Inserisci un indirizzo email valido e accetta il consenso per iscriverti.", "err")
+            return redirect(back)
+        sub = Subscriber.query.filter_by(email=email).first()
+        if sub is None:
+            sub = Subscriber(email=email, source=(request.form.get("source") or "")[:200],
+                             consent_version=newsletter.CONSENT_VERSION)
+            db.session.add(sub)
+        ok, status, err = newsletter.subscribe_mailchimp(email)
+        sub.mailchimp_status, sub.mailchimp_error = status, err
+        db.session.commit()
+        session["nl_confirm"] = bool(ok)
+        return redirect(url_for("newsletter_thanks"))
 
-        def send():
-            try:
-                msg = EmailMessage()
-                msg["Subject"] = "Nuova richiesta dal sito: " + lead.name
-                msg["From"] = Config.SMTP_USER or Config.MAIL_TO
-                msg["To"] = Config.MAIL_TO
-                msg.set_content("Nome: %s\nRecapito: %s\nInteresse: %s\n\n%s" % (lead.name, lead.contact, lead.interest, lead.message))
-                with smtplib.SMTP(Config.SMTP_HOST, Config.SMTP_PORT, timeout=10) as s:
-                    s.starttls()
-                    if Config.SMTP_USER:
-                        s.login(Config.SMTP_USER, Config.SMTP_PASSWORD)
-                    s.send_message(msg)
-            except Exception:
-                log.exception("Invio email non riuscito")
-        threading.Thread(target=send, daemon=True).start()
+    @app.route("/newsletter/grazie")
+    def newsletter_thanks():
+        meta = {"title": "Iscrizione alla newsletter – Daliamae", "description": "Grazie per l'iscrizione.",
+                "keywords": "", "robots": "noindex", "canonical": base_url() + "/newsletter/grazie",
+                "og_type": "website", "image": base_url() + url_for("static", filename="img/og-default.jpg")}
+        return render_template("newsletter_grazie.html", meta=meta, ld=[], confirm=session.pop("nl_confirm", False))
+
+    def notify(lead):
+        """Avvisa Dalia via email (solo se la posta è configurata). Parte in secondo piano: il sito non aspetta."""
+        if not mailer.is_configured():
+            return
+        threading.Thread(target=mailer.send_lead_email, args=(lead,), daemon=True).start()
 
     # ------------------------------------------------------------------ file per motori di ricerca e AI
     @app.route("/robots.txt")

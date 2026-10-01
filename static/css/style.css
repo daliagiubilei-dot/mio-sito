@@ -387,3 +387,14 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .hero{--logo:clamp(110px,38vw,200px)}
   .hero-logo{margin:0 auto 14px}
 }
+
+/* newsletter nel piede di pagina */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nl{display:grid;gap:8px;max-width:520px;margin:6px 0}
+.nl-title{font:400 1.1rem var(--display);color:var(--fg)}
+.nl-row{display:flex;gap:8px;flex-wrap:wrap}
+.nl-row input[type=email]{flex:1 1 200px;min-width:0;padding:11px 14px;border:1px solid var(--line);border-radius:99px;background:var(--bg2);color:var(--fg);font:inherit}
+.nl-row .btn{padding:11px 22px}
+.nl-priv{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;line-height:1.45;color:var(--muted)}
+.nl-priv input{margin-top:3px;flex:none}
+.nl-msg{color:var(--gold2);margin:0 0 6px;font-size:.92rem}

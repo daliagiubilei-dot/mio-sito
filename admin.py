@@ -1,15 +1,17 @@
 """Pannello di controllo (/admin): SEO delle pagine, frasi chiave AEO, blog, video, eventi, richieste."""
+import csv
 import hmac
+import io
 import re
 import secrets
 import unicodedata
 from datetime import date, datetime
 from functools import wraps
 
-from flask import (Blueprint, abort, flash, redirect, render_template, request, session, url_for)
+from flask import (Blueprint, Response, abort, flash, redirect, render_template, request, session, url_for)
 
 from config import Config
-from models import AeoPhrase, Event, Lead, PageSEO, Post, Setting, Video, db
+from models import AeoPhrase, Event, Lead, PageSEO, Post, Setting, Subscriber, Video, db
 import seo
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
@@ -280,6 +282,35 @@ def lead_delete(lid):
     db.session.commit()
     flash("Richiesta eliminata.", "ok")
     return redirect(url_for("admin.leads"))
+
+
+# ----------------------------------------------------------------------------- iscritti alla newsletter
+@admin_bp.route("/newsletter")
+def subscribers():
+    import newsletter
+    rows = Subscriber.query.order_by(Subscriber.created_at.desc()).all()
+    return render_template("admin/newsletter.html", rows=rows, ready=newsletter.mailchimp_ready())
+
+
+@admin_bp.route("/newsletter.csv")
+def subscribers_csv():
+    rows = Subscriber.query.order_by(Subscriber.created_at).all()
+    buf = io.StringIO()
+    w = csv.writer(buf, delimiter=";")
+    w.writerow(["email", "data iscrizione", "pagina", "consenso", "stato Mailchimp"])
+    for r in rows:
+        w.writerow([r.email, r.created_at.strftime("%d/%m/%Y %H:%M"), r.source, r.consent_version, r.mailchimp_status])
+    return Response("\ufeff" + buf.getvalue(), mimetype="text/csv; charset=utf-8",
+                    headers={"Content-Disposition": "attachment; filename=iscritti-newsletter.csv"})
+
+
+@admin_bp.route("/newsletter/<int:sid>/elimina", methods=["POST"])
+def subscriber_delete(sid):
+    row = db.session.get(Subscriber, sid) or abort(404)
+    db.session.delete(row)
+    db.session.commit()
+    flash("Iscritto eliminato dal sito. Se è presente su Mailchimp, toglilo anche da lì.", "ok")
+    return redirect(url_for("admin.subscribers"))
 
 
 # ----------------------------------------------------------------------------- elenco / modulo / elimina (generici)

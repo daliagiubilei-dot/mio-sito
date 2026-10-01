@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top"><div class="wrap">
+  <p class="label">Newsletter</p>
+  {% if confirm %}
+  <h1>Controlla la tua email</h1>
+  <p class="intro">Ti ho appena scritto per confermare l'iscrizione: apri il messaggio e clicca sul pulsante per completarla. Se non lo trovi, guarda anche nella cartella spam o nelle promozioni.</p>
+  {% else %}
+  <h1>Grazie!</h1>
+  <p class="intro">Ho registrato la tua richiesta di iscrizione. Se non ricevi una email di conferma entro qualche minuto, scrivimi dalla pagina Contatti.</p>
+  {% endif %}
+  <div class="cta" style="margin-top:20px"><a class="btn ghost" href="{{ url_for('home') }}">Torna alla home</a></div>
+</div></section>
+{% endblock %}
