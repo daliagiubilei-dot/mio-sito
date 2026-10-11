@@ -40,9 +40,10 @@
     <a class="brand" href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo-round.png') }}" alt="" width="38" height="38">Daliamae</a>
     <div class="tools">
       <button class="btn-s" id="themeBtn" type="button">Tema</button>
+      <button class="btn-s menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mainNav">Menu</button>
     </div>
-    <nav aria-label="Principale">
-      {{ nav(['home'], 'Home') }}{{ nav(['visione'], 'La Visione') }}{{ nav(['chi_sono'], 'Chi Sono') }}{{ nav(['percorsi','service'], '<span class="nav-long">Pratiche &amp; </span>Percorsi') }}{{ nav(['archetipi'], 'Archetipi') }}{{ nav(['eventi'], 'Eventi') }}{{ nav(['blog','post'], 'Blog') }}{{ nav(['video_social'], 'Video Social') }}{{ nav(['domande'], 'Domande') }}{{ nav(['contatti'], 'Contatti') }}
+    <nav id="mainNav" aria-label="Principale">
+      {{ nav(['home'], 'Home') }}{{ nav(['visione'], 'La Visione') }}{{ nav(['chi_sono'], 'Chi Sono') }}{{ nav(['percorsi','service'], 'Pratiche &amp; Percorsi') }}{{ nav(['archetipi'], 'Archetipi') }}{{ nav(['eventi'], 'Eventi') }}{{ nav(['blog','post'], 'Blog') }}{{ nav(['video_social'], 'Video Social') }}{{ nav(['domande'], 'Domande') }}{{ nav(['contatti'], 'Contatti') }}
     </nav>
   </div>
 </header>

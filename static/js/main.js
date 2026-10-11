@@ -13,6 +13,22 @@
     });
   }
 
+  // Menu su telefono: il pulsante "Menu" apre e chiude il pannello delle voci
+  var menuBtn = document.getElementById('menuBtn');
+  var header = document.querySelector('header.nav');
+  function setMenu(open) {
+    if (!header || !menuBtn) return;
+    header.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? 'Chiudi' : 'Menu';
+  }
+  if (menuBtn && header) {
+    menuBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!header.classList.contains('open')); });
+    header.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('click', function (e) { if (!header.contains(e.target)) setMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  }
+
   // Altezza del menu (serve alle pagine "a schermo intero")
   function setNavH() {
     var h = document.querySelector('header.nav');

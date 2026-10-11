@@ -36,6 +36,8 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .nav nav a{color:var(--muted);text-decoration:none}
 .nav nav a:hover{color:var(--gold2)}
 .tools{display:flex;gap:8px}
+.menu-btn{display:none;margin-left:8px}
+@keyframes navIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .btn-s{font:600 .78rem var(--body);border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:99px;padding:6px 12px;cursor:pointer}
 .btn-s[aria-pressed="true"]{border-color:var(--note);color:var(--note);background:var(--noteBg)}
 
@@ -362,10 +364,17 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .services,.path{grid-template-columns:1fr}
   .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}
   section.block{padding-block:64px}
-  /* menu su due righe, senza scorrere di lato */
-  .nav nav{order:3;width:100%;margin-left:0;padding-bottom:10px;display:grid;grid-template-columns:repeat(5,auto);justify-content:space-between;gap:6px 10px;font-size:clamp(.88rem,4.2vw,1rem);letter-spacing:.03em;white-space:nowrap}
-  .nav nav .nav-long{display:none}
-  .nav nav a{justify-self:center}
+  /* menu a tendina: pulsante "Menu" che apre un pannello con tutte le voci */
+  .nav .wrap{position:relative}
+  .menu-btn{display:inline-block}
+  .nav nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;gap:0;margin:0;padding:6px 24px 16px;
+    background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 32px -24px rgba(0,0,0,.45);
+    font:400 1.3rem var(--label);letter-spacing:.07em;max-height:calc(100svh - var(--navh,65px));overflow-y:auto}
+  header.nav.open nav{display:flex;animation:navIn .18s ease-out}
+  .nav nav a{padding:12px 2px;border-bottom:1px solid var(--line)}
+  .nav nav a:last-child{border-bottom:0}
+  .nav nav a[aria-current="page"]{border-bottom:1px solid var(--line);color:var(--gold2)}
+  .nav nav a[aria-current="page"]::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 10px 3px 0;vertical-align:middle}
   .tools{margin-left:auto}
 }
 @media (max-width:460px){.zodiac,.tiles{grid-template-columns:1fr}}
