@@ -61,6 +61,9 @@ def create_app():
     with app.app_context():
         db.create_all()
         seed_if_empty()
+        # Con gunicorn --preload questo codice gira prima di creare i processi: chiudiamo le connessioni al database
+        # aperte qui, così ogni processo apre le sue (connessioni SSL condivise causano "bad record mac").
+        db.engine.dispose()
     log.info(mailer.status()[1])
 
     # ------------------------------------------------------------------ utilità per i template
