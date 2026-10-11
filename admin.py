@@ -263,8 +263,17 @@ def keywords():
 # ----------------------------------------------------------------------------- richieste dal modulo contatti
 @admin_bp.route("/richieste")
 def leads():
+    import mailer
     rows = Lead.query.order_by(Lead.created_at.desc()).all()
-    return render_template("admin/leads.html", rows=rows)
+    return render_template("admin/leads.html", rows=rows, mail_status=mailer.status())
+
+
+@admin_bp.route("/richieste/email-prova", methods=["POST"])
+def lead_test_email():
+    import mailer
+    ok, msg = mailer.send_test_email()
+    flash(("Prova riuscita. " if ok else "Prova NON riuscita. ") + msg, "ok" if ok else "err")
+    return redirect(url_for("admin.leads"))
 
 
 @admin_bp.route("/richieste/<int:lid>/gestita", methods=["POST"])

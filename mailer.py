@@ -34,13 +34,18 @@ def _send_resend(subject, body, reply_to):
         headers={"Authorization": "Bearer " + Config.RESEND_API_KEY, "Content-Type": "application/json",
                  "User-Agent": "daliamae-site/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=10) as r:
-            return 200 <= r.status < 300
+        with urllib.request.urlopen(req, timeout=15) as r:
+            if 200 <= r.status < 300:
+                log.info("Email inviata con Resend a %s", ", ".join(_recipients()))
+                return True, "Email inviata a %s." % ", ".join(_recipients())
+            return False, "Resend ha risposto con il codice %s." % r.status
     except urllib.error.HTTPError as e:
-        log.error("Resend ha rifiutato l'email (%s): %s", e.code, e.read()[:300])
-    except Exception:
+        detail = e.read()[:300].decode("utf-8", "replace")
+        log.error("Resend ha rifiutato l'email (%s): %s", e.code, detail)
+        return False, "Resend ha rifiutato l'email (codice %s): %s" % (e.code, detail)
+    except Exception as e:
         log.exception("Invio con Resend non riuscito")
-    return False
+        return False, "Il sito non è riuscito a contattare Resend: %s" % e
 
 
 def _send_smtp(subject, body, reply_to):
@@ -57,20 +62,42 @@ def _send_smtp(subject, body, reply_to):
             if Config.SMTP_USER:
                 s.login(Config.SMTP_USER, Config.SMTP_PASSWORD)
             s.send_message(msg)
-        return True
-    except Exception:
+        log.info("Email inviata via SMTP a %s", ", ".join(_recipients()))
+        return True, "Email inviata a %s." % ", ".join(_recipients())
+    except Exception as e:
         log.exception("Invio SMTP non riuscito")
-        return False
+        return False, "Invio SMTP non riuscito: %s" % e
+
+
+def status():
+    """Descrizione leggibile della configurazione (senza mostrare la chiave)."""
+    missing = [n for n, v in (("MAIL_TO", Config.MAIL_TO), ("RESEND_API_KEY", Config.RESEND_API_KEY or Config.SMTP_HOST)) if not v]
+    if missing:
+        return False, "Email di avviso NON configurata: mancano le variabili " + ", ".join(missing) + "."
+    method = "Resend" if Config.RESEND_API_KEY else "SMTP"
+    return True, "Email di avviso configurata con %s: mittente %s, destinatari %s." % (
+        method, Config.MAIL_FROM if Config.RESEND_API_KEY else (Config.SMTP_USER or "-"), ", ".join(_recipients()))
+
+
+def _send(subject, body, reply_to=None):
+    if not is_configured():
+        return False, status()[1]
+    if Config.RESEND_API_KEY:
+        return _send_resend(subject, body, reply_to)
+    return _send_smtp(subject, body, reply_to)
+
+
+def send_test_email():
+    """Email di prova dal pannello: ritorna (riuscito, spiegazione)."""
+    return _send("Prova email dal sito Daliamae",
+                 "Questa è un'email di prova inviata dal pannello di controllo del sito Daliamae.\n"
+                 "Se la leggi, gli avvisi del modulo Contatti funzionano.")
 
 
 def send_lead_email(lead):
-    """Spedisce a Dalia i dati di una nuova richiesta. Ritorna True se l'invio è andato a buon fine."""
-    if not is_configured():
-        return False
+    """Spedisce a Dalia i dati di una nuova richiesta. Ritorna (riuscito, spiegazione)."""
     subject = "Nuova richiesta dal sito: %s" % lead.name
     body = "Nome: %s\nRecapito: %s\nInteresse: %s\n\nMessaggio:\n%s\n\n— Richiesta ricevuta dal sito Daliamae." % (
         lead.name, lead.contact, lead.interest or "-", lead.message or "(nessun messaggio)")
     reply_to = lead.contact if _EMAIL.match(lead.contact or "") else None
-    if Config.RESEND_API_KEY:
-        return _send_resend(subject, body, reply_to)
-    return _send_smtp(subject, body, reply_to)
+    return _send(subject, body, reply_to)

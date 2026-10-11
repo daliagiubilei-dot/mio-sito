@@ -27,6 +27,12 @@ from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, V
 from seed_data import seed_if_empty
 
 log = logging.getLogger("daliamae")
+# I messaggi del sito (email inviate, errori) devono comparire nei log di Railway
+_h = logging.StreamHandler()
+_h.setFormatter(logging.Formatter("[%(asctime)s] [%(levelname)s] %(name)s: %(message)s"))
+log.addHandler(_h)
+log.setLevel(logging.INFO)
+log.propagate = False
 
 MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto",
         "settembre", "ottobre", "novembre", "dicembre"]
@@ -55,6 +61,7 @@ def create_app():
     with app.app_context():
         db.create_all()
         seed_if_empty()
+    log.info(mailer.status()[1])
 
     # ------------------------------------------------------------------ utilità per i template
     @app.template_filter("tojson_ld")
@@ -242,6 +249,7 @@ def create_app():
             form = request.form
             ip = request.remote_addr or "?"
             if form.get("website"):                      # campo trappola per i bot
+                log.warning("Modulo contatti scartato come bot (campo trappola compilato)")
                 return redirect(url_for("contatti", inviato=1))
             if too_many("lead:" + ip, limit=5):
                 error = "Hai inviato troppe richieste: riprova tra qualche minuto."
@@ -295,7 +303,9 @@ def create_app():
 
     def notify(lead):
         """Avvisa Dalia via email (solo se la posta è configurata). Parte in secondo piano: il sito non aspetta."""
+        log.info("Nuova richiesta dal modulo contatti (id %s)", lead.id)
         if not mailer.is_configured():
+            log.warning(mailer.status()[1])
             return
         threading.Thread(target=mailer.send_lead_email, args=(lead,), daemon=True).start()
 

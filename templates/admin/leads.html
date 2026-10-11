@@ -3,6 +3,10 @@
 {% block body %}
 <h1>Richieste dal modulo Contatti</h1>
 <p class="sub">Chi ha compilato il modulo nella pagina Contatti, dalla più recente.</p>
+<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+  <div><b>Email di avviso</b><br><span class="help">{{ mail_status[1] }}</span></div>
+  <form method="post" action="{{ url_for('admin.lead_test_email') }}"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><button class="btn small" type="submit">Invia email di prova</button></form>
+</div>
 {% for r in rows %}
 <div class="card" style="{{ 'opacity:.6' if r.handled else '' }}">
   <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
