@@ -35,8 +35,14 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .nav nav{display:flex;gap:4px 18px;flex-wrap:wrap;margin-left:auto;font:400 1.08rem var(--label);letter-spacing:.06em}
 .nav nav a{color:var(--muted);text-decoration:none}
 .nav nav a:hover{color:var(--gold2)}
-.tools{display:flex;gap:8px}
-.menu-btn{display:none;margin-left:8px}
+.tools{display:flex;gap:8px;align-items:center}
+/* pulsante menu a tre linee (solo telefono); diventa una X quando è aperto */
+.menu-btn{display:none;position:relative;width:40px;height:40px;margin-left:6px;padding:0;border:0;background:transparent;color:var(--fg);cursor:pointer}
+.menu-btn span{position:absolute;left:9px;right:9px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,opacity .2s ease}
+.menu-btn span:nth-child(1){top:13px}.menu-btn span:nth-child(2){top:19px}.menu-btn span:nth-child(3){top:25px}
+header.nav.open .menu-btn span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.nav.open .menu-btn span:nth-child(2){opacity:0}
+header.nav.open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 @keyframes navIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .btn-s{font:600 .78rem var(--body);border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:99px;padding:6px 12px;cursor:pointer}
 .btn-s[aria-pressed="true"]{border-color:var(--note);color:var(--note);background:var(--noteBg)}
@@ -366,7 +372,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   section.block{padding-block:64px}
   /* menu a tendina: pulsante "Menu" che apre un pannello con tutte le voci */
   .nav .wrap{position:relative}
-  .menu-btn{display:inline-block}
+  .menu-btn{display:inline-block;vertical-align:middle}
   .nav nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;gap:0;margin:0;padding:6px 24px 16px;
     background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 32px -24px rgba(0,0,0,.45);
     font:400 1.3rem var(--label);letter-spacing:.07em;max-height:calc(100svh - var(--navh,65px));overflow-y:auto}
@@ -403,6 +409,20 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 @media (max-width:960px){
   .hero{--logo:clamp(110px,38vw,200px)}
   .hero-logo{margin:0 auto 14px}
+}
+/* home su telefono: blocco iniziale più compatto, così la goccia si vede già nella prima schermata */
+@media (max-width:600px){
+  .hero{--logo:clamp(84px,26vw,120px);padding-block:10px 20px}
+  .hero-logo{margin:0 auto 8px}
+  .hero .kicker{margin-bottom:6px}
+  .hero h1{font-size:1.6rem}
+  .hero h1 em{font-size:1.25em;margin-top:.05em}
+  .hero p.lead{margin-top:10px;font-size:.98rem;line-height:1.55}
+  .hero .cta{margin-top:16px;flex-wrap:nowrap;gap:8px}
+  .hero .cta .btn{flex:1 1 auto;justify-content:center;padding:11px 10px;font-size:.88rem;white-space:nowrap}
+  .hero .cta .cta-long{display:none}
+  .hero-art{margin-top:2px}
+  .hero-art figcaption{margin-top:0}
 }
 
 /* newsletter nel piede di pagina */
