@@ -75,6 +75,6 @@ SITE = {
     "vat": "18680741008",
     "instagram": "https://www.instagram.com/daliamae_/",
     "tiktok": "https://www.tiktok.com/@daliamae77",
-    # Facebook: compare nel sito solo se imposti FACEBOOK_URL
-    "facebook": os.environ.get("FACEBOOK_URL", "").strip(),
+    # Facebook: la variabile FACEBOOK_URL su Railway, se impostata, ha la precedenza
+    "facebook": os.environ.get("FACEBOOK_URL", "").strip() or "https://www.facebook.com/share/19y2NsDGtC/",
 }
