@@ -93,7 +93,35 @@ POSTS = [
 ]
 
 
+VIDEOS = [
+    dict(
+        key="cambio-di-prospettiva",
+        title="Il cambio di prospettiva",
+        description="Un breve video di Dalia sul cambio di prospettiva: guardare la stessa situazione da un altro punto di vista.",
+        file="video/cambio-di-prospettiva.mp4",
+        poster="video/cambio-di-prospettiva.jpg",
+        upload_date=date(2026, 10, 11),
+        sort=0,                      # 0 = primo della pagina Video Social
+    ),
+]
+
+
+def _add_videos():
+    for data in VIDEOS:
+        data = dict(data)
+        key = data.pop("key")
+        try:
+            if not _first_time("video_" + key) or Video.query.filter_by(file=data["file"]).first():
+                db.session.commit()
+                continue
+            db.session.add(Video(published=True, **data))
+            db.session.commit()
+        except Exception:      # più processi che partono insieme: il primo vince
+            db.session.rollback()
+
+
 def _add_posts():
+    _add_videos()
     from models import Post
     for data in POSTS:
         try:
