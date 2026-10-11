@@ -48,6 +48,7 @@ def seed_if_empty():
     except Exception:          # più processi che partono insieme: il primo vince
         db.session.rollback()
     _add_posts()
+    _update_faq_progetto_animico()
 
 
 # ---------------------------------------------------------------- articoli aggiunti dal codice
@@ -132,3 +133,26 @@ def _add_posts():
             db.session.commit()
         except Exception:      # più processi che partono insieme: il primo vince
             db.session.rollback()
+
+
+# ---------------------------------------------------------------- FAQ: oroscopo evolutivo come progetto animico
+# Aggiorna una sola volta le due risposte sull'oroscopo evolutivo, ma solo se nel pannello
+# sono ancora identiche al testo originale (le modifiche fatte da Dalia non vengono toccate).
+FAQ_PROGETTO_ANIMICO = [
+    ("L'oroscopo evolutivo è una lettura del tema natale che lo interpreta come una mappa di potenzialità e schemi interiori, anziché come previsione di eventi. Aiuta a riconoscere le proprie inclinazioni, i blocchi ricorrenti e le direzioni di crescita, per vivere le scelte con più consapevolezza.",
+     "L'oroscopo evolutivo legge il cielo di nascita come il progetto che la tua anima ha scelto prima di incarnarsi: non un destino scritto, ma la direzione che sei qui per abitare. Più che prevedere eventi, il tema natale diventa la mappa di questo progetto: aiuta a riconoscere le tue inclinazioni, i blocchi ricorrenti e le direzioni di crescita, per vivere le scelte con più consapevolezza."),
+    ("L'oroscopo classico, come quello dei giornali, parla del segno solare e cerca di prevedere cosa accadrà. L'oroscopo evolutivo studia il tuo tema natale completo, calcolato su data, ora e luogo di nascita, e si concentra su chi sei e su come puoi crescere, non su cosa ti succederà.",
+     "L'oroscopo classico, come quello dei giornali, parla del segno solare e cerca di prevedere cosa accadrà. L'oroscopo evolutivo studia il tuo tema natale completo, calcolato su data, ora e luogo di nascita, e lo legge come il progetto della tua anima: si concentra su chi sei, sulle tue inclinazioni e su come puoi crescere, non su cosa ti succederà."),
+]
+
+
+def _update_faq_progetto_animico():
+    try:
+        if not _first_time("faq_progetto_animico"):
+            return
+        for old, new in FAQ_PROGETTO_ANIMICO:
+            for row in AeoPhrase.query.filter_by(answer=old).all():
+                row.answer = new
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
