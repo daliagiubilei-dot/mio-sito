@@ -494,3 +494,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .news-body{padding:18px 18px 20px}
   .news-body h3{font-size:1.3rem}
 }
+/* «Novità» subito sotto il benvenuto, prima di «Quattro pratiche» */
+section.block.news-sec{padding-top:40px}
+.news-sec .news{margin:0;padding:0;border-top:0}
+@media (max-width:760px){section.block.news-sec{padding-block:28px 56px}}
