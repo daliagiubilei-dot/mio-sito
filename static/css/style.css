@@ -416,7 +416,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 @media (max-width:600px){
   .hero{--logo:clamp(84px,26vw,120px);padding-block:10px 20px}
   .hero-logo{margin:0 auto 8px}
-  .hero .kicker{margin-bottom:6px}
+  .hero .kicker{margin-bottom:6px;text-align:center}
   .hero h1{font-size:1.6rem}
   .hero h1 em{font-size:1.25em;margin-top:.05em}
   .hero p.lead{margin-top:10px;font-size:.98rem;line-height:1.55}
