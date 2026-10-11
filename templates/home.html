@@ -37,6 +37,7 @@
       <a class="tile" href="{{ url_for('service', slug='percorso-individuale') }}"><span class="glyph" aria-hidden="true">⟡</span><h3>Percorsi 1:1</h3><p>Incontri individuali per riconoscere gli schemi e tornare al centro.</p><span class="go">Scopri →</span></a>
       <a class="tile" href="{{ url_for('service', slug='massaggio-psicosomatico') }}"><span class="glyph" aria-hidden="true">❋</span><h3>Massaggio psicosomatico</h3><p>Il corpo come linguaggio, un tocco consapevole.</p><span class="go">Scopri →</span></a>
     </div>
+    {% include "partials/novita.html" %}
     <div class="teaser">
       <img src="{{ url_for('static', filename='img/dalia.jpg') }}" alt="Ritratto di Dalia Giubilei, operatrice olistica" loading="lazy">
       <div class="txt">

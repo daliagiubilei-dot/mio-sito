@@ -75,6 +75,10 @@ def create_app():
     def it_month(d):
         return "%s %d" % (MESI[d.month - 1].capitalize(), d.year) if d else ""
 
+    @app.template_filter("it_date")
+    def it_date(d):
+        return "%d %s %d" % (d.day, MESI[d.month - 1], d.year) if d else ""
+
     @app.template_filter("it_datetime")
     def it_datetime(d):
         return "%d %s %d, ore %02d:%02d" % (d.day, MESI[d.month - 1], d.year, d.hour, d.minute) if d else ""
@@ -155,7 +159,10 @@ def create_app():
     # ------------------------------------------------------------------ pagine
     @app.route("/")
     def home():
-        return render("home.html", "home")
+        # sezione «Novità»: si aggiorna da sola con l'ultimo articolo e l'ultimo video pubblicati
+        latest_post = Post.query.filter_by(published=True).order_by(Post.published_at.desc(), Post.id.desc()).first()
+        latest_video = Video.query.filter_by(published=True).order_by(Video.upload_date.desc(), Video.id.desc()).first()
+        return render("home.html", "home", latest_post=latest_post, latest_video=latest_video)
 
     @app.route("/la-visione")
     def visione():

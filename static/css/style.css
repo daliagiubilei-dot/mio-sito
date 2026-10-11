@@ -466,3 +466,31 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 .about-sec .name-row h1{color:var(--gold2)}
 .about-sec .name-row .role{color:var(--fg)}
 .star-o{display:inline-block;width:.68em;height:.84em;vertical-align:-.06em;margin-right:.03em;color:var(--gold2);overflow:visible}
+
+/* Home: sezione «Novità» (ultimo articolo del blog e ultimo video, aggiornati in automatico) */
+.news{margin:72px 0;padding:48px 0 8px;border-top:1px solid var(--line)}
+.news-head{display:grid;gap:10px;justify-items:center;text-align:center;margin-bottom:32px}
+.news-head h2{font-size:clamp(1.65rem,3.2vw,2.4rem)}
+.news-head h2 em{color:var(--gold2)}
+.news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.news-card{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line);background:var(--bg);color:var(--fg);text-decoration:none;min-width:0;transition:border-color .2s}
+.news-card:hover{border-color:var(--gold)}
+.news-media{position:relative;aspect-ratio:1200/630;overflow:hidden;background:var(--bg2)}
+.news-media img{width:100%;height:100%;object-fit:cover;display:block}
+.news-media.reel .blur{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);filter:blur(18px) brightness(.7)}
+.news-media.reel .front{position:relative;width:auto;margin:0 auto;object-fit:contain}
+.news-play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(23,28,27,.55);border:1px solid #f0c878;display:grid;place-items:center}
+.news-play svg{width:20px;height:20px;margin-left:3px;fill:#f0c878}
+.news-tag{position:absolute;left:12px;top:12px;font:400 .9rem/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:rgba(23,28,27,.62);color:#f0c878}
+.news-body{display:grid;gap:9px;padding:22px 24px 26px;align-content:start}
+.news-meta{font:400 .95rem/1.2 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.news-body h3{font-size:1.45rem}
+.news-body p:not(.news-meta){color:var(--muted);font-size:.95rem;line-height:1.55}
+.news-btn{justify-self:start;margin-top:6px;padding:11px 22px}
+.news-card:hover .news-btn{background:var(--gold);color:var(--onGold)}
+@media (max-width:760px){
+  .news{margin:48px 0;padding-top:36px}
+  .news-grid{grid-template-columns:1fr;gap:22px}
+  .news-body{padding:18px 18px 20px}
+  .news-body h3{font-size:1.3rem}
+}

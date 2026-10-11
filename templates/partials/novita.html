@@ -1,0 +1,39 @@
+{% if latest_post or latest_video %}
+<div class="news">
+  <div class="news-head">
+    <p class="label">Novità</p>
+    <h2>Le ultime da <em>Daliamae</em></h2>
+  </div>
+  <div class="news-grid">
+    {% if latest_post %}
+    <a class="news-card" href="{{ url_for('post', slug=latest_post.slug) }}">
+      <div class="news-media">
+        {% if latest_post.cover %}<img src="{{ latest_post.cover_url }}" alt="{{ latest_post.cover_alt or latest_post.title }}" loading="lazy">{% endif %}
+        <span class="news-tag">Dal blog</span>
+      </div>
+      <div class="news-body">
+        <p class="news-meta">{% if latest_post.category %}{{ latest_post.category }} · {% endif %}{{ latest_post.published_at|it_date }} · {{ latest_post.reading_min }} min</p>
+        <h3>{{ latest_post.title }}</h3>
+        {% if latest_post.excerpt %}<p>{{ latest_post.excerpt }}</p>{% endif %}
+        <span class="btn ghost news-btn">Vai al blog →</span>
+      </div>
+    </a>
+    {% endif %}
+    {% if latest_video %}
+    <a class="news-card" href="{{ url_for('video_social') }}#video-{{ latest_video.id }}">
+      <div class="news-media reel">
+        {% if latest_video.poster %}<img class="blur" src="{{ latest_video.poster_url }}" alt="" loading="lazy"><img class="front" src="{{ latest_video.poster_url }}" alt="{{ latest_video.title }}" loading="lazy">{% endif %}
+        <span class="news-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+        <span class="news-tag">Video social</span>
+      </div>
+      <div class="news-body">
+        <p class="news-meta">Video · {{ latest_video.upload_date|it_date }}</p>
+        <h3>{{ latest_video.title }}</h3>
+        {% if latest_video.description %}<p>{{ latest_video.description }}</p>{% endif %}
+        <span class="btn ghost news-btn">Guarda i video →</span>
+      </div>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

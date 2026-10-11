@@ -9,7 +9,7 @@
   <div class="wrap">
     <div class="vgrid">
       {% for v in videos %}
-      <article class="vcard">
+      <article class="vcard" id="video-{{ v.id }}">
         <div class="vframe"><video src="{{ v.file_url }}"{% if v.poster_url %} poster="{{ v.poster_url }}"{% endif %} controls playsinline preload="none" aria-label="{{ v.title }}"></video></div>
         <h2>{{ v.title }}</h2>
         {% if v.description %}<p>{{ v.description }}</p>{% endif %}
