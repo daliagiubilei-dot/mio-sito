@@ -457,3 +457,8 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .about-sec .name-row .role::before{content:"· "}
   .about-sec .about img{order:2;margin:4px auto 10px}
 }
+
+/* Chi sono: nome dorato, "Operatrice Olistica" in nero con le O disegnate come stelle cadenti */
+.about-sec .name-row h1{color:var(--gold2)}
+.about-sec .name-row .role{color:var(--fg)}
+.star-o{display:inline-block;width:.68em;height:.84em;vertical-align:-.06em;margin-right:.03em;color:var(--gold2);overflow:visible}
