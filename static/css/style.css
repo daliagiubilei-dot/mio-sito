@@ -509,3 +509,14 @@ section.block.news-sec{padding-top:40px}
   .svc-map .glyph{font:400 1.9rem/1 var(--display);color:var(--gold);height:2rem;display:flex;align-items:center}
   .svc4 .svc{scroll-margin-top:calc(var(--navh,65px) + 12px)}
 }
+
+/* Video Social su telefono: intestazione compatta e video interi nella schermata */
+@media (max-width:600px){
+  .vs-top{padding-block:16px 0}
+  .vs-top .label{display:none}
+  .vs-top h1{font-size:1.9rem;margin-top:0}
+  .vs-top p.intro{margin-top:6px;font-size:.95rem;line-height:1.5}
+  section.block.vs-list{padding-top:14px!important}
+  .vs-list .vgrid{grid-template-columns:1fr;justify-items:center;gap:32px}
+  .vs-list .vcard{width:min(100%,calc((100svh - var(--navh,65px) - 200px) * 9 / 16));min-width:220px}
+}
