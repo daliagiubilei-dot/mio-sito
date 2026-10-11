@@ -423,7 +423,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   /* "Prenota" sulla riga di "Abitalo.", "Scopri i percorsi" come link discreto sotto il testo */
   .hero h1 em{line-height:48px}
   .h1-cta{display:inline-flex;position:absolute;right:0;bottom:4px;padding:9px 16px;font-size:.88rem;line-height:1.2;white-space:nowrap}
-  .hero .cta{margin-top:10px}
+  .hero .cta{margin-top:10px;position:relative;z-index:2}
   .hero .cta .btn.primary{display:none}
   .hero .cta .btn.ghost{border:0;padding:4px 0;border-radius:0;font-size:1rem;letter-spacing:.01em}
   .hero .cta .arrow{display:inline;margin-left:2px}
@@ -442,3 +442,14 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 .nl-priv{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;line-height:1.45;color:var(--muted)}
 .nl-priv input{margin-top:3px;flex:none}
 .nl-msg{color:var(--gold2);margin:0 0 6px;font-size:.92rem}
+
+/* Chi sono su telefono: "Chi sono · Dalia Giubilei · Operatrice olistica" sopra la foto */
+@media (max-width:860px){
+  .about-sec .about{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:0}
+  .about-sec .about .txt{display:contents}
+  .about-sec .about .txt > *{order:5}
+  .about-sec .about .txt > .label{order:1;text-align:center}
+  .about-sec .about .txt > h1{order:2;text-align:center;margin:0}
+  .about-sec .about .txt > .role{order:3;text-align:center}
+  .about-sec .about img{order:4;margin:8px auto 14px}
+}
