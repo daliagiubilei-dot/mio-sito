@@ -499,3 +499,13 @@ section.block.news-sec{padding-top:40px}
 .news-sec .news{margin:0;padding:0;border-top:0}
 @media (max-width:760px){section.block.news-sec{padding-block:28px 56px}}
 .news-sec + section.block .teaser{margin-top:0}
+
+/* Pratiche & Percorsi: schemino con i quattro simboli (solo su telefono e tablet, dove le schede non si vedono tutte insieme) */
+.svc-map{display:none}
+@media (max-width:860px){
+  .svc-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .svc-map a{display:grid;justify-items:center;align-content:center;gap:6px;padding:18px 10px 16px;background:var(--bg);text-align:center;text-decoration:none;color:var(--fg);font:400 1.02rem/1.25 var(--display);transition:background .2s}
+  .svc-map a:hover,.svc-map a:focus-visible{background:var(--bg2)}
+  .svc-map .glyph{font:400 1.9rem/1 var(--display);color:var(--gold);height:2rem;display:flex;align-items:center}
+  .svc4 .svc{scroll-margin-top:calc(var(--navh,65px) + 12px)}
+}

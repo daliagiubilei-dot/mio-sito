@@ -7,29 +7,35 @@
       <h1>Quattro strade per tornare al tuo centro</h1>
       <p class="intro">Ogni pratica può essere vissuta da sola o intrecciata alle altre in un percorso costruito su di te.</p>
     </div>
+    <nav class="svc-map" aria-label="I quattro percorsi in breve">
+      <a href="#oroscopo-evolutivo"><span class="glyph" aria-hidden="true">☉</span><span>Oroscopo evolutivo</span></a>
+      <a href="#meditazioni-guidate"><span class="glyph" aria-hidden="true">◌</span><span>Meditazioni guidate</span></a>
+      <a href="#percorso-individuale"><span class="glyph" aria-hidden="true">⟡</span><span>Percorsi 1:1</span></a>
+      <a href="#massaggio-psicosomatico"><span class="glyph" aria-hidden="true">❋</span><span>Massaggio psicosomatico</span></a>
+    </nav>
     <div class="svc4">
-      <article class="svc">
+      <article class="svc" id="oroscopo-evolutivo">
         <span class="glyph" aria-hidden="true">☉</span>
         <h2><a href="{{ url_for('service', slug='oroscopo-evolutivo') }}" style="color:inherit;text-decoration:none">Oroscopo evolutivo &amp; Messaggi dell'Anima</a></h2>
         <p>La mappa del cielo come specchio del tuo cammino, dell'inconscio e delle vocazioni interiori.</p>
         <p class="meta">Serve: data, ora e luogo di nascita</p>
         <a href="{{ url_for('contatti') }}">Richiedi la lettura →</a>
         </article>
-      <article class="svc">
+      <article class="svc" id="meditazioni-guidate">
         <span class="glyph" aria-hidden="true">◌</span>
         <h2><a href="{{ url_for('service', slug='meditazioni-guidate') }}" style="color:inherit;text-decoration:none">Meditazioni guidate</a></h2>
         <p>Silenzio, respiro, grounding e visualizzazione per connetterti con la tua parte più profonda, su temi specifici e generali.</p>
         <p class="meta">Individuali o di gruppo</p>
         <a href="{{ url_for('eventi') }}">Prossimi incontri →</a>
         </article>
-      <article class="svc">
+      <article class="svc" id="percorso-individuale">
         <span class="glyph" aria-hidden="true">⟡</span>
         <h2><a href="{{ url_for('service', slug='percorso-individuale') }}" style="color:inherit;text-decoration:none">Percorsi 1:1 di consapevolezza e crescita</a></h2>
         <p>Incontri individuali di riallineamento, comprensione degli schemi personali e riscoperta del proprio centro.</p>
         
         <a href="{{ url_for('contatti') }}">Parliamone →</a>
         </article>
-      <article class="svc">
+      <article class="svc" id="massaggio-psicosomatico">
         <span class="glyph" aria-hidden="true">❋</span>
         <h2><a href="{{ url_for('service', slug='massaggio-psicosomatico') }}" style="color:inherit;text-decoration:none">Massaggio psicosomatico</a></h2>
         <p>Il corpo come linguaggio: un tocco consapevole per sciogliere tensioni emotive e ritrovare armonia tra corpo e mente.</p>
