@@ -443,13 +443,12 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 .nl-priv input{margin-top:3px;flex:none}
 .nl-msg{color:var(--gold2);margin:0 0 6px;font-size:.92rem}
 
-/* Chi sono su telefono: "Chi sono · Dalia Giubilei · Operatrice olistica" sopra la foto */
+/* Chi sono su telefono: solo "Chi sono" sopra la foto, tutto il resto sotto */
 @media (max-width:860px){
   .about-sec .about{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:0}
   .about-sec .about .txt{display:contents}
   .about-sec .about .txt > *{order:5}
   .about-sec .about .txt > .label{order:1;text-align:center}
-  .about-sec .about .txt > h1{order:2;text-align:center;margin:0}
-  .about-sec .about .txt > .role{order:3;text-align:center}
-  .about-sec .about img{order:4;margin:8px auto 14px}
+  .about-sec .about .txt > h1{margin:0}
+  .about-sec .about img{order:2;margin:4px auto 10px}
 }
