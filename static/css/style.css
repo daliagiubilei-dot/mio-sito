@@ -498,3 +498,4 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
 section.block.news-sec{padding-top:40px}
 .news-sec .news{margin:0;padding:0;border-top:0}
 @media (max-width:760px){section.block.news-sec{padding-block:28px 56px}}
+.news-sec + section.block .teaser{margin-top:0}
