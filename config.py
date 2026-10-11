@@ -1,5 +1,6 @@
 """Configurazione: tutto ciò che cambia tra il computer e Railway arriva da variabili d'ambiente."""
 import os
+import re
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -48,6 +49,12 @@ class Config:
 
     # Indirizzo pubblico (es. https://www.daliamae.it). Se vuoto si usa quello della richiesta.
     SITE_URL = os.environ.get("SITE_URL", "").rstrip("/")
+
+    # Codice di verifica di Google Search Console (metodo "Tag HTML").
+    # Si può incollare il tag intero <meta name="google-site-verification" content="..."> oppure solo il codice.
+    _gsv = os.environ.get("GOOGLE_SITE_VERIFICATION", "").strip()
+    _m = re.search(r'content\s*=\s*["\']([^"\']+)', _gsv)
+    GOOGLE_SITE_VERIFICATION = (_m.group(1) if _m else _gsv).strip()
 
     # Email di avviso quando arriva una richiesta dal modulo contatti (facoltativa).
     # MAIL_TO = indirizzo di Dalia (più indirizzi separati da virgola).

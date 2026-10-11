@@ -104,7 +104,8 @@ def create_app():
     @app.context_processor
     def inject():
         return {"site": SITE, "csrf_token": csrf_token, "asset": asset, "nl_consent": newsletter.CONSENT_TEXT,
-                "aeo_first": lambda slug: (faqs_for(slug) or [None])[0]}
+                "aeo_first": lambda slug: (faqs_for(slug) or [None])[0],
+                "google_verification": Config.GOOGLE_SITE_VERIFICATION}
 
     # ------------------------------------------------------------------ sicurezza di base
     @app.before_request
