@@ -430,7 +430,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .hero .cta .arrow{display:inline;margin-left:2px}
   .hero .wrap{row-gap:0}
   .hero-art{margin-top:-28px}
-  .hero-art figcaption{margin-top:6px;font-size:clamp(1.35rem,6.4vw,1.7rem)}
+  .hero-art figcaption{margin-top:18px;font-size:clamp(1.35rem,6.4vw,1.7rem)}
   /* "Quattro pratiche, un unico cammino" su una riga */
   .sec-head h2.one-line{font-size:clamp(1.15rem,5.4vw,1.7rem);white-space:nowrap;text-wrap:nowrap}
 }
