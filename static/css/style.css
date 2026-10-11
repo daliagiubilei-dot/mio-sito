@@ -72,7 +72,7 @@ header.nav.open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-4
 .brush img{-webkit-mask:radial-gradient(closest-side,#000 55%,transparent 96%);mask:radial-gradient(closest-side,#000 55%,transparent 96%)}
 .brush img{inset:9% 20%;width:60%;height:82%}
 .brush video{object-fit:cover}
-.hero-art figcaption{margin-top:6px;padding-left:12%;font:italic 400 1.15rem var(--display);color:var(--muted)}
+.hero-art figcaption{margin-top:14px;padding:0;text-align:center;font:italic 400 clamp(1.6rem,3vw,2.2rem)/1.25 var(--display);color:var(--muted)}
 .hero-art figcaption b{font-weight:400;color:var(--gold2)}
 
 /* pagine */
@@ -430,7 +430,7 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .hero .cta .arrow{display:inline;margin-left:2px}
   .hero .wrap{row-gap:0}
   .hero-art{margin-top:-28px}
-  .hero-art figcaption{margin-top:0}
+  .hero-art figcaption{margin-top:6px;font-size:clamp(1.55rem,7.4vw,1.9rem)}
 }
 
 /* newsletter nel piede di pagina */
