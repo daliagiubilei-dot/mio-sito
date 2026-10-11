@@ -33,7 +33,7 @@
 </head>
 <body>
 {% macro nav(endpoints, label) -%}
-<a href="{{ url_for(endpoints[0]) }}"{% if request.endpoint in endpoints %} aria-current="page"{% endif %}>{{ label }}</a>
+<a href="{{ url_for(endpoints[0]) }}"{% if request.endpoint in endpoints %} aria-current="page"{% endif %}>{{ label|safe }}</a>
 {%- endmacro %}
 <header class="nav">
   <div class="wrap">
@@ -42,7 +42,7 @@
       <button class="btn-s" id="themeBtn" type="button">Tema</button>
     </div>
     <nav aria-label="Principale">
-      {{ nav(['home'], 'Home') }}{{ nav(['visione'], 'La Visione') }}{{ nav(['chi_sono'], 'Chi Sono') }}{{ nav(['percorsi','service'], 'Pratiche & Percorsi') }}{{ nav(['archetipi'], 'Archetipi') }}{{ nav(['eventi'], 'Eventi') }}{{ nav(['blog','post'], 'Blog') }}{{ nav(['video_social'], 'Video Social') }}{{ nav(['domande'], 'Domande') }}{{ nav(['contatti'], 'Contatti') }}
+      {{ nav(['home'], 'Home') }}{{ nav(['visione'], 'La Visione') }}{{ nav(['chi_sono'], 'Chi Sono') }}{{ nav(['percorsi','service'], '<span class="nav-long">Pratiche &amp; </span>Percorsi') }}{{ nav(['archetipi'], 'Archetipi') }}{{ nav(['eventi'], 'Eventi') }}{{ nav(['blog','post'], 'Blog') }}{{ nav(['video_social'], 'Video Social') }}{{ nav(['domande'], 'Domande') }}{{ nav(['contatti'], 'Contatti') }}
     </nav>
   </div>
 </header>

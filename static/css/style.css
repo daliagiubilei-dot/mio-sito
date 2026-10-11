@@ -362,7 +362,10 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .services,.path{grid-template-columns:1fr}
   .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}
   section.block{padding-block:64px}
-  .nav nav{order:3;width:100%;margin-left:0;padding-bottom:10px;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+  /* menu su due righe, senza scorrere di lato */
+  .nav nav{order:3;width:100%;margin-left:0;padding-bottom:10px;display:grid;grid-template-columns:repeat(5,auto);justify-content:space-between;gap:6px 10px;font-size:clamp(.88rem,4.2vw,1rem);letter-spacing:.03em;white-space:nowrap}
+  .nav nav .nav-long{display:none}
+  .nav nav a{justify-self:center}
   .tools{margin-left:auto}
 }
 @media (max-width:460px){.zodiac,.tiles{grid-template-columns:1fr}}
