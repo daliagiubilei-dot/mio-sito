@@ -451,12 +451,13 @@ footer .social a:hover{color:var(--gold2);border-color:var(--gold)}
   .about-sec .about .txt > *{order:5}
   .about-sec .about .txt > .label{order:1;text-align:center;font-size:1.7rem;letter-spacing:.16em}
   /* "Dalia Giubilei · Operatrice olistica" su una sola riga */
-  .about-sec .name-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:0 8px}
+  .about-sec .name-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:0 8px;margin-bottom:40px}
   .about-sec .name-row h1{margin:0;font-size:clamp(1.35rem,6.4vw,1.8rem)!important;white-space:nowrap}
   .about-sec .name-row .role{font-size:clamp(.95rem,4.4vw,1.2rem);letter-spacing:.06em;white-space:nowrap}
   .about-sec .name-row .role::before{content:"· "}
   .about-sec{padding-top:10px}
-  .about-sec .about img{order:2;margin:2px auto 8px;width:auto;max-width:100%;height:min(64svh,540px);max-height:none;aspect-ratio:374/672;object-fit:cover;object-position:top}
+  /* prima schermata: "Chi sono", foto grande e nome; il racconto inizia scorrendo */
+  .about-sec .about img{order:2;margin:2px auto 8px;width:100%;max-width:440px;height:calc(100svh - var(--navh,65px) - 150px);min-height:340px;max-height:none;aspect-ratio:auto;object-fit:cover;object-position:top}
 }
 
 /* Chi sono: nome dorato, "Operatrice Olistica" in nero con le O disegnate come stelle cadenti */
