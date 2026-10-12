@@ -114,14 +114,22 @@ header.nav.open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-4
 .vis-principles p{color:#d9ccb2;font-size:clamp(.9rem,2vh,1.05rem);line-height:1.5}
 .vis-content .note{color:#bfe6f3;background:rgba(15,40,50,.75);border-color:#6fb3c9}
 @media (max-width:860px){.vis-principles{grid-template-columns:1fr;gap:16px}}
+.vis-top{display:contents}
+.vis-strip,.answer-below{display:none}
 @media (max-width:600px){.vis-hero{padding:12px 12px 20px}
-  .vis-panel{min-height:0;align-items:flex-start;background:
-    linear-gradient(180deg,rgba(12,10,6,.78) 0,rgba(12,10,6,.55) calc((100vw - 24px)*.55),rgba(12,10,6,.25) calc((100vw - 24px)*.8),rgba(12,10,6,.55) calc((100vw - 24px)*1.15),#0c0a06 calc((100vw - 24px)*1.5)),
-    url("../img/vision-bg-mobile.jpg") center top/100% auto no-repeat #0c0a06}
-  .vis-content{padding:28px 22px 30px;gap:14px}
+  .vis-panel{min-height:0;align-items:flex-start;background:#0c0a06}
+  .vis-content{padding:0 0 30px;gap:14px}
+  .vis-content > *{padding-left:22px;padding-right:22px}
+  .vis-top{display:grid;gap:14px;padding-top:28px;padding-bottom:22px;max-width:none!important;
+    background:linear-gradient(180deg,rgba(12,10,6,.72),rgba(12,10,6,.5)),url("../img/vision-sky-mobile.jpg") center/cover no-repeat}
+  .vis-top > *{padding:0}
   .vis-content h1{font-size:2.15rem;line-height:1.12}
   .vis-content .big{font-size:1.22rem}
-  .vis-content .answer{font-size:1rem;line-height:1.55;margin-top:calc((100vw - 24px)*.42)}
+  .vis-content .answer{font-size:1rem;line-height:1.55}
+  .vis-top .answer{color:#fff6e4}
+  .answer-rest{display:none}
+  .vis-strip{display:block;width:100%;height:auto;padding:0!important;margin:-14px 0 4px;max-width:none!important}
+  .answer-below{display:block}
   .vis-principles{margin-top:8px}}
 
 /* home tiles */
