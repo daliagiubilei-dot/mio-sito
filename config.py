@@ -52,7 +52,8 @@ class Config:
 
     # Codice di verifica di Google Search Console (metodo "Tag HTML").
     # Si può incollare il tag intero <meta name="google-site-verification" content="..."> oppure solo il codice.
-    _gsv = os.environ.get("GOOGLE_SITE_VERIFICATION", "").strip()
+    # Codice di daliamae.it già inserito (non è un dato segreto); la variabile su Railway, se c'è, ha la precedenza.
+    _gsv = os.environ.get("GOOGLE_SITE_VERIFICATION", "").strip() or "pnxx0y1kgrwU0dsGghtf_LPWdDsWABRZGyLl8m3nxYs"
     _m = re.search(r'content\s*=\s*["\']([^"\']+)', _gsv)
     GOOGLE_SITE_VERIFICATION = (_m.group(1) if _m else _gsv).strip()
 
