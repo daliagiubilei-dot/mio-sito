@@ -322,6 +322,11 @@ def create_app():
         threading.Thread(target=mailer.send_lead_email, args=(lead,), daemon=True).start()
 
     # ------------------------------------------------------------------ file per motori di ricerca e AI
+    @app.route("/favicon.ico")
+    def favicon():
+        from flask import send_from_directory
+        return send_from_directory(app.static_folder, "favicon.ico", mimetype="image/x-icon", max_age=604800)
+
     @app.route("/robots.txt")
     def robots():
         txt = "User-agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: %s/sitemap.xml\n" % base_url()

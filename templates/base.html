@@ -22,7 +22,9 @@
 <meta name="twitter:title" content="{{ meta.title }}">
 <meta name="twitter:description" content="{{ meta.description }}">
 <meta name="twitter:image" content="{{ meta.image }}">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img/icon-192.png') }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='img/icon-96.png') }}">
 <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -44,7 +44,7 @@ PAGE_DEFAULTS = {
         "oroscopo evolutivo, meditazione guidata, percorso di crescita personale, massaggio psicosomatico"),
     "percorsi/oroscopo-evolutivo": ("Pratica: Oroscopo evolutivo",
         "Oroscopo evolutivo | Lettura del tema natale online – Daliamae",
-        "Oroscopo evolutivo: la lettura del tema natale come mappa di potenzialità e schemi interiori. Servono data, ora e luogo di nascita. Anche online.",
+        "Oroscopo evolutivo: il tema natale letto come progetto della tua anima, per riconoscere le tue inclinazioni. Servono data, ora e luogo di nascita. Anche online.",
         "oroscopo evolutivo, lettura del tema natale, tema natale online, astrologia evolutiva, nodi lunari"),
     "percorsi/meditazioni-guidate": ("Pratica: Meditazioni guidate",
         "Meditazione guidata | Individuale e di gruppo – Daliamae",

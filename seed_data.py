@@ -49,6 +49,7 @@ def seed_if_empty():
         db.session.rollback()
     _add_posts()
     _update_faq_progetto_animico()
+    _update_seo_oroscopo()
 
 
 # ---------------------------------------------------------------- articoli aggiunti dal codice
@@ -153,6 +154,24 @@ def _update_faq_progetto_animico():
         for old, new in FAQ_PROGETTO_ANIMICO:
             for row in AeoPhrase.query.filter_by(answer=old).all():
                 row.answer = new
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+
+# ---------------------------------------------------------------- SEO: descrizione oroscopo evolutivo
+# Aggiorna una sola volta la meta description della pagina, solo se nel pannello è ancora quella originale.
+SEO_OROSCOPO_OLD = "Oroscopo evolutivo: la lettura del tema natale come mappa di potenzialità e schemi interiori. Servono data, ora e luogo di nascita. Anche online."
+SEO_OROSCOPO_NEW = "Oroscopo evolutivo: il tema natale letto come progetto della tua anima, per riconoscere le tue inclinazioni. Servono data, ora e luogo di nascita. Anche online."
+
+
+def _update_seo_oroscopo():
+    try:
+        if not _first_time("seo_oroscopo_progetto_animico"):
+            return
+        row = PageSEO.query.filter_by(slug="percorsi/oroscopo-evolutivo").first()
+        if row and row.meta_description in ("", SEO_OROSCOPO_OLD):
+            row.meta_description = SEO_OROSCOPO_NEW
         db.session.commit()
     except Exception:
         db.session.rollback()
