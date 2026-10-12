@@ -76,7 +76,7 @@ header.nav.open .menu-btn span:nth-child(3){transform:translateY(-6px) rotate(-4
 .hero-art figcaption b{font-weight:400;color:var(--gold2)}
 
 /* pagine */
-.page[hidden]{display:none!important}
+[hidden]{display:none!important}
 .page-top{padding-block:64px 8px}
 .page-top h1{font-size:clamp(2.1rem,4.2vw,3.2rem);margin-top:12px;max-width:18em}
 .page-top p.intro{margin-top:16px;max-width:40em;color:var(--muted);font-size:1.1rem}
