@@ -24,13 +24,13 @@
 
 <section class="block roots-sec">
   <div class="wrap roots{% if not static_exists('img/san-polo.jpg') %} roots-solo{% endif %}">
+    <p class="label roots-head">Le mie radici</p>
     {% if static_exists('img/san-polo.jpg') %}
     <figure class="roots-photo">
       <img src="{{ url_for('static', filename='img/san-polo.jpg') }}" alt="Antico muro di pietra con un volto dipinto" loading="lazy">
     </figure>
     {% endif %}
     <div class="roots-txt">
-      <p class="label">Le mie radici</p>
       <p class="roots-lead">Le mie radici affondano in terre di antica sapienza.</p>
       <p class="roots-lead">Dalla parte di mia madre, la Sicilia di nonna Maria e nonno Baldassarre: Ribera, dove la terra baciata dal sole custodisce il profumo degli aranci, nella terra agrigentina dei templi dorici e della Scala dei Turchi, la scogliera bianca che scende nel mare come una scalinata di luce.</p>
       <p class="roots-lead">Dalla parte di mio padre, la Sardegna di nonna Abia, Cagliari, terra del mare e del sale, della Dea Madre e di un'antica sapienza al femminile; e la montagna di nonno Vinicio, San Polo dei Cavalieri, antico borgo dei Monti Lucretili legato fin dai tempi più remoti al culto della luna.</p>

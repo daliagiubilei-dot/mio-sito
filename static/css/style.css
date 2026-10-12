@@ -532,7 +532,6 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 @media (max-width:760px){
   section.block.roots-sec{padding-block:40px 56px}
   .roots{grid-template-columns:1fr;gap:22px}
-  .roots-txt{order:-1}
   .roots-photo img{aspect-ratio:3/4;max-height:none}
 }
 .roots.roots-solo{grid-template-columns:1fr;max-width:46rem}
@@ -550,3 +549,4 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 .names-close{text-align:center;font:italic 400 clamp(1.05rem,1.8vw,1.25rem)/1.55 var(--display);color:var(--fg);max-width:40rem;justify-self:center}
 @media (max-width:900px){.names-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.names-list{grid-template-columns:1fr}}
+.roots-head{grid-column:1/-1;margin-bottom:-8px}
