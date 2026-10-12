@@ -535,3 +535,4 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
   .roots-txt{order:-1}
   .roots-photo img{aspect-ratio:4/5;max-height:70svh}
 }
+.roots.roots-solo{grid-template-columns:1fr;max-width:46rem}

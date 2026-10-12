@@ -105,7 +105,8 @@ def create_app():
     def inject():
         return {"site": SITE, "csrf_token": csrf_token, "asset": asset, "nl_consent": newsletter.CONSENT_TEXT,
                 "aeo_first": lambda slug: (faqs_for(slug) or [None])[0],
-                "google_verification": Config.GOOGLE_SITE_VERIFICATION}
+                "google_verification": Config.GOOGLE_SITE_VERIFICATION,
+                "static_exists": lambda path: os.path.isfile(os.path.join(app.static_folder, path))}
 
     # ------------------------------------------------------------------ sicurezza di base
     @app.before_request
