@@ -593,8 +593,3 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
   /* goccia allargata: le punte del pennello arrivano proprio ai bordi dello schermo */
   .hero .brush{width:106%;margin-inline:-3%}
 }
-
-/* home su telefono: "Prenota un primo colloquio gratuito" su due righe accanto ad "Abitalo." */
-@media (max-width:600px){
-  .h1-cta{white-space:normal;text-align:center;justify-content:center;width:min(190px,calc(100% - 140px));padding:6px 14px;line-height:1.2;bottom:0}
-}
