@@ -687,3 +687,5 @@ section.block.teaser-sec{padding-top:0}
   .names-parents{font-size:.9rem;line-height:1.42}
   .names-me{margin-top:2px}
 }
+/* frase sui genitori larga quanto le schede dei nonni */
+.names-parents{max-width:none;justify-self:stretch}
