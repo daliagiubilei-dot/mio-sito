@@ -611,3 +611,6 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 }
 @keyframes tipBob{0%,100%{transform:translateY(-2px);opacity:.75}50%{transform:translateY(5px);opacity:1}}
 @media (prefers-reduced-motion:reduce){.scroll-sword .tip{animation:none}}
+
+/* i link interni (es. la spada della home) non finiscono sotto il menu fisso */
+html{scroll-padding-top:calc(var(--navh,65px) + 8px)}
