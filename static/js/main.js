@@ -75,4 +75,37 @@
   // Video della home: chi preferisce meno movimento vede solo l'immagine
   var hv = document.getElementById('heroVideo');
   if (hv && matchMedia('(prefers-reduced-motion: reduce)').matches) { hv.removeAttribute('autoplay'); hv.pause(); }
+
+  // Video della home: audio. I browser bloccano il sonoro automatico,
+  // quindi si prova con l'audio e, se bloccato, si attiva al primo tocco nella pagina.
+  var sb = document.getElementById('soundToggle');
+  if (hv && sb) {
+    var showSound = function () {
+      var on = !hv.muted;
+      sb.textContent = on ? '🔊 Audio attivo' : '🔇 Tocca per ascoltare';
+      sb.setAttribute('aria-pressed', on);
+    };
+    var unmute = function () { hv.muted = false; hv.play().catch(function () {}); showSound(); };
+    var onFirstTouch = function (e) {
+      if (e.target === sb) return;
+      unmute();
+      document.removeEventListener('pointerdown', onFirstTouch);
+      document.removeEventListener('keydown', onFirstTouch);
+    };
+    if (!hv.paused || hv.autoplay) {
+      hv.muted = false;
+      hv.play().then(showSound).catch(function () {
+        hv.muted = true;
+        hv.play().catch(function () {});
+        showSound();
+        document.addEventListener('pointerdown', onFirstTouch);
+        document.addEventListener('keydown', onFirstTouch);
+      });
+    }
+    sb.addEventListener('click', function () {
+      document.removeEventListener('pointerdown', onFirstTouch);
+      document.removeEventListener('keydown', onFirstTouch);
+      if (hv.muted) unmute(); else { hv.muted = true; showSound(); }
+    });
+  }
 })();

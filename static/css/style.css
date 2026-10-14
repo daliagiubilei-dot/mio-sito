@@ -566,3 +566,9 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 @media (max-width:900px){.names-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.names-list{grid-template-columns:1fr}}
 .roots-head{grid-column:1/-1;margin-bottom:-8px}
+
+/* home: pulsante audio sotto la goccia */
+.sound-btn{display:flex;align-items:center;gap:6px;margin:14px auto 0;padding:8px 18px;border:1px solid var(--gold);border-radius:99px;
+  background:transparent;color:var(--gold2);font:600 .9rem var(--body);cursor:pointer}
+.sound-btn:hover,.sound-btn[aria-pressed="true"]{background:color-mix(in srgb,var(--gold) 14%,transparent)}
+.hero-art .sound-btn + figcaption{margin-top:10px}
