@@ -23,6 +23,9 @@
 </section>
 
 <section class="block roots-sec">
+  <video class="roots-bg" id="rootsBg" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+         data-src="{{ url_for('static', filename='video/albero-radici.mp4') }}"
+         poster="{{ url_for('static', filename='img/albero-radici.jpg') }}"></video>
   <div class="wrap roots{% if not static_exists('img/san-polo.jpg') %} roots-solo{% endif %}">
     <p class="label roots-head">Le mie radici</p>
     {% if static_exists('img/san-polo.jpg') %}
@@ -47,7 +50,9 @@
         <div><dt>Abia</dt><dd>Un nome antico, di origine biblica, che significa più o meno «Dio è mio padre». Raro e prezioso.</dd></div>
         <div><dt>Vinicio</dt><dd>Un nome latino che di solito si collega alla vite e al vino, antico simbolo di trasformazione e di festa.</dd></div>
       </dl>
-      <p class="names-close">Dalla parte di mia madre, la Madre e il Mago che segue la stella. Dalla parte di mio padre, una donna antica e rara e un uomo legato alla terra che si trasforma.</p>
+      <p class="names-parents">Da Maria e Baldassarre nasce Francesca, mia madre, porta il nome del santo che nel presepe riunì la Madre e i Magi guidati dalla stella.<br>
+        Da Abia e Vinicio nasce Domenico, mio padre: porta il nome del giorno del Signore, il giorno del sole e della festa, che accoglie il cielo di Abia,<br>
+        «Dio è mio padre», e celebra la trasformazione di Vinicio. <span class="names-me">Da loro, io.</span></p>
     </div>
   </div>
 </section>
