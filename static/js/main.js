@@ -61,6 +61,15 @@
     });
   });
 
+  // Home: la scritta di benvenuto con le frecce porta alla sezione successiva
+  var cap = document.querySelector('.scroll-cap');
+  if (cap) {
+    cap.addEventListener('click', function () {
+      var next = document.querySelector('.hero') && document.querySelector('.hero').nextElementSibling;
+      if (next) next.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
   // Contatti: copia il numero di telefono
   var copy = document.getElementById('copyTel');
   if (copy) {
@@ -82,7 +91,6 @@
   if (hv && sb) {
     var showSound = function () {
       var on = !hv.muted;
-      sb.textContent = on ? '🔊' : '🔇';
       sb.setAttribute('aria-pressed', on);
       sb.setAttribute('aria-label', on ? "Disattiva l'audio" : "Attiva l'audio");
     };
