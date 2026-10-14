@@ -13,6 +13,11 @@
       <div class="cta">
         <a class="btn ghost" href="{{ url_for('percorsi') }}">Scopri i percorsi<span class="arrow" aria-hidden="true"> →</span></a>
       </div>
+      <a class="scroll-sword" href="#dopo-hero" aria-label="Scorri alla sezione successiva">
+        <svg class="hilt" viewBox="0 0 48 36" aria-hidden="true"><circle cx="24" cy="7.5" r="5.2" stroke-width="2.4"/><circle class="f" cx="24" cy="7.5" r="1.6"/><path class="f" d="M22.4 12.6h3.2v16h-3.2z"/><path d="M22.4 17h3.2M22.4 21h3.2M22.4 25h3.2" stroke-width="1" class="d"/><path class="f" d="M3 27.5l5 2.2h32l5-2.2v8l-5-2.2H8l-5 2.2z"/></svg>
+        <span class="blade" aria-hidden="true"></span>
+        <svg class="tip" viewBox="0 0 40 20" aria-hidden="true"><path d="M8 3l12 14 12-14"/></svg>
+      </a>
       </div>
     <figure class="hero-art">
       <div class="brush">
@@ -24,6 +29,7 @@
   </div>
 </section>
 
+<span id="dopo-hero"></span>
 {% if latest_post or latest_video %}
 <section class="block news-sec">
   <div class="wrap">
