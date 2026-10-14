@@ -693,3 +693,13 @@ section.block.teaser-sec{padding-top:0}
 .names-parents{text-align:justify;text-align-last:center;hyphens:auto;-webkit-hyphens:auto;color:var(--fg)}
 @media (min-width:961px){.names-parents{font-size:1.06rem;line-height:1.55}}
 @media (min-width:961px) and (max-height:820px){.names-parents{font-size:.98rem;line-height:1.45}}
+
+/* Chi sono: albero spoglio con rami e radici, in filigrana dietro "Le mie radici" (solo computer) */
+@media (min-width:961px){
+  section.block.roots-sec{position:relative;isolation:isolate}
+  section.block.roots-sec::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:url("../img/albero-radici.svg") center 137%/78% 110% no-repeat;opacity:.2}
+  .roots-sec .names-list{background:none}
+  .roots-sec .names-list > div{background:color-mix(in srgb,var(--bg) 55%,transparent)}
+  .roots-sec .names-list > div + div{border-left:1px solid var(--line)}
+}
