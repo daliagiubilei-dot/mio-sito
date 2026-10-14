@@ -764,3 +764,22 @@ section.block.teaser-sec{padding-top:0}
   .jstep{grid-template-columns:92px 1fr}
   .journey::before{left:46px;top:46px;bottom:46px}
 }
+/* cerchi dei disegni più grandi */
+.jicon{width:190px;height:190px;padding:5px}
+.journey::before{top:95px}
+@media (max-width:860px){
+  .jstep{grid-template-columns:1fr;justify-items:center;text-align:center;padding:0}
+  .jstep .jicon{grid-row:auto;width:200px;height:200px;margin:0 0 6px}
+  .jstep > *:not(.jicon){grid-column:1}
+  .journey::before{left:50%;top:100px;bottom:auto;height:calc(100% - 200px);z-index:0}
+  .jstep{background:var(--bg);position:relative}
+  .journey{gap:40px}
+  .journey-head{text-align:center;justify-items:center}
+}
+/* telefono: niente riquadro dietro le tappe, un filo corto d'oro tra una tappa e l'altra */
+@media (max-width:860px){
+  .jstep{background:none}
+  .journey::before{display:none}
+  .journey{gap:14px}
+  .jstep:not(:last-child)::after{content:"";display:block;width:1px;height:36px;margin:14px auto 0;background:var(--gold);grid-column:1}
+}
