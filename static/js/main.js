@@ -82,8 +82,9 @@
   if (hv && sb) {
     var showSound = function () {
       var on = !hv.muted;
-      sb.textContent = on ? '🔊 Audio attivo' : '🔇 Tocca per ascoltare';
+      sb.textContent = on ? '🔊' : '🔇';
       sb.setAttribute('aria-pressed', on);
+      sb.setAttribute('aria-label', on ? "Disattiva l'audio" : "Attiva l'audio");
     };
     var unmute = function () { hv.muted = false; hv.play().catch(function () {}); showSound(); };
     var onFirstTouch = function (e) {
