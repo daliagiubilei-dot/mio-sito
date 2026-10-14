@@ -594,16 +594,20 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
   .hero .brush{width:106%;margin-inline:-3%}
 }
 
-/* home su computer: spadina d'oro al centro che invita a scorrere; le frecce ai lati del benvenuto restano solo sul telefono */
+/* home su computer: spada d'oro lunga tra testo e goccia, dal simbolo alla fine delle scritte; invita a scorrere.
+   Le frecce ai lati del benvenuto restano solo sul telefono */
 .scroll-sword{display:none}
 @media (min-width:961px){
-  .hero{position:relative}
-  .scroll-sword{display:block;position:absolute;left:50%;bottom:4px;width:30px;height:90px;margin-left:-15px;color:var(--gold)}
-  .scroll-sword svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-    animation:swordBob 2.6s ease-in-out infinite}
+  .hero .wrap > div:first-child{position:relative}
+  .scroll-sword{position:absolute;top:0;bottom:0;right:-40px;width:40px;display:flex;flex-direction:column;align-items:center;
+    color:var(--gold);animation:swordBob 2.8s ease-in-out infinite}
+  .scroll-sword svg{flex:none;width:40px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .scroll-sword .hilt{height:30px}
+  .scroll-sword .tip{height:18px;margin-top:-10px}
   .scroll-sword .f{fill:currentColor;stroke:none}
+  .scroll-sword .blade{flex:1;width:4px;margin-top:-2px;background:currentColor;clip-path:polygon(0 0,100% 0,62% 100%,38% 100%)}
   .scroll-sword:hover{color:var(--gold2)}
   .hero-art .scroll-cap .cue{display:none}
 }
-@keyframes swordBob{0%,100%{transform:translateY(-4px);opacity:.8}50%{transform:translateY(4px);opacity:1}}
-@media (prefers-reduced-motion:reduce){.scroll-sword svg{animation:none}}
+@keyframes swordBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@media (prefers-reduced-motion:reduce){.scroll-sword{animation:none}}
