@@ -61,13 +61,21 @@
     });
   });
 
-  // Home: la scritta di benvenuto con le frecce porta alla sezione successiva
+  // Home: la scritta di benvenuto resta sempre su una riga: se il carattere non ci sta, si rimpicciolisce quanto basta
   var cap = document.querySelector('.scroll-cap');
+  function fitCap() {
+    var t = cap && cap.querySelector('span');
+    if (!t) return;
+    cap.style.fontSize = '';
+    var room = cap.clientWidth - Array.prototype.reduce.call(cap.querySelectorAll('.cue'), function (w, c) {
+      return w + (c.offsetWidth ? c.offsetWidth + 8 : 0); }, 0) - 8;
+    var size = parseFloat(getComputedStyle(cap).fontSize);
+    if (t.scrollWidth > room) cap.style.fontSize = Math.floor(size * room / t.scrollWidth * 10) / 10 + 'px';
+  }
   if (cap) {
-    cap.addEventListener('click', function () {
-      var next = document.querySelector('.hero') && document.querySelector('.hero').nextElementSibling;
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
-    });
+    fitCap();
+    addEventListener('resize', fitCap);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCap);
   }
 
   // Contatti: copia il numero di telefono
