@@ -614,3 +614,15 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 
 /* i link interni (es. la spada della home) non finiscono sotto il menu fisso */
 html{scroll-padding-top:calc(var(--navh,65px) + 8px)}
+
+section.block.teaser-sec{padding-top:0}
+/* Novità: titolo più grande e proporzionato */
+.news-head .label{font-size:clamp(1.25rem,1.8vw,1.6rem);letter-spacing:.2em}
+.news-head h2{font-size:clamp(2rem,4vw,3.1rem)}
+/* su computer le Novità occupano una schermata intera, così "Chi ti accompagna" con la foto inizia nella schermata successiva */
+@media (min-width:961px){
+  section.block.news-sec{min-height:calc(100svh - var(--navh,65px));display:flex;flex-direction:column;justify-content:center;padding-block:28px}
+  .news-sec .news-head{margin-bottom:36px}
+  section.block.teaser-sec{padding-block:64px 72px}
+  .teaser-sec .teaser img{width:260px}
+}
