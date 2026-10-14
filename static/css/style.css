@@ -717,3 +717,13 @@ section.block.teaser-sec{padding-top:0}
   .names-parents{text-align:left;text-align-last:left;hyphens:none;-webkit-hyphens:none;justify-self:stretch}
   .names-parents .br-pc{display:none}
 }
+/* Chi sono sul telefono: l'albero (immagine ferma) sotto la frase sui genitori */
+.roots-tree-img{display:none}
+@media (max-width:960px){
+  .roots-tree-img{display:block;width:calc(100% + 24px);max-width:none;margin:4px -12px 0;height:auto;mix-blend-mode:multiply;opacity:.75;
+    -webkit-mask:radial-gradient(ellipse 58% 56% at 50% 50%,#000 45%,transparent 100%);mask:radial-gradient(ellipse 58% 56% at 50% 50%,#000 45%,transparent 100%)}
+  :root[data-theme="dark"] .roots-tree-img{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg);opacity:.6}
+}
+@media (max-width:960px) and (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .roots-tree-img{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg);opacity:.6}
+}
