@@ -656,3 +656,11 @@ section.block.teaser-sec{padding-top:0}
   .roots .roots-txt{grid-column:2;grid-row:2;align-self:start}
   .roots .names{grid-row:3}
 }
+
+/* "Ti do il benvenuto in Daliamae" sempre su una riga, tra le frecce (il carattere si adatta allo schermo) */
+.scroll-cap span{white-space:nowrap}
+@media (max-width:600px){
+  .hero-art .scroll-cap{gap:8px;padding-inline:4px}
+  .scroll-cap .cue{width:16px;height:22px}
+  .hero-art figcaption.scroll-cap{font-size:calc((100vw - 84px) / 15.2)}
+}
