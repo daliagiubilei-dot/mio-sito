@@ -623,6 +623,10 @@ section.block.teaser-sec{padding-top:0}
 @media (min-width:961px){
   section.block.news-sec{min-height:calc(100svh - var(--navh,65px));display:flex;flex-direction:column;justify-content:center;padding-block:28px}
   .news-sec .news-head{margin-bottom:36px}
-  section.block.teaser-sec{padding-block:64px 72px}
+  section.block.teaser-sec{padding-block:28px 32px}
+  /* foto e piede di pagina stanno insieme nella stessa schermata */
+  body:has(.teaser-sec) footer{padding-block:22px 24px}
+  body:has(.teaser-sec) footer .legal{max-width:none}
+  body:has(.teaser-sec) footer .wrap{gap:10px}
   .teaser-sec .teaser img{width:260px}
 }
