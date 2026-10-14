@@ -43,12 +43,43 @@
         <a href="{{ url_for('contatti') }}">Prenota →</a>
         </article>
     </div>
-    <div class="path3" aria-label="Il tuo percorso in tre fasi">
+    </div>
+</section>
+
+<section class="journey-sec" aria-labelledby="journey-title">
+  <div class="wrap">
+    <div class="journey-head">
       <p class="label">Il tuo percorso</p>
-      <div class="step"><span class="n">Fase 1 · La superficie</span><h3>Riconoscere il problema</h3><p>Diamo un nome a ciò che si manifesta e agli schemi che si ripetono.</p></div>
-      <div class="step"><span class="n">Fase 2 · Il cuore</span><h3>La trasformazione</h3><p>Leggiamo i simboli del tuo cielo e del tuo corpo per capire da dove nasce.</p></div>
-      <div class="step"><span class="n">Fase 3 · Le radici</span><h3>Profondità</h3><p>Radichi nuove abitudini di presenza da portare nella vita di ogni giorno.</p></div>
+      <h2 id="journey-title">Dalla superficie alle radici, <em>fino al cuore</em></h2>
+      <p class="intro">Non un rimedio veloce, ma un cammino in tre tempi: si parte da ciò che si vede, si scende dove tutto nasce e si torna alla vita trasformati.</p>
     </div>
-    </div>
+    <ol class="journey">
+      <li class="jstep j1">
+        <span class="jicon"><img src="{{ url_for('static', filename='img/percorso-1.jpg') }}" alt="Persona sotto la pioggia con le mani sulla testa" width="300" height="300" loading="lazy"></span>
+        <p class="jn">Fase 1 · La superficie</p>
+        <h3>Riconoscere il problema</h3>
+        <p>Arrivi con ciò che si vede: ansia, blocco, stanchezza, schemi che si ripetono. Gli diamo un nome, senza giudizio.</p>
+        <p class="jnote"><b>La trappola:</b> rimedi usa-e-getta e strumenti slegati, che danno solo un sollievo momentaneo.</p>
+      </li>
+      <li class="jstep j2">
+        <span class="jicon"><img src="{{ url_for('static', filename='img/percorso-2.jpg') }}" alt="Figura in meditazione su un cristallo, con le radici sotto" width="300" height="300" loading="lazy"></span>
+        <p class="jn">Fase 2 · Le radici</p>
+        <h3>Scendere in profondità</h3>
+        <p>Cerchiamo l'origine: il tuo tema natale, il corpo, i simboli che parlano di te.</p>
+        <ul>
+          <li>Oroscopo evolutivo, meditazione, massaggio psicosomatico e narrazione simbolica, intrecciati in un unico percorso.</li>
+          <li>Il <b>clic</b> interiore: un cambio di prospettiva che unisce corpo e anima.</li>
+        </ul>
+      </li>
+      <li class="jstep j3">
+        <span class="jicon"><img src="{{ url_for('static', filename='img/percorso-3.jpg') }}" alt="Donna che danza sotto la pioggia al sole, con un fiore in mano" width="300" height="300" loading="lazy"></span>
+        <p class="jn">Fase 3 · Il cuore</p>
+        <h3>La trasformazione</h3>
+        <p class="jquote">«La felicità non è l'assenza del sintomo, ma la capacità di danzare sotto la pioggia.»</p>
+        <p class="jnote">Un benessere che dura, perché nasce da una consapevolezza radicata.</p>
+      </li>
+    </ol>
+    <div class="journey-cta"><a class="btn primary" href="{{ url_for('contatti') }}">Primo colloquio gratuito</a></div>
+  </div>
 </section>
 {% endblock %}

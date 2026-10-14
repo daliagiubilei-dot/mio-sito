@@ -727,3 +727,69 @@ section.block.teaser-sec{padding-top:0}
 @media (max-width:960px) and (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .roots-tree-img{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg);opacity:.6}
 }
+
+/* Pratiche & Percorsi: "Il tuo percorso" come un cammino in tre tappe (superficie, radici, cuore) */
+.journey-sec{padding-block:clamp(48px,8vh,88px);border-top:1px solid var(--line);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--bg2) 70%,transparent),transparent 40%)}
+.journey-head{display:grid;gap:10px;justify-items:center;text-align:center;margin-bottom:clamp(28px,5vh,52px)}
+.journey-head h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.journey-head h2 em{color:var(--gold2)}
+.journey-head .intro{color:var(--muted);max-width:40rem;font-size:1.02rem}
+.journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,36px);position:relative;counter-reset:j}
+/* filo d'oro che unisce le tre tappe */
+.journey::before{content:"";position:absolute;left:16.6%;right:16.6%;top:38px;height:1px;
+  background:linear-gradient(90deg,#8fa3ad,var(--gold) 50%,var(--gold2))}
+.jstep{position:relative;display:grid;gap:10px;align-content:start;justify-items:center;text-align:center;padding:0 clamp(4px,1vw,14px)}
+.jicon{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--gold);position:relative;z-index:1;margin-bottom:6px}
+.jicon svg{width:46px;height:46px;fill:none;stroke:var(--gold2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.j1 .jicon{border-color:#8fa3ad}.j1 .jicon svg{stroke:#8fa3ad}
+.j3 .jicon{background:radial-gradient(circle,color-mix(in srgb,var(--gold2) 28%,var(--bg)) 0%,var(--bg) 70%)}
+.jn{font:400 1rem/1.2 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.j1 .jn{color:#7f949e}
+.jstep h3{font-size:clamp(1.3rem,2vw,1.6rem)}
+.jstep p,.jstep li{color:var(--muted);font-size:.98rem;line-height:1.6}
+.jstep ul{margin:2px 0 0;padding:0;list-style:none;display:grid;gap:8px;text-align:left}
+.jstep ul li{position:relative;padding-left:18px}
+.jstep ul li::before{content:"";position:absolute;left:2px;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.jstep b{color:var(--fg);font-weight:600}
+.jnote{font-size:.92rem;padding:10px 14px;border-radius:10px;background:color-mix(in srgb,var(--bg2) 80%,transparent);border:1px solid var(--line)}
+.jquote{font:italic 400 1.18rem/1.45 var(--display);color:var(--fg) !important}
+.journey-cta{display:flex;justify-content:center;margin-top:clamp(28px,5vh,48px)}
+/* telefono: le tre tappe una sotto l'altra, unite da un filo verticale */
+@media (max-width:860px){
+  .journey{grid-template-columns:1fr;gap:30px}
+  .journey::before{left:37px;right:auto;top:38px;bottom:38px;width:1px;height:auto;background:linear-gradient(180deg,#8fa3ad,var(--gold) 50%,var(--gold2))}
+  .jstep{grid-template-columns:76px 1fr;justify-items:start;text-align:left;column-gap:18px;row-gap:6px;padding:0}
+  .jstep .jicon{grid-row:1 / span 5;margin:0}
+  .jstep > *:not(.jicon){grid-column:2}
+  .journey-head{text-align:left;justify-items:start}
+}
+/* tappe del percorso con i disegni */
+.jicon{width:124px;height:124px;padding:4px;overflow:hidden}
+.jicon img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.journey::before{top:62px}
+.j3 .jicon{background:var(--bg)}
+@media (max-width:860px){
+  .jicon{width:92px;height:92px}
+  .jstep{grid-template-columns:92px 1fr}
+  .journey::before{left:46px;top:46px;bottom:46px}
+}
+/* cerchi dei disegni più grandi */
+.jicon{width:190px;height:190px;padding:5px}
+.journey::before{top:95px}
+@media (max-width:860px){
+  .jstep{grid-template-columns:1fr;justify-items:center;text-align:center;padding:0}
+  .jstep .jicon{grid-row:auto;width:200px;height:200px;margin:0 0 6px}
+  .jstep > *:not(.jicon){grid-column:1}
+  .journey::before{left:50%;top:100px;bottom:auto;height:calc(100% - 200px);z-index:0}
+  .jstep{background:var(--bg);position:relative}
+  .journey{gap:40px}
+  .journey-head{text-align:center;justify-items:center}
+}
+/* telefono: niente riquadro dietro le tappe, un filo corto d'oro tra una tappa e l'altra */
+@media (max-width:860px){
+  .jstep{background:none}
+  .journey::before{display:none}
+  .journey{gap:14px}
+  .jstep:not(:last-child)::after{content:"";display:block;width:1px;height:36px;margin:14px auto 0;background:var(--gold);grid-column:1}
+}
