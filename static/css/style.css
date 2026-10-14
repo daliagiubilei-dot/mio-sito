@@ -548,7 +548,7 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 @media (max-width:760px){
   section.block.roots-sec{padding-block:40px 56px}
   .roots{grid-template-columns:1fr;gap:22px}
-  .roots-photo img{aspect-ratio:3/4;max-height:none}
+  .roots-photo img{aspect-ratio:1300/1460;max-height:none}
 }
 .roots.roots-solo{grid-template-columns:1fr;max-width:46rem}
 
@@ -614,3 +614,45 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 
 /* i link interni (es. la spada della home) non finiscono sotto il menu fisso */
 html{scroll-padding-top:calc(var(--navh,65px) + 8px)}
+
+section.block.teaser-sec{padding-top:0}
+/* Novità: titolo più grande e proporzionato */
+.news-head .label{font-size:clamp(1.25rem,1.8vw,1.6rem);letter-spacing:.2em}
+.news-head h2{font-size:clamp(2rem,4vw,3.1rem)}
+/* su computer le Novità occupano una schermata intera, così "Chi ti accompagna" con la foto inizia nella schermata successiva */
+@media (min-width:961px){
+  section.block.news-sec{min-height:calc(100svh - var(--navh,65px));display:flex;flex-direction:column;justify-content:center;padding-block:28px}
+  .news-sec .news-head{margin-bottom:36px}
+  section.block.teaser-sec{padding-block:28px 32px}
+  /* foto e piede di pagina stanno insieme nella stessa schermata */
+  body:has(.teaser-sec) footer{padding-block:22px 24px}
+  body:has(.teaser-sec) footer .legal{max-width:none}
+  body:has(.teaser-sec) footer .wrap{gap:10px}
+  .teaser-sec .teaser img{width:260px}
+}
+
+/* Chi sono su computer: "Le mie radici" tutta in una schermata, sopra foto e racconto, sotto i nomi dei nonni */
+@media (min-width:961px){
+  section.block.roots-sec{min-height:calc(100svh - var(--navh,65px));display:flex;flex-direction:column;justify-content:center;padding-block:22px}
+  .roots{grid-template-columns:minmax(0,min(300px,calc((100svh - var(--navh,65px) - 420px) * .86))) minmax(0,1fr);column-gap:48px;row-gap:14px;align-items:center}
+  .roots-head{margin-bottom:0}
+  .roots-photo img{aspect-ratio:1300/1460;object-position:center}
+  .roots-txt{gap:10px}
+  .roots-lead{font-size:1.12rem;line-height:1.5;max-width:46rem}
+  .roots .roots-lead + .roots-lead{margin-top:0}
+  .names{margin-top:6px;padding-top:16px;gap:12px}
+  .names-head{gap:2px}
+  .names-head h2{font-size:1.7rem}
+  .names-list > div{padding:12px 16px;gap:4px}
+  .names-list dt{font-size:1.25rem}
+  .names-list dd{font-size:.88rem;line-height:1.45}
+  .names-close{font-size:1.02rem;line-height:1.45}
+}
+/* Chi sono su computer: titolo "Le mie radici" sopra il racconto, accanto alla foto */
+@media (min-width:961px){
+  .roots{grid-template-rows:auto auto auto;align-items:start}
+  .roots .roots-photo{grid-column:1;grid-row:1 / span 2;align-self:center}
+  .roots .roots-head{grid-column:2;grid-row:1;align-self:end;margin:0}
+  .roots .roots-txt{grid-column:2;grid-row:2;align-self:start}
+  .roots .names{grid-row:3}
+}
