@@ -61,9 +61,8 @@
     });
   });
 
-  // Home: la scritta di benvenuto con le frecce porta alla sezione successiva
+  // Home: la scritta di benvenuto resta sempre su una riga: se il carattere non ci sta, si rimpicciolisce quanto basta
   var cap = document.querySelector('.scroll-cap');
-  // e resta sempre su una riga: se il carattere non ci sta, si rimpicciolisce quanto basta
   function fitCap() {
     var t = cap && cap.querySelector('span');
     if (!t) return;
@@ -77,10 +76,6 @@
     fitCap();
     addEventListener('resize', fitCap);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCap);
-    cap.addEventListener('click', function () {
-      var next = document.querySelector('.hero') && document.querySelector('.hero').nextElementSibling;
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
-    });
   }
 
   // Contatti: copia il numero di telefono
