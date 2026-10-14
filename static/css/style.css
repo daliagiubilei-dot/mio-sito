@@ -593,3 +593,17 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
   /* goccia allargata: le punte del pennello arrivano proprio ai bordi dello schermo */
   .hero .brush{width:106%;margin-inline:-3%}
 }
+
+/* home su computer: spadina d'oro al centro che invita a scorrere; le frecce ai lati del benvenuto restano solo sul telefono */
+.scroll-sword{display:none}
+@media (min-width:961px){
+  .hero{position:relative}
+  .scroll-sword{display:block;position:absolute;left:50%;bottom:4px;width:30px;height:90px;margin-left:-15px;color:var(--gold)}
+  .scroll-sword svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    animation:swordBob 2.6s ease-in-out infinite}
+  .scroll-sword .f{fill:currentColor;stroke:none}
+  .scroll-sword:hover{color:var(--gold2)}
+  .hero-art .scroll-cap .cue{display:none}
+}
+@keyframes swordBob{0%,100%{transform:translateY(-4px);opacity:.8}50%{transform:translateY(4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.scroll-sword svg{animation:none}}
