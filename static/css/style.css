@@ -689,3 +689,7 @@ section.block.teaser-sec{padding-top:0}
 }
 /* frase sui genitori larga quanto le schede dei nonni */
 .names-parents{max-width:none;justify-self:stretch}
+/* frase sui genitori: giustificata da margine a margine, un po' più grande ora che ha spazio */
+.names-parents{text-align:justify;text-align-last:center;hyphens:auto;-webkit-hyphens:auto;color:var(--fg)}
+@media (min-width:961px){.names-parents{font-size:1.06rem;line-height:1.55}}
+@media (min-width:961px) and (max-height:820px){.names-parents{font-size:.98rem;line-height:1.45}}
