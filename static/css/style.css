@@ -586,12 +586,8 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 @keyframes cueBob{0%,100%{transform:translateY(-3px);opacity:.75}50%{transform:translateY(4px);opacity:1}}
 @media (prefers-reduced-motion:reduce){.scroll-cap .cue{animation:none}}
 
-/* home su telefono: blocco iniziale più compatto, così "Ti do il benvenuto" si vede già nella prima schermata */
+/* home su telefono: "Scopri i percorsi" e "Ti do il benvenuto" un poco più in alto */
 @media (max-width:600px){
-  .hero{--logo:clamp(72px,20vw,92px);padding-block:6px 16px}
-  .hero-logo{margin-bottom:4px}
-  .hero .kicker{margin-bottom:4px}
-  .hero p.lead{margin-top:8px}
-  .hero .brush{width:76%;margin-inline:auto}
-  .hero-art figcaption.scroll-cap{margin-top:8px;font-size:clamp(1.25rem,5.6vw,1.5rem)}
+  .hero .cta{margin-top:4px}
+  .hero-art figcaption.scroll-cap{margin-top:2px}
 }
