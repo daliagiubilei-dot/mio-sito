@@ -754,3 +754,13 @@ section.block.teaser-sec{padding-top:0}
   .jstep > *:not(.jicon){grid-column:2}
   .journey-head{text-align:left;justify-items:start}
 }
+/* tappe del percorso con i disegni */
+.jicon{width:124px;height:124px;padding:4px;overflow:hidden}
+.jicon img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.journey::before{top:62px}
+.j3 .jicon{background:var(--bg)}
+@media (max-width:860px){
+  .jicon{width:92px;height:92px}
+  .jstep{grid-template-columns:92px 1fr}
+  .journey::before{left:46px;top:46px;bottom:46px}
+}
