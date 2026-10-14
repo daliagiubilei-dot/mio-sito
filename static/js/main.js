@@ -96,7 +96,7 @@
     };
     var unmute = function () { hv.muted = false; hv.play().catch(function () {}); showSound(); };
     var onFirstTouch = function (e) {
-      if (e.target === sb) return;
+      if (sb.contains(e.target)) return;
       unmute();
       document.removeEventListener('pointerdown', onFirstTouch);
       document.removeEventListener('keydown', onFirstTouch);
