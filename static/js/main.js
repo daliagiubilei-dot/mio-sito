@@ -78,6 +78,19 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCap);
   }
 
+  // Chi sono: l'albero che cresce dietro "Le mie radici" (solo computer). Parte quando la sezione entra nello schermo,
+  // cresce una volta sola e resta fermo sull'ultimo fotogramma. Chi preferisce meno movimento vede solo l'albero finito.
+  var rb = document.getElementById('rootsBg');
+  if (rb && matchMedia('(min-width:961px)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var startTree = function () { if (!rb.src) { rb.src = rb.dataset.src; } rb.play().catch(function () {}); };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { startTree(); io.disconnect(); } });
+      }, { threshold: 0.35 });
+      io.observe(rb.parentElement);
+    } else { startTree(); }
+  }
+
   // Contatti: copia il numero di telefono
   var copy = document.getElementById('copyTel');
   if (copy) {

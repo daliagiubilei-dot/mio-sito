@@ -23,6 +23,9 @@
 </section>
 
 <section class="block roots-sec">
+  <video class="roots-bg" id="rootsBg" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+         data-src="{{ url_for('static', filename='video/albero-radici.mp4') }}"
+         poster="{{ url_for('static', filename='img/albero-radici.jpg') }}"></video>
   <div class="wrap roots{% if not static_exists('img/san-polo.jpg') %} roots-solo{% endif %}">
     <p class="label roots-head">Le mie radici</p>
     {% if static_exists('img/san-polo.jpg') %}
