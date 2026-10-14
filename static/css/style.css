@@ -712,3 +712,8 @@ section.block.teaser-sec{padding-top:0}
 @media (min-width:961px) and (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .roots-bg{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg);opacity:.3}
 }
+/* frase sui genitori sul telefono: allineata a sinistra, senza parole spezzate e senza l'a capo dopo Abia */
+@media (max-width:960px){
+  .names-parents{text-align:left;text-align-last:left;hyphens:none;-webkit-hyphens:none;justify-self:stretch}
+  .names-parents .br-pc{display:none}
+}
