@@ -670,7 +670,7 @@ section.block.teaser-sec{padding-top:0}
 @media (max-width:600px){.hero-art figcaption.scroll-cap{font-size:calc((100vw - 48px) / 15.2)}}
 /* Chi sono: i genitori, dopo i nomi dei nonni */
 .names-parents{text-align:center;font:400 clamp(1rem,1.7vw,1.15rem)/1.6 var(--display);color:var(--muted);max-width:48rem;justify-self:center;margin:0}
-.names-me{display:inline-block;margin-top:6px;color:var(--gold2);font-style:italic;font-size:1.15em}
+.names-me{color:var(--gold2);font-style:italic;font-size:1.15em}
 @media (min-width:961px){.names-parents{font-size:.98rem;line-height:1.5}.names{gap:10px}}
 /* portatili con schermo basso: radici, nonni e genitori restano comunque in una schermata */
 @media (min-width:961px) and (max-height:820px){
