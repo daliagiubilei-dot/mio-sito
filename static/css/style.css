@@ -590,4 +590,6 @@ section.block.roots-sec{padding-block:56px 72px;border-top:1px solid var(--line)
 @media (max-width:600px){
   .hero .cta{margin-top:4px}
   .hero-art figcaption.scroll-cap{margin-top:2px}
+  /* goccia allargata: le punte del pennello arrivano proprio ai bordi dello schermo */
+  .hero .brush{width:106%;margin-inline:-3%}
 }
