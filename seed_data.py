@@ -77,6 +77,34 @@ CRISI_BUSSOLA_BODY = """
 <p>✨ <strong>Vuoi fare chiarezza e ritrovare il tuo centro?</strong> <a href="/contatti?pratica=Percorso+1%3A1">Scrivimi</a>: il primo incontro orientativo è completamente gratuito.</p>
 """
 
+CUFFIE_GIUDIZIO_BODY = """
+<p>"I giovani sono alienati", "Stanno sempre con le cuffie e la testa tra le nuvole", "Non sanno più comunicare". Quante volte lo abbiamo pensato (o detto)?</p>
+
+<p><strong>Continuiamo a criticare invece di comprendere.</strong></p>
+
+<p>Quelle cuffie sembrano un muro, ma forse sono solo un modo per cercare un po' di silenzio dentro un mondo che urla. Uno spazio tutto loro, dove nessuno li giudica.</p>
+
+<p>Poi li vediamo riunirsi in centinaia per una aura battle, e li giudichiamo anche lì. Se si isolano, sbagliano. Se si incontrano, sbagliano.</p>
+
+<p>Allora facciamo un passo indietro e chiediamoci: cosa cercano davvero?</p>
+
+<h2>Che cosa significa "avere aura"</h2>
+
+<p><strong>Aura</strong> significa "soffio". È quell'energia invisibile che ci circonda, quella che gli altri sentono prima ancora che apriamo bocca. Quando un ragazzo cerca di "avere aura", non sta inseguendo una sciocchezza: sta chiedendo di essere visto per ciò che è, non per la performance che offre.</p>
+
+<h2>Il significato simbolico del "six seven"</h2>
+
+<p>E quel famigerato <strong>"six seven"</strong> che ripetono ovunque? Il 6 è il cuore, il legame, l'appartenenza. Il 7 è la ricerca interiore, il mistero. Insieme fanno 13, il numero della trasformazione.</p>
+
+<p>Forse è solo un tormentone passeggero. O forse, senza saperlo, stanno dando voce proprio a questo passaggio: dal bisogno di appartenere a un gruppo al bisogno di scoprire chi sono davvero.</p>
+
+<blockquote>Ogni generazione ha le sue geografie interiori. Il nostro compito non è correggerle, ma decodificarle.</blockquote>
+
+<p>Non serve guardarle con la sufficienza degli adulti. Togliamoci le nostre di cuffie, quelle del giudizio, della fretta, della presunzione di sapere già tutto, e proviamo ad ascoltare cosa ci stanno urlando in silenzio.</p>
+
+<p>E tu, da che parte stai? Ti fermi a giudicare la superficie o provi a guardare cosa c'è dietro?</p>
+"""
+
 POSTS = [
     dict(
         slug="crisi-vera-bussola",
@@ -92,6 +120,21 @@ POSTS = [
         meta_title="E se la crisi fosse la tua vera bussola? – Daliamae",
         meta_description="La crisi non è un errore da correggere: è lo specchio che mostra la tua vera rotta. Una riflessione di crescita personale e trasformazione interiore.",
         keywords="crescita personale, crescita interiore, trasformazione interiore, simbolismo, consapevolezza, crisi come opportunità, ascolto autentico",
+    ),
+    dict(
+        slug="aura-battle-togliamoci-le-cuffie-del-giudizio",
+        title="Aura battle: togliamoci le cuffie del giudizio",
+        category="Crescita personale",
+        excerpt="Centinaia di ragazzi riuniti per una aura battle, e noi a giudicarli. E se provassimo a capire cosa cercano davvero?",
+        lead="Centinaia di ragazzi riuniti per una aura battle. E noi, ancora una volta, a giudicarli.",
+        body_html=CUFFIE_GIUDIZIO_BODY.strip(),
+        cover="img/blog/cuffie-giudizio-cover.jpg",
+        cover_alt="Illustrazione: un ragazzo con le cuffie seduto su un muretto, dietro di lui una folla di ragazzi in cerchio durante una aura battle. In alto la scritta Togliamoci le cuffie del giudizio",
+        published_at=date(2026, 10, 19),
+        reading_min=3,
+        meta_title="Aura battle: togliamoci le cuffie del giudizio – Daliamae",
+        meta_description="Aura battle e six seven: cosa cercano davvero i ragazzi? Il significato di aura, la simbologia dei numeri 6 e 7 e l'invito a comprendere invece di giudicare.",
+        keywords="aura battle, significato aura, six seven significato, adolescenti, generazione Z, giudizio, comprendere i giovani, numerologia, crescita personale",
     ),
 ]
 
