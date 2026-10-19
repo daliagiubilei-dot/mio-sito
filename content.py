@@ -1,7 +1,7 @@
 """Contenuti fissi del sito: pratiche, segni zodiacali, argomenti delle FAQ."""
 
 INTERESTS = ["Oroscopo evolutivo", "Meditazioni guidate", "Percorso 1:1",
-             "Massaggio psicosomatico", "Non lo so ancora"]
+             "Massaggio psicosomatico (prossimamente)", "Non lo so ancora"]
 
 # Argomenti con cui si dividono le domande nella pagina "Domande frequenti"
 FAQ_GROUPS = [("op", "L'operatrice"), ("pr", "Le pratiche"), ("cf", "Come funziona")]
@@ -35,13 +35,14 @@ SERVICES = {
         "interest": "Percorso 1:1",
     },
     "massaggio-psicosomatico": {
-        "name": "Massaggio psicosomatico",
+        "name": "Massaggio psicosomatico (prossimamente)",
         "h1": "Massaggio psicosomatico",
+        "soon": True,
         "intro": "Il corpo come linguaggio: un tocco consapevole per sciogliere tensioni emotive e ritrovare armonia tra corpo e mente.",
         "detail": "Una pratica di benessere che usa un tocco consapevole per aiutarti a percepire e sciogliere le tensioni legate alle emozioni. Non è un trattamento sanitario.",
-        "meta": "In presenza.",
-        "cta": "Prenota",
-        "interest": "Massaggio psicosomatico",
+        "meta": "Prossimamente · In presenza.",
+        "cta": "Prossimamente",
+        "interest": "Massaggio psicosomatico (prossimamente)",
     },
 }
 

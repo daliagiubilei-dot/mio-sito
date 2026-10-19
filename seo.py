@@ -28,7 +28,7 @@ CORE_KEYWORDS = [
 PAGE_DEFAULTS = {
     "home": ("Home",
         "Dalia Giubilei – Operatrice Olistica | Oroscopo Evolutivo",
-        "Operatrice olistica: oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e massaggio psicosomatico per il tuo benessere olistico.",
+        "Operatrice olistica: oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e, prossimamente, massaggio psicosomatico per il tuo benessere olistico.",
         "operatrice olistica, oroscopo evolutivo, meditazione guidata, crescita personale, massaggio psicosomatico, benessere olistico"),
     "la-visione": ("La Visione",
         "La Visione | Percorsi olistici di consapevolezza – Daliamae",
@@ -40,7 +40,7 @@ PAGE_DEFAULTS = {
         "operatrice olistica, Dalia Giubilei, formazione olistica, crescita personale"),
     "percorsi": ("Pratiche & Percorsi",
         "Pratiche e Percorsi | Oroscopo evolutivo e meditazione – Daliamae",
-        "Oroscopo evolutivo, meditazioni guidate, percorsi individuali di crescita personale e massaggio psicosomatico: quattro strade per tornare al tuo centro.",
+        "Oroscopo evolutivo, meditazioni guidate, percorsi individuali di crescita personale e, prossimamente, massaggio psicosomatico: quattro strade per tornare al tuo centro.",
         "oroscopo evolutivo, meditazione guidata, percorso di crescita personale, massaggio psicosomatico"),
     "percorsi/oroscopo-evolutivo": ("Pratica: Oroscopo evolutivo",
         "Oroscopo evolutivo | Lettura del tema natale online – Daliamae",
@@ -55,8 +55,8 @@ PAGE_DEFAULTS = {
         "Percorso individuale di consapevolezza e crescita personale online: incontri 1:1 per riconoscere gli schemi che si ripetono e tornare al tuo centro.",
         "percorso di crescita personale, percorso di consapevolezza, crescita personale online, incontri individuali"),
     "percorsi/massaggio-psicosomatico": ("Pratica: Massaggio psicosomatico",
-        "Massaggio psicosomatico | Tocco consapevole – Daliamae",
-        "Massaggio psicosomatico: un tocco consapevole per percepire e sciogliere le tensioni legate alle emozioni. Pratica di benessere, non sanitaria.",
+        "Massaggio psicosomatico (prossimamente) – Daliamae",
+        "Prossimamente: massaggio psicosomatico, un tocco consapevole per percepire e sciogliere le tensioni legate alle emozioni. Pratica di benessere, non sanitaria.",
         "massaggio psicosomatico, tocco consapevole, benessere corpo mente, benessere olistico"),
     "archetipi-astrologici": ("Archetipi astrologici",
         "Archetipi astrologici | I 12 segni zodiacali – Daliamae",
@@ -94,13 +94,13 @@ def ld_organization(site, base_url, keywords):
     person = {
         "@type": "Person", "@id": base_url + "/#dalia", "name": site["owner"], "jobTitle": site["role"],
         "description": "Operatrice olistica ai sensi della Legge 4/2013: oroscopo evolutivo, meditazioni guidate, "
-                       "percorsi di crescita personale, massaggio psicosomatico.",
+                       "percorsi di crescita personale e, prossimamente, massaggio psicosomatico.",
         "url": base_url + "/", "sameAs": same_as, "worksFor": {"@id": base_url + "/#daliamae"},
     }
     business = {
         "@type": "ProfessionalService", "@id": base_url + "/#daliamae", "name": site["name"], "url": base_url + "/",
         "description": "Percorsi olistici di consapevolezza: oroscopo evolutivo, meditazioni guidate, "
-                       "percorsi individuali di crescita personale e massaggio psicosomatico.",
+                       "percorsi individuali di crescita personale e, prossimamente, massaggio psicosomatico.",
         "founder": {"@id": base_url + "/#dalia"}, "telephone": site["phone_intl"], "vatID": "IT" + site["vat"],
         "areaServed": "IT", "inLanguage": "it", "sameAs": same_as,
         "knowsAbout": list(keywords)[:14],

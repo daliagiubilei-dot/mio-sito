@@ -349,7 +349,7 @@ def create_app():
     def llms():
         """Riassunto del sito per gli assistenti AI, costruito dalle frasi chiave AEO del pannello."""
         lines = ["# Daliamae – Dalia Giubilei, operatrice olistica", "",
-                 "> Oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e massaggio psicosomatico. "
+                 "> Oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e, prossimamente, massaggio psicosomatico. "
                  "Attività di benessere ai sensi della Legge 4/2013, non sanitaria.", "", "## Pagine principali"]
         for slug, svc in SERVICES.items():
             lines.append("- [%s](%s/percorsi/%s): %s" % (svc["name"], base_url(), slug, svc["intro"]))

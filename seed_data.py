@@ -50,6 +50,7 @@ def seed_if_empty():
     _add_posts()
     _update_faq_progetto_animico()
     _update_seo_oroscopo()
+    _update_massaggio_prossimamente()
 
 
 # ---------------------------------------------------------------- articoli aggiunti dal codice
@@ -172,6 +173,69 @@ def _update_seo_oroscopo():
         row = PageSEO.query.filter_by(slug="percorsi/oroscopo-evolutivo").first()
         if row and row.meta_description in ("", SEO_OROSCOPO_OLD):
             row.meta_description = SEO_OROSCOPO_NEW
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+
+# ---------------------------------------------------------------- massaggio psicosomatico: "Prossimamente"
+# Aggiorna una sola volta FAQ e SEO già salvati nel database, solo se sono ancora i testi originali
+# (se Dalia li ha già cambiati dal pannello, restano come li ha scritti lei).
+FAQ_MASSAGGIO_PROSSIMAMENTE = [
+    [
+        "No. Il massaggio psicosomatico è una pratica di benessere che usa un tocco consapevole per aiutarti a percepire e sciogliere le tensioni legate alle emozioni. Non è un trattamento sanitario o fisioterapico: in presenza di dolori, patologie o disturbi è necessario rivolgersi prima al proprio medico.",
+        "No. Il massaggio psicosomatico, disponibile prossimamente, è una pratica di benessere che usa un tocco consapevole per aiutarti a percepire e sciogliere le tensioni legate alle emozioni. Non è un trattamento sanitario o fisioterapico: in presenza di dolori, patologie o disturbi è necessario rivolgersi prima al proprio medico."
+    ],
+    [
+        "Non serve saperlo in anticipo. Nel primo contatto Dalia ascolta cosa stai vivendo e cosa cerchi, e insieme individuate la pratica più adatta: la lettura del tema natale per fare chiarezza, la meditazione per ritrovare calma, il percorso individuale per un cambiamento profondo, il massaggio per ripartire dal corpo.",
+        "Non serve saperlo in anticipo. Nel primo contatto Dalia ascolta cosa stai vivendo e cosa cerchi, e insieme individuate la pratica più adatta: la lettura del tema natale per fare chiarezza, la meditazione per ritrovare calma, il percorso individuale per un cambiamento profondo, e, prossimamente, il massaggio per ripartire dal corpo."
+    ],
+    [
+        "La lettura dell'oroscopo evolutivo e i percorsi individuali di consapevolezza si prestano anche all'incontro online, in videochiamata, ovunque tu sia in Italia. Il massaggio psicosomatico si svolge invece solo in presenza. Le modalità disponibili si concordano al momento della prenotazione.",
+        "La lettura dell'oroscopo evolutivo e i percorsi individuali di consapevolezza si prestano anche all'incontro online, in videochiamata, ovunque tu sia in Italia. Il massaggio psicosomatico, disponibile prossimamente, si svolgerà invece solo in presenza. Le modalità disponibili si concordano al momento della prenotazione."
+    ]
+]
+
+SEO_MASSAGGIO_PROSSIMAMENTE = [
+    [
+        "home",
+        "Dalia Giubilei – Operatrice Olistica | Oroscopo Evolutivo",
+        "Dalia Giubilei – Operatrice Olistica | Oroscopo Evolutivo",
+        "Operatrice olistica: oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e massaggio psicosomatico per il tuo benessere olistico.",
+        "Operatrice olistica: oroscopo evolutivo, meditazioni guidate, percorsi di crescita personale e, prossimamente, massaggio psicosomatico per il tuo benessere olistico."
+    ],
+    [
+        "percorsi",
+        "Pratiche e Percorsi | Oroscopo evolutivo e meditazione – Daliamae",
+        "Pratiche e Percorsi | Oroscopo evolutivo e meditazione – Daliamae",
+        "Oroscopo evolutivo, meditazioni guidate, percorsi individuali di crescita personale e massaggio psicosomatico: quattro strade per tornare al tuo centro.",
+        "Oroscopo evolutivo, meditazioni guidate, percorsi individuali di crescita personale e, prossimamente, massaggio psicosomatico: quattro strade per tornare al tuo centro."
+    ],
+    [
+        "percorsi/massaggio-psicosomatico",
+        "Massaggio psicosomatico | Tocco consapevole – Daliamae",
+        "Massaggio psicosomatico (prossimamente) – Daliamae",
+        "Massaggio psicosomatico: un tocco consapevole per percepire e sciogliere le tensioni legate alle emozioni. Pratica di benessere, non sanitaria.",
+        "Prossimamente: massaggio psicosomatico, un tocco consapevole per percepire e sciogliere le tensioni legate alle emozioni. Pratica di benessere, non sanitaria."
+    ]
+]
+
+
+def _update_massaggio_prossimamente():
+    try:
+        if not _first_time("massaggio_prossimamente"):
+            return
+        for old, new in FAQ_MASSAGGIO_PROSSIMAMENTE:
+            for row in AeoPhrase.query.filter_by(answer=old).all():
+                row.answer = new
+        for slug, old_t, new_t, old_d, new_d in SEO_MASSAGGIO_PROSSIMAMENTE:
+            row = PageSEO.query.filter_by(slug=slug).first()
+            if not row:
+                continue
+            if row.title in ("", old_t):
+                row.title = new_t
+            if row.meta_description in ("", old_d):
+                row.meta_description = new_d
         db.session.commit()
     except Exception:
         db.session.rollback()
