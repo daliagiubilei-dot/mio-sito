@@ -52,14 +52,71 @@
     });
   });
 
-  // Archetipi: filtro per elemento
+  // Archetipi: filtro per elemento (con la frase che lo presenta) e carte che si aprono in una scheda
   var z = document.getElementById('zodiac');
+  var archEl = document.getElementById('archData');
+  var arch = { signs: [], elements: {} };
+  try { if (archEl) arch = JSON.parse(archEl.textContent); } catch (e) {}
+  var elLine = document.getElementById('elLine');
+  var slugOf = function (el) { return (el || '').toLowerCase(); };
+  if (z) z.querySelectorAll('.sign').forEach(function (c, i) { c.style.setProperty('--d', i); });
   document.querySelectorAll('.filters button').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.filters button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-      if (z) z.querySelectorAll('.sign').forEach(function (c) { c.hidden = !(b.dataset.el === 'tutti' || c.dataset.el === b.dataset.el); });
+      var el = b.dataset.el;
+      if (z) z.querySelectorAll('.sign').forEach(function (c) { c.hidden = !(el === 'tutti' || c.dataset.el === el); });
+      if (elLine) {
+        elLine.className = 'el-line' + (el === 'tutti' ? '' : ' el-' + slugOf(el));
+        elLine.textContent = el === 'tutti' ? '' : (arch.elements[el] || '');
+      }
     });
   });
+
+  var dlg = document.getElementById('archDlg');
+  if (dlg && z && arch.signs.length && typeof dlg.showModal === 'function') {
+    var cur = 0, opener = null;
+    var visible = function () {
+      return Array.prototype.filter.call(z.querySelectorAll('.sign'), function (c) { return !c.hidden; })
+        .map(function (c) { return +c.dataset.i; });
+    };
+    var $ = function (id) { return document.getElementById(id); };
+    var show = function (i) {
+      var s = arch.signs[i], list = visible();
+      cur = i;
+      $('adCard').className = 'ad-card el-' + slugOf(s.element);
+      $('adWm').textContent = s.symbol;
+      $('adEl').textContent = s.element;
+      $('adPeriod').textContent = s.period;
+      $('adName').textContent = s.name;
+      $('adArc').textContent = s.archetype;
+      $('adTxt').textContent = s.text;
+      $('adQ').textContent = '«' + s.question + '»';
+      $('adCount').textContent = (list.indexOf(i) + 1) + ' / ' + list.length;
+    };
+    var step = function (d) {
+      var list = visible(), k = list.indexOf(cur);
+      show(list[(k + d + list.length) % list.length]);
+    };
+    z.querySelectorAll('.sign').forEach(function (c) {
+      c.addEventListener('click', function () { opener = c; show(+c.dataset.i); dlg.showModal(); });
+    });
+    $('adPrev').addEventListener('click', function () { step(-1); });
+    $('adNext').addEventListener('click', function () { step(1); });
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { if (opener) opener.focus(); });
+    // scorrere con il dito sulla scheda: sinistra/destra = archetipo successivo/precedente
+    var x0 = null;
+    dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    dlg.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+    });
+  }
 
   // Home: la scritta di benvenuto resta sempre su una riga: se il carattere non ci sta, si rimpicciolisce quanto basta
   var cap = document.querySelector('.scroll-cap');

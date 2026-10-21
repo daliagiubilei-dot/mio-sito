@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% set el_slug = {"Fuoco": "fuoco", "Terra": "terra", "Aria": "aria", "Acqua": "acqua"} %}
 <div class="arch-bg" id="p-archetipi">
 <section class="fit-sec">
   <div class="wrap fit">
@@ -7,21 +8,48 @@
       <div class="fit-head">
         <p class="label">Archetipi astrologici</p>
         <h1>Dodici archetipi, dodici modi di stare al mondo</h1>
-        <p class="intro">Nell'astrologia evolutiva ogni segno è un archetipo: una forza interiore da riconoscere e integrare, più che un destino da subire.</p>
+        <p class="intro">Nell'astrologia evolutiva ogni segno è un archetipo: una forza interiore da riconoscere e integrare, più che un destino da subire. <span class="arch-hint">Tocca una carta.</span></p>
+        <p class="el-line" id="elLine" aria-live="polite"></p>
       </div>
       <div class="filters" role="group" aria-label="Filtra per elemento">
         <button type="button" data-el="tutti" aria-pressed="true">Tutti</button>
-        <button type="button" data-el="Fuoco" aria-pressed="false">Fuoco</button>
-        <button type="button" data-el="Terra" aria-pressed="false">Terra</button>
-        <button type="button" data-el="Aria" aria-pressed="false">Aria</button>
-        <button type="button" data-el="Acqua" aria-pressed="false">Acqua</button>
+        {% for el in elements %}<button type="button" data-el="{{ el }}" class="el-{{ el_slug[el] }}" aria-pressed="false"><i aria-hidden="true"></i>{{ el }}</button>
+        {% endfor %}
       </div>
     </div>
     <div class="zodiac" id="zodiac">
-      {% for s in signs %}<article class="sign" data-el="{{ s.element }}"><div class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></div><h3>{{ s.name }}</h3><span class="arc">{{ s.archetype }}</span><p>{{ s.text }}</p></article>
+      {% for s in signs %}<button type="button" class="sign el-{{ el_slug[s.element] }}" data-el="{{ s.element }}" data-i="{{ loop.index0 }}" aria-haspopup="dialog">
+        <span class="wm" aria-hidden="true">{{ s.symbol }}</span>
+        <span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></span>
+        <span class="nm">{{ s.name }}</span>
+        <span class="arc">{{ s.archetype }}</span>
+        <span class="txt">{{ s.text }}</span>
+      </button>
       {% endfor %}
     </div>
   </div>
 </section>
 </div>
+
+<dialog class="arch-dlg" id="archDlg" aria-labelledby="adName">
+  <form method="dialog" class="ad-close"><button aria-label="Chiudi">&times;</button></form>
+  <div class="ad-card" id="adCard">
+    <span class="wm" id="adWm" aria-hidden="true"></span>
+    <p class="ad-meta"><span id="adEl"></span> · <span id="adPeriod" class="nowrap"></span></p>
+    <h2 id="adName"></h2>
+    <p class="ad-arc" id="adArc"></p>
+    <p class="ad-txt" id="adTxt"></p>
+    <p class="ad-q" id="adQ"></p>
+    <div class="ad-cta">
+      <p>Il tuo segno è solo una parte del progetto della tua anima.</p>
+      <a class="btn primary" href="{{ url_for('service', slug='oroscopo-evolutivo') }}">Scopri l'oroscopo evolutivo</a>
+    </div>
+    <div class="ad-nav">
+      <button type="button" id="adPrev" aria-label="Archetipo precedente">&larr;</button>
+      <span id="adCount"></span>
+      <button type="button" id="adNext" aria-label="Archetipo successivo">&rarr;</button>
+    </div>
+  </div>
+</dialog>
+<script type="application/json" id="archData">{{ {"signs": signs, "elements": elements} | tojson }}</script>
 {% endblock %}
