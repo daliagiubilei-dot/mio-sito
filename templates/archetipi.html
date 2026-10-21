@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="zodiac" id="zodiac">
-      {% for s in signs %}{% if s.media %}<article class="sign has-media" data-el="{{ s.element }}" style="--cover:url('{{ url_for('static', filename=s.media.cover) }}')"><button type="button" class="sign-open" data-dialog="arch-{{ s.name|lower }}" aria-haspopup="dialog"><span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></span><span class="h3">{{ s.name }}</span><span class="arc">{{ s.archetype }}</span><span class="p">{{ s.text }}</span><span class="watch">▶ Guarda il {{ s.name }}</span></button></article>
+      {% for s in signs %}{% if s.media %}<article class="sign has-media" data-el="{{ s.element }}" style="--cover:url('{{ url_for('static', filename=s.media.cover) }}')"><button type="button" class="sign-open" data-dialog="arch-{{ s.name|lower }}" aria-haspopup="dialog" aria-label="{{ s.name }}, {{ s.archetype }}: guarda video e immagini"><span class="cap"><span class="h3"><span class="sym" aria-hidden="true">{{ s.symbol }}</span> {{ s.name }}</span><span class="arc">{{ s.archetype }}</span><span class="watch">▶ Guarda</span></span></button></article>
       {% else %}<article class="sign" data-el="{{ s.element }}"><div class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></div><h3>{{ s.name }}</h3><span class="arc">{{ s.archetype }}</span><p>{{ s.text }}</p></article>
       {% endif %}{% endfor %}
     </div>
@@ -29,7 +29,7 @@
 <dialog class="arch-dialog" id="arch-{{ s.name|lower }}" aria-labelledby="arch-{{ s.name|lower }}-t">
   <div class="arch-dialog-in">
     <header>
-      <div><p class="label">{{ s.symbol }} {{ s.element }} · {{ s.archetype }}</p><h2 id="arch-{{ s.name|lower }}-t">{{ s.name }}</h2><p class="teaser">{{ s.media.teaser }}</p></div>
+      <div><p class="label">{{ s.symbol }} {{ s.element }} · {{ s.archetype }}</p><h2 id="arch-{{ s.name|lower }}-t">{{ s.name }}</h2><p class="teaser">{{ s.text }} {{ s.media.teaser }}</p></div>
       <button type="button" class="arch-close" aria-label="Chiudi">✕</button>
     </header>
     <div class="arch-videos">
