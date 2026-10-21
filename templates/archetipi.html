@@ -18,10 +18,30 @@
       </div>
     </div>
     <div class="zodiac" id="zodiac">
-      {% for s in signs %}<article class="sign" data-el="{{ s.element }}"><div class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></div><h3>{{ s.name }}</h3><span class="arc">{{ s.archetype }}</span><p>{{ s.text }}</p></article>
-      {% endfor %}
+      {% for s in signs %}{% if s.media %}<article class="sign has-media" data-el="{{ s.element }}" style="--cover:url('{{ url_for('static', filename=s.media.cover) }}')"><button type="button" class="sign-open" data-dialog="arch-{{ s.name|lower }}" aria-haspopup="dialog"><span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></span><span class="h3">{{ s.name }}</span><span class="arc">{{ s.archetype }}</span><span class="p">{{ s.text }}</span><span class="watch">▶ Guarda il {{ s.name }}</span></button></article>
+      {% else %}<article class="sign" data-el="{{ s.element }}"><div class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></div><h3>{{ s.name }}</h3><span class="arc">{{ s.archetype }}</span><p>{{ s.text }}</p></article>
+      {% endif %}{% endfor %}
     </div>
   </div>
 </section>
 </div>
+{% for s in signs if s.media %}
+<dialog class="arch-dialog" id="arch-{{ s.name|lower }}" aria-labelledby="arch-{{ s.name|lower }}-t">
+  <div class="arch-dialog-in">
+    <header>
+      <div><p class="label">{{ s.symbol }} {{ s.element }} · {{ s.archetype }}</p><h2 id="arch-{{ s.name|lower }}-t">{{ s.name }}</h2><p class="teaser">{{ s.media.teaser }}</p></div>
+      <button type="button" class="arch-close" aria-label="Chiudi">✕</button>
+    </header>
+    <div class="arch-videos">
+      {% for v in s.media.videos %}<figure class="{{ 'v' if v.vertical else 'h' }}"><video controls playsinline preload="none" poster="{{ url_for('static', filename=v.poster) }}"><source src="{{ url_for('static', filename=v.src) }}" type="video/mp4"></video><figcaption>{{ v.title }}</figcaption></figure>
+      {% endfor %}
+    </div>
+    <div class="arch-gallery">
+      {% for i in s.media.images %}<img src="{{ url_for('static', filename=i.src) }}" alt="{{ i.alt }}" loading="lazy">
+      {% endfor %}
+    </div>
+    <p class="arch-more">Vuoi conoscere il tuo archetipo? <a href="{{ url_for('contatti') }}">Scrivimi</a></p>
+  </div>
+</dialog>
+{% endfor %}
 {% endblock %}

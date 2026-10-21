@@ -61,6 +61,16 @@
     });
   });
 
+  // Archetipi: la carta con personaggio apre video e immagini; chiudendo, i video si fermano
+  document.querySelectorAll('.sign-open').forEach(function (b) {
+    var d = document.getElementById(b.dataset.dialog);
+    if (!d || !d.showModal) return;
+    b.addEventListener('click', function () { d.showModal(); });
+    d.querySelector('.arch-close').addEventListener('click', function () { d.close(); });
+    d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+    d.addEventListener('close', function () { d.querySelectorAll('video').forEach(function (v) { v.pause(); }); b.focus(); });
+  });
+
   // Home: la scritta di benvenuto resta sempre su una riga: se il carattere non ci sta, si rimpicciolisce quanto basta
   var cap = document.querySelector('.scroll-cap');
   function fitCap() {

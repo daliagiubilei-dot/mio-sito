@@ -219,6 +219,41 @@ section.block{padding-block:88px}
 @media (max-width:1100px){#p-archetipi .zodiac{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:760px){#p-archetipi .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+/* archetipi con personaggio: la carta mostra l'immagine e apre video e galleria */
+#p-archetipi .sign.has-media,.sign.has-media{padding:0;position:relative;overflow:hidden;background:#120f0a var(--cover) center 30%/cover no-repeat}
+.sign-open{all:unset;box-sizing:border-box;cursor:pointer;display:grid;align-content:end;width:100%;height:100%;min-height:100%;
+  padding:clamp(12px,2.2vh,22px) clamp(12px,1.2vw,18px);gap:clamp(3px,.7vh,6px);color:#f4ead4;
+  background:linear-gradient(180deg,rgba(10,9,6,.15) 0%,rgba(10,9,6,.55) 45%,rgba(10,9,6,.92) 100%);transition:background .3s;text-shadow:0 1px 3px rgba(0,0,0,.85)}
+.sign-open:hover,.sign-open:focus-visible{background:linear-gradient(180deg,rgba(10,9,6,0) 0%,rgba(10,9,6,.45) 45%,rgba(10,9,6,.9) 100%)}
+.sign-open:focus-visible{outline:2px solid #f0c878;outline-offset:-4px}
+.sign-open .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:auto}
+.sign-open .el{background:rgba(10,9,6,.55);padding:1px 6px;border-radius:3px}
+.sign-open .sym{font:400 clamp(1.4rem,3.2vh,1.8rem)/1 var(--display);color:#f0c878}
+.sign-open .el{font:400 .88rem var(--label);letter-spacing:.12em;text-transform:uppercase;color:#e6d9b8}
+.sign-open .h3{font:400 clamp(1.05rem,2.3vh,1.2rem)/1.15 var(--display)}
+.sign-open .arc{font:400 clamp(.92rem,2vh,1.02rem) var(--label);letter-spacing:.06em;color:#b9d47a}
+.sign-open .p{font-size:clamp(.82rem,1.75vh,.9rem);line-height:1.45;color:#e6d9b8}
+.sign-open .watch{font:400 .95rem var(--label);letter-spacing:.1em;text-transform:uppercase;color:#f0c878;margin-top:2px}
+
+.arch-dialog{width:min(1040px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+.arch-dialog::backdrop{background:rgba(5,6,6,.78)}
+.arch-dialog-in{padding:clamp(18px,3vw,32px);display:grid;gap:22px}
+.arch-dialog header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.arch-dialog h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-top:6px}
+.arch-dialog .teaser{color:var(--muted);margin-top:6px}
+.arch-close{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:99px;width:40px;height:40px;font-size:1rem;cursor:pointer;flex:none}
+.arch-close:hover{border-color:var(--gold)}
+.arch-videos{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:16px;align-items:start}
+.arch-videos figure{margin:0;display:grid;gap:6px}
+.arch-videos video{width:100%;display:block;border-radius:4px;background:#000}
+.arch-videos .h video{aspect-ratio:16/9}
+.arch-videos .v video{aspect-ratio:9/16;max-height:70vh}
+.arch-videos figcaption{font:400 1rem var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.arch-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.arch-gallery img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;display:block}
+.arch-more{color:var(--muted)}
+@media (max-width:760px){.arch-videos{grid-template-columns:1fr}.arch-videos .v{max-width:340px}.arch-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 
 /* faq in una schermata */
 .faq-layout{display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(28px,4vw,72px);align-content:center;align-items:start}
