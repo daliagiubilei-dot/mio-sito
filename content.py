@@ -100,6 +100,13 @@ SIGN_MEDIA = {
     "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
+# Polarità: Fuoco e Aria maschili, Terra e Acqua femminili (simbolo, nome, frase quando si filtra)
+POLARITY = {"Fuoco": "Maschile", "Aria": "Maschile", "Terra": "Femminile", "Acqua": "Femminile"}
+POLARITIES = {
+    "Maschile": ("♂", "I segni maschili, di Fuoco e d'Aria, vanno verso il mondo: energia che si espande, agisce, si esprime. Non parla di genere: in ognuno di noi vivono entrambe le forze."),
+    "Femminile": ("♀", "I segni femminili, di Terra e d'Acqua, accolgono: energia che raccoglie, custodisce, fa maturare. Non parla di genere: in ognuno di noi vivono entrambe le forze."),
+}
+
 # Gli elementi: come si presentano quando si filtrano le carte
 ELEMENTS = {
     "Fuoco": "Il Fuoco accende: è slancio, entusiasmo, la scintilla che dà inizio alle cose.",

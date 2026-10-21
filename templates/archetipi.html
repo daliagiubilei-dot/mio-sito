@@ -15,12 +15,15 @@
         <button type="button" data-el="tutti" aria-pressed="true">Tutti</button>
         {% for el in elements %}<button type="button" data-el="{{ el }}" class="el-{{ el_slug[el] }}" aria-pressed="false"><i aria-hidden="true"></i>{{ el }}</button>
         {% endfor %}
+        <span class="f-sep" aria-hidden="true"></span>
+        <button type="button" data-pol="Maschile" aria-pressed="false"><b aria-hidden="true">♂</b>Maschile</button>
+        <button type="button" data-pol="Femminile" aria-pressed="false"><b aria-hidden="true">♀</b>Femminile</button>
       </div>
     </div>
     <div class="zodiac" id="zodiac">
-      {% for s in signs %}<button type="button" class="sign el-{{ el_slug[s.element] }}{% if s.media and s.media.fig %} with-fig{% endif %}" data-el="{{ s.element }}" data-i="{{ loop.index0 }}" aria-haspopup="dialog">
+      {% for s in signs %}<button type="button" class="sign el-{{ el_slug[s.element] }}{% if s.media and s.media.fig %} with-fig{% endif %}" data-el="{{ s.element }}" data-pol="{{ s.polarity }}" data-i="{{ loop.index0 }}" aria-haspopup="dialog">
         <span class="wm" aria-hidden="true">{{ s.symbol }}</span>
-        <span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="sr-only">{{ s.element }}</span></span>
+        <span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="pol" title="Segno {{ s.polarity|lower }}"><b aria-hidden="true">{{ s.pol_sym }}</b> {{ s.polarity }}</span><span class="sr-only">{{ s.element }}</span></span>
         <span class="nm">{{ s.name }}</span>
         <span class="arc">{{ s.archetype }}</span>
         <span class="txt">{{ s.text }}</span>
@@ -38,7 +41,7 @@
   <div class="ad-card" id="adCard">
     <div class="ad-media" id="adMedia" hidden></div>
     <span class="wm" id="adWm" aria-hidden="true"></span>
-    <p class="ad-meta"><span id="adEl"></span> · <span id="adPeriod" class="nowrap"></span></p>
+    <p class="ad-meta"><span id="adEl"></span> · <span id="adPol"></span> · <span id="adPeriod" class="nowrap"></span></p>
     <h2 id="adName"></h2>
     <p class="ad-arc" id="adArc"></p>
     <p class="ad-txt" id="adTxt"></p>
@@ -55,5 +58,5 @@
     </div>
   </div>
 </dialog>
-<script type="application/json" id="archData">{{ {"signs": signs, "elements": elements} | tojson }}</script>
+<script type="application/json" id="archData">{{ {"signs": signs, "elements": elements, "polarities": polarities} | tojson }}</script>
 {% endblock %}

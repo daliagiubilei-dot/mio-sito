@@ -63,11 +63,13 @@
   document.querySelectorAll('.filters button').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.filters button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-      var el = b.dataset.el;
-      if (z) z.querySelectorAll('.sign').forEach(function (c) { c.hidden = !(el === 'tutti' || c.dataset.el === el); });
+      var el = b.dataset.el, pol = b.dataset.pol;
+      if (z) z.querySelectorAll('.sign').forEach(function (c) {
+        c.hidden = pol ? c.dataset.pol !== pol : !(el === 'tutti' || c.dataset.el === el);
+      });
       if (elLine) {
-        elLine.className = 'el-line' + (el === 'tutti' ? '' : ' el-' + slugOf(el));
-        elLine.textContent = el === 'tutti' ? '' : (arch.elements[el] || '');
+        elLine.className = 'el-line' + (el && el !== 'tutti' ? ' el-' + slugOf(el) : '') + (pol ? ' pol-line' : '');
+        elLine.textContent = pol ? ((arch.polarities || {})[pol] || '') : (el === 'tutti' ? '' : (arch.elements[el] || ''));
       }
     });
   });
@@ -86,6 +88,7 @@
       $('adCard').className = 'ad-card el-' + slugOf(s.element);
       $('adWm').textContent = s.symbol;
       $('adEl').textContent = s.element;
+      $('adPol').textContent = s.pol_sym + ' ' + s.polarity;
       $('adPeriod').textContent = s.period;
       $('adName').textContent = s.name;
       $('adArc').textContent = s.archetype;

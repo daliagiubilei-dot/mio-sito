@@ -844,6 +844,13 @@ small.soon{font-size:.7em}
 #p-archetipi .sign .nm{font:400 clamp(1.05rem,2.3vh,1.2rem)/1.15 var(--display)}
 #p-archetipi .sign .txt{font-size:clamp(.82rem,1.75vh,.9rem);line-height:1.45;color:var(--muted)}
 #p-archetipi .sign[hidden]{display:none}
+#p-archetipi .sign .top{justify-content:flex-start;gap:8px;align-items:center}
+#p-archetipi .sign .pol{font:400 .82rem/1 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+#p-archetipi .sign .pol b{font:700 1.15rem/1 "Segoe UI Symbol","DejaVu Sans",sans-serif;color:var(--elc);margin-right:2px;vertical-align:-1px}
+.filters .f-sep{width:1px;align-self:stretch;background:var(--line);margin:2px 4px}
+.filters button[data-pol] b{font:400 1.05rem/1 var(--body);margin-right:6px;color:var(--gold2);vertical-align:-1px}
+.filters button[data-pol][aria-pressed="true"]{border-color:var(--gold);color:var(--gold2)}
+.el-line.pol-line{color:var(--gold2)}
 @keyframes signIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 .arch-dlg{border:0;padding:0;background:transparent;color:var(--fg);max-width:min(460px,calc(100vw - 32px));width:100%}
@@ -899,7 +906,7 @@ small.soon{font-size:.7em}
 #p-archetipi .sign:hover .fig img,#p-archetipi .sign:focus-visible .fig img{transform:scale(1.06) translateY(-3px)}
 #p-archetipi .sign.with-fig .wm{display:none}
 #p-archetipi .sign.with-fig > span:not(.fig){padding-right:40%}
-#p-archetipi .sign.with-fig .top{padding-right:0}
+#p-archetipi .sign.with-fig .top{padding-right:38%}
 @media (max-width:1100px){#p-archetipi .zodiac{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:760px){#p-archetipi .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}#p-archetipi .sign{min-height:132px}
   #p-archetipi .sign.with-fig > span:not(.fig){padding-right:36%}}
