@@ -820,10 +820,10 @@ small.soon{font-size:.7em}
 .btn.soon-btn{cursor:default;opacity:.75;border:1px solid var(--gold);color:var(--gold);background:transparent}
 
 /* Archetipi: carte con i colori dei quattro elementi, che si aprono in una scheda */
-:root{--fuoco:#ec9a52;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#62c6b6}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--fuoco:#a3561a;--terra:#56711c;--aria:#5a52ad;--acqua:#1b776b}}
-:root[data-theme="light"]{--fuoco:#a3561a;--terra:#56711c;--aria:#5a52ad;--acqua:#1b776b}
-:root[data-theme="dark"]{--fuoco:#ec9a52;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#62c6b6}
+:root{--fuoco:#e8894a;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#5fb2e6}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--fuoco:#b0471c;--terra:#56711c;--aria:#5a52ad;--acqua:#1d6aa8}}
+:root[data-theme="light"]{--fuoco:#b0471c;--terra:#56711c;--aria:#5a52ad;--acqua:#1d6aa8}
+:root[data-theme="dark"]{--fuoco:#e8894a;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#5fb2e6}
 .el-fuoco{--elc:var(--fuoco)}.el-terra{--elc:var(--terra)}.el-aria{--elc:var(--aria)}.el-acqua{--elc:var(--acqua)}
 .arch-hint{color:var(--gold2);white-space:nowrap}
 .filters button i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--elc);margin:0 7px 2px 0;vertical-align:middle}
@@ -904,3 +904,8 @@ small.soon{font-size:.7em}
 @media (max-width:760px){#p-archetipi .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}#p-archetipi .sign{min-height:132px}
   #p-archetipi .sign.with-fig > span:not(.fig){padding-right:36%}}
 @media (prefers-reduced-motion:reduce){#p-archetipi .sign:hover .fig img{transform:none}}
+/* Fuoco: cornice in alto che sfuma dall'oro al rosso */
+#p-archetipi .sign.el-fuoco{border-top-width:0;padding-top:calc(clamp(12px,2.2vh,22px) + 3px)}
+#p-archetipi .sign.el-fuoco::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:1;background:linear-gradient(90deg,var(--gold2),var(--fuoco) 70%)}
+.ad-card.el-fuoco{border-top-width:0;padding-top:34px}
+.ad-card.el-fuoco::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;z-index:3;background:linear-gradient(90deg,var(--gold2),var(--fuoco) 70%)}
