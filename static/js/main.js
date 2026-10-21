@@ -88,7 +88,7 @@
       $('adCard').className = 'ad-card el-' + slugOf(s.element);
       $('adWm').textContent = s.symbol;
       $('adEl').textContent = s.element;
-      $('adPol').textContent = s.pol_sym + ' ' + s.polarity;
+      $('adPol').textContent = s.pol_sym; $('adPol').title = 'Segno ' + s.polarity.toLowerCase();
       $('adPeriod').textContent = s.period;
       $('adName').textContent = s.name;
       $('adArc').textContent = s.archetype;
