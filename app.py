@@ -200,6 +200,8 @@ def create_app():
         out = {"img": asset(m["img"]), "alt": m.get("alt", "")}
         if m.get("video") and os.path.isfile(os.path.join(app.static_folder, m["video"])):
             out["video"] = asset(m["video"])
+        if m.get("face") and os.path.isfile(os.path.join(app.static_folder, m["face"])):
+            out["face"] = asset(m["face"])
         return out
 
     @app.route("/archetipi-astrologici")

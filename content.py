@@ -92,11 +92,11 @@ SIGN_DEEP = {
 }
 
 # Immagini e video degli archetipi (in static/): compaiono in alto nella carta aperta.
-# "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
+# "face" = faccetta tonda sulla carta chiusa; "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
 SIGN_MEDIA = {
-    "Ariete": {"img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
-    "Vergine": {"img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
-    "Sagittario": {"img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
+    "Ariete": {"face": "img/archetipi/ariete-volto.jpg", "img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
+    "Vergine": {"face": "img/archetipi/vergine-volto.jpg", "img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
+    "Sagittario": {"face": "img/archetipi/sagittario-volto.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
 # Gli elementi: come si presentano quando si filtrano le carte

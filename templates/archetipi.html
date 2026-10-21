@@ -18,13 +18,13 @@
       </div>
     </div>
     <div class="zodiac" id="zodiac">
-      {% for s in signs %}<button type="button" class="sign el-{{ el_slug[s.element] }}" data-el="{{ s.element }}" data-i="{{ loop.index0 }}" aria-haspopup="dialog">
+      {% for s in signs %}<button type="button" class="sign el-{{ el_slug[s.element] }}{% if s.media and s.media.face %} with-face{% endif %}" data-el="{{ s.element }}" data-i="{{ loop.index0 }}" aria-haspopup="dialog">
         <span class="wm" aria-hidden="true">{{ s.symbol }}</span>
         <span class="top"><span class="sym" aria-hidden="true">{{ s.symbol }}</span><span class="el">{{ s.element }}</span></span>
         <span class="nm">{{ s.name }}</span>
         <span class="arc">{{ s.archetype }}</span>
         <span class="txt">{{ s.text }}</span>
-        {% if s.media %}<span class="has-media" aria-hidden="true">{% if s.media.video %}▶{% else %}◆{% endif %}</span>{% endif %}
+        {% if s.media and s.media.face %}<span class="face" aria-hidden="true"><img src="{{ s.media.face }}" alt="" loading="lazy" width="120" height="120"></span>{% endif %}
       </button>
       {% endfor %}
     </div>
