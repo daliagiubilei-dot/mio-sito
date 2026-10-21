@@ -95,7 +95,8 @@ SIGN_DEEP = {
 # "fig" = personaggio in miniatura a destra sulla carta chiusa; "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
 SIGN_MEDIA = {
     "Ariete": {"fig": "img/archetipi/ariete-figura.jpg", "img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
-    "Vergine": {"fig": "img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
+    "Leone": {"fig": "img/archetipi/leone-figura.jpg", "img": "img/archetipi/leone.jpg", "video": "video/archetipi/leone.mp4", "alt": "Video: il Leone si libera dalla catena e diventa luce, seduto in meditazione in un tempio dorato tra due leoni"},
+    "Vergine": {"fig":"img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
     "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
