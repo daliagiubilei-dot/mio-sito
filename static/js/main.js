@@ -90,6 +90,27 @@
       $('adName').textContent = s.name;
       $('adArc').textContent = s.archetype;
       $('adTxt').textContent = s.text;
+      $('adGift').textContent = s.gift;
+      var m = $('adMedia'), md = s.media;
+      m.innerHTML = '';
+      m.hidden = !md;
+      $('adCard').classList.toggle('has-m', !!md);
+      dlg.classList.toggle('has-m', !!md);
+      if (md) {
+        var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var el;
+        if (md.video && !still) {
+          el = document.createElement('video');
+          el.src = md.video; el.poster = md.img;
+          el.muted = true; el.loop = true; el.autoplay = true; el.playsInline = true;
+          el.setAttribute('playsinline', ''); el.setAttribute('aria-label', md.alt);
+        } else {
+          el = document.createElement('img');
+          el.src = md.img; el.alt = md.alt; el.decoding = 'async';
+        }
+        m.appendChild(el);
+        if (el.play) el.play().catch(function () {});
+      }
       $('adQ').textContent = '«' + s.question + '»';
       $('adCount').textContent = (list.indexOf(i) + 1) + ' / ' + list.length;
     };
@@ -107,7 +128,7 @@
       if (e.key === 'ArrowRight') step(1);
     });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-    dlg.addEventListener('close', function () { if (opener) opener.focus(); });
+    dlg.addEventListener('close', function () { $('adMedia').innerHTML = ''; if (opener) opener.focus(); });
     // scorrere con il dito sulla scheda: sinistra/destra = archetipo successivo/precedente
     var x0 = null;
     dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });

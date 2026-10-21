@@ -24,9 +24,11 @@
         <span class="nm">{{ s.name }}</span>
         <span class="arc">{{ s.archetype }}</span>
         <span class="txt">{{ s.text }}</span>
+        {% if s.media %}<span class="has-media" aria-hidden="true">{% if s.media.video %}▶{% else %}◆{% endif %}</span>{% endif %}
       </button>
       {% endfor %}
     </div>
+    <p class="arch-note">I doni dei segni sono ispirati alla leggenda della creazione riportata da Martin Schulman in <i>Astrologia karmica</i>. Il racconto completo lo scopriamo insieme negli incontri.</p>
   </div>
 </section>
 </div>
@@ -34,11 +36,13 @@
 <dialog class="arch-dlg" id="archDlg" aria-labelledby="adName">
   <form method="dialog" class="ad-close"><button aria-label="Chiudi">&times;</button></form>
   <div class="ad-card" id="adCard">
+    <div class="ad-media" id="adMedia" hidden></div>
     <span class="wm" id="adWm" aria-hidden="true"></span>
     <p class="ad-meta"><span id="adEl"></span> · <span id="adPeriod" class="nowrap"></span></p>
     <h2 id="adName"></h2>
     <p class="ad-arc" id="adArc"></p>
     <p class="ad-txt" id="adTxt"></p>
+    <p class="ad-gift">Il suo dono: <b id="adGift"></b></p>
     <p class="ad-q" id="adQ"></p>
     <div class="ad-cta">
       <p>Il tuo segno è solo una parte del progetto della tua anima.</p>

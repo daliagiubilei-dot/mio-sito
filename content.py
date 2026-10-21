@@ -62,32 +62,41 @@ SIGNS = [
     ("♓︎", "Pesci", "Acqua", "Il Mistico", "L'empatia che scioglie i confini."),
 ]
 
-# Quando si apre una carta: periodo del segno e una domanda per te (il resto si scopre negli incontri)
+# Quando si apre una carta: periodo, dono (dalla leggenda della creazione riportata da Martin Schulman,
+# solo il nome del dono) e una domanda per te. Il racconto completo resta per gli incontri.
 SIGN_DEEP = {
-    'Ariete': ('21 marzo – 19 aprile',
+    'Ariete': ('21 marzo – 19 aprile', 'la stima di sé',
               'Che cosa nella tua vita aspetta solo il tuo primo passo?'),
-    'Toro': ('20 aprile – 20 maggio',
+    'Toro': ('20 aprile – 20 maggio', 'la forza',
             'Che cosa ti fa sentire davvero al sicuro, senza bisogno di possederlo?'),
-    'Gemelli': ('21 maggio – 20 giugno',
+    'Gemelli': ('21 maggio – 20 giugno', 'la conoscenza',
                'Quale parola non hai ancora detto, e a chi?'),
-    'Cancro': ('21 giugno – 22 luglio',
+    'Cancro': ('21 giugno – 22 luglio', 'la famiglia',
               'Chi si prende cura della bambina che è in te?'),
-    'Leone': ('23 luglio – 22 agosto',
+    'Leone': ('23 luglio – 22 agosto', "l'onore",
              'Come brilleresti se nessuno ti stesse guardando?'),
-    'Vergine': ('23 agosto – 22 settembre',
+    'Vergine': ('23 agosto – 22 settembre', 'la purezza di spirito',
                'Che cosa succederebbe se ti concedessi di essere imperfetta?'),
-    'Bilancia': ('23 settembre – 22 ottobre',
+    'Bilancia': ('23 settembre – 22 ottobre', "l'amore",
                 'Dove stai cercando fuori un equilibrio che può nascere solo dentro?'),
-    'Scorpione': ('23 ottobre – 21 novembre',
+    'Scorpione': ('23 ottobre – 21 novembre', 'la determinazione',
                  'Che cosa sei pronta a lasciar andare per rinascere?'),
-    'Sagittario': ('22 novembre – 21 dicembre',
+    'Sagittario': ('22 novembre – 21 dicembre', "l'abbondanza",
                   "Qual è l'orizzonte che ti chiama in questo momento?"),
-    'Capricorno': ('22 dicembre – 19 gennaio',
+    'Capricorno': ('22 dicembre – 19 gennaio', 'la responsabilità',
                   'Che cosa stai costruendo, e per chi lo stai facendo davvero?'),
-    'Acquario': ('20 gennaio – 18 febbraio',
+    'Acquario': ('20 gennaio – 18 febbraio', 'la libertà',
                 'Dove puoi essere libera e, insieme, vicina?'),
-    'Pesci': ('19 febbraio – 20 marzo',
+    'Pesci': ('19 febbraio – 20 marzo', 'la comprensione',
              'Quale sogno sta chiedendo di toccare terra?'),
+}
+
+# Immagini e video degli archetipi (in static/): compaiono in alto nella carta aperta.
+# "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
+SIGN_MEDIA = {
+    "Ariete": {"img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
+    "Vergine": {"img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
+    "Sagittario": {"img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
 # Gli elementi: come si presentano quando si filtrano le carte
