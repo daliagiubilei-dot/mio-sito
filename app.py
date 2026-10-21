@@ -22,7 +22,7 @@ import mailer
 import newsletter
 import seo
 from config import Config, SITE
-from content import FAQ_GROUPS, INTERESTS, SERVICES, SIGN_MEDIA, SIGNS
+from content import FAQ_GROUPS, INTERESTS, SERVICES, SIGNS
 from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, Video, db, static_or_url
 from seed_data import seed_if_empty
 
@@ -195,8 +195,7 @@ def create_app():
 
     @app.route("/archetipi-astrologici")
     def archetipi():
-        signs = [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4],
-                      media=SIGN_MEDIA.get(s[1])) for s in SIGNS]
+        signs = [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4]) for s in SIGNS]
         return render("archetipi.html", "archetipi-astrologici", crumb="Archetipi astrologici", signs=signs)
 
     @app.route("/eventi")

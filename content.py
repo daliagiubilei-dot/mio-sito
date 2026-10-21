@@ -61,26 +61,3 @@ SIGNS = [
     ("♒︎", "Acquario", "Aria", "Il Visionario", "La libertà di pensare oltre le regole."),
     ("♓︎", "Pesci", "Acqua", "Il Mistico", "L'empatia che scioglie i confini."),
 ]
-
-# Immagini e video dei personaggi-archetipo, per segno (percorsi relativi a /static).
-# Per aggiungere un nuovo segno basta una voce con la stessa forma.
-SIGN_MEDIA = {
-    "Leone": {
-        "cover": "img/archetipi/leone/copertina.jpg",
-        "teaser": "Dall'ombra alla luce: quando il sole smette di essere una catena.",
-        "videos": [
-            {"src": "video/archetipi/leone-dall-ombra-alla-luce.mp4",
-             "poster": "video/archetipi/leone-dall-ombra-alla-luce.jpg",
-             "title": "Dall'ombra alla luce", "vertical": False},
-            {"src": "video/archetipi/leone-il-sole-si-libera.mp4",
-             "poster": "video/archetipi/leone-il-sole-si-libera.jpg",
-             "title": "Il sole si libera", "vertical": True},
-        ],
-        "images": [
-            {"src": "img/archetipi/leone/ombra-e-luce.jpg", "alt": "Il Leone diviso tra ufficio in tempesta e tempio dorato"},
-            {"src": "img/archetipi/leone/il-sovrano.jpg", "alt": "Il Leone sorridente nel suo ufficio, in abito blu e cravatta d'oro"},
-            {"src": "img/archetipi/leone/il-cuore-solare.jpg", "alt": "Il Leone in meditazione in un tempio di luce, con un sole alle spalle"},
-            {"src": "img/archetipi/leone/la-luce-che-insegna.jpg", "alt": "Il Leone che racconta ai bambini, con un libro e un sole sulla copertina"},
-        ],
-    },
-}
