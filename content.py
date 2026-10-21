@@ -61,3 +61,56 @@ SIGNS = [
     ("♒︎", "Acquario", "Aria", "Il Visionario", "La libertà di pensare oltre le regole."),
     ("♓︎", "Pesci", "Acqua", "Il Mistico", "L'empatia che scioglie i confini."),
 ]
+
+# Quando si apre una carta: periodo, dono (dalla leggenda della creazione riportata da Martin Schulman,
+# solo il nome del dono) e una domanda per te. Il racconto completo resta per gli incontri.
+SIGN_DEEP = {
+    'Ariete': ('21 marzo – 19 aprile', 'la stima di sé',
+              'Che cosa nella tua vita aspetta solo il tuo primo passo?'),
+    'Toro': ('20 aprile – 20 maggio', 'la forza',
+            'Che cosa ti fa sentire davvero al sicuro, senza bisogno di possederlo?'),
+    'Gemelli': ('21 maggio – 20 giugno', 'la conoscenza',
+               'Quale parola non hai ancora detto, e a chi?'),
+    'Cancro': ('21 giugno – 22 luglio', 'la famiglia',
+              'Chi si prende cura della bambina che è in te?'),
+    'Leone': ('23 luglio – 22 agosto', "l'onore",
+             'Come brilleresti se nessuno ti stesse guardando?'),
+    'Vergine': ('23 agosto – 22 settembre', 'la purezza di spirito',
+               'Che cosa succederebbe se ti concedessi di essere imperfetta?'),
+    'Bilancia': ('23 settembre – 22 ottobre', "l'amore",
+                'Dove stai cercando fuori un equilibrio che può nascere solo dentro?'),
+    'Scorpione': ('23 ottobre – 21 novembre', 'la determinazione',
+                 'Che cosa sei pronta a lasciar andare per rinascere?'),
+    'Sagittario': ('22 novembre – 21 dicembre', "l'abbondanza",
+                  "Qual è l'orizzonte che ti chiama in questo momento?"),
+    'Capricorno': ('22 dicembre – 19 gennaio', 'la responsabilità',
+                  'Che cosa stai costruendo, e per chi lo stai facendo davvero?'),
+    'Acquario': ('20 gennaio – 18 febbraio', 'la libertà',
+                'Dove puoi essere libera e, insieme, vicina?'),
+    'Pesci': ('19 febbraio – 20 marzo', 'la comprensione',
+             'Quale sogno sta chiedendo di toccare terra?'),
+}
+
+# Immagini e video degli archetipi (in static/): compaiono in alto nella carta aperta.
+# "fig" = personaggio in miniatura a destra sulla carta chiusa; "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
+SIGN_MEDIA = {
+    "Ariete": {"fig": "img/archetipi/ariete-figura.jpg", "img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
+    "Leone": {"fig": "img/archetipi/leone-figura.jpg", "img": "img/archetipi/leone.jpg", "video": "video/archetipi/leone.mp4", "alt": "Video: il Leone si libera dalla catena e diventa luce, seduto in meditazione in un tempio dorato tra due leoni"},
+    "Vergine": {"fig":"img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "alt": "Illustrazione della Vergine: una giovane donna nel suo studio, tra libri e semi, sotto la costellazione"},
+    "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
+}
+
+# Polarità: Fuoco e Aria maschili, Terra e Acqua femminili (simbolo, nome, frase quando si filtra)
+POLARITY = {"Fuoco": "Maschile", "Aria": "Maschile", "Terra": "Femminile", "Acqua": "Femminile"}
+POLARITIES = {
+    "Maschile": ("♂", "I segni maschili, di Fuoco e d'Aria, vanno verso il mondo: energia che si espande, agisce, si esprime. Non parla di genere: in ognuno di noi vivono entrambe le forze."),
+    "Femminile": ("♀", "I segni femminili, di Terra e d'Acqua, accolgono: energia che raccoglie, custodisce, fa maturare. Non parla di genere: in ognuno di noi vivono entrambe le forze."),
+}
+
+# Gli elementi: come si presentano quando si filtrano le carte
+ELEMENTS = {
+    "Fuoco": "Il Fuoco accende: è slancio, entusiasmo, la scintilla che dà inizio alle cose.",
+    "Terra": "La Terra radica: è corpo, concretezza, la pazienza di far crescere.",
+    "Aria": "L'Aria collega: è pensiero, parola, incontro tra le persone e le idee.",
+    "Acqua": "L'Acqua sente: è emozione, intuizione, la memoria profonda dell'anima.",
+}

@@ -818,3 +818,99 @@ section.block.teaser-sec{padding-top:0}
 small.soon{font-size:.7em}
 .soon-link{font-family:var(--label);letter-spacing:.06em;color:var(--gold)}
 .btn.soon-btn{cursor:default;opacity:.75;border:1px solid var(--gold);color:var(--gold);background:transparent}
+
+/* Archetipi: carte con i colori dei quattro elementi, che si aprono in una scheda */
+:root{--fuoco:#e8894a;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#5fb2e6}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--fuoco:#b0471c;--terra:#56711c;--aria:#5a52ad;--acqua:#1d6aa8}}
+:root[data-theme="light"]{--fuoco:#b0471c;--terra:#56711c;--aria:#5a52ad;--acqua:#1d6aa8}
+:root[data-theme="dark"]{--fuoco:#e8894a;--terra:#a3c25e;--aria:#aaa5ec;--acqua:#5fb2e6}
+.el-fuoco{--elc:var(--fuoco)}.el-terra{--elc:var(--terra)}.el-aria{--elc:var(--aria)}.el-acqua{--elc:var(--acqua)}
+.arch-hint{color:var(--gold2);white-space:nowrap}
+.filters button i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--elc);margin:0 7px 2px 0;vertical-align:middle}
+.filters button[aria-pressed="true"].el-fuoco,.filters button[aria-pressed="true"].el-terra,
+.filters button[aria-pressed="true"].el-aria,.filters button[aria-pressed="true"].el-acqua{border-color:var(--elc);color:var(--elc)}
+.el-line{min-height:1.5em;margin:0;font:italic 400 clamp(.95rem,2vh,1.08rem)/1.5 var(--display);color:var(--elc,var(--muted));transition:opacity .3s}
+#p-archetipi .zodiac{gap:clamp(8px,1.2vh,12px);background:transparent;border:0}
+#p-archetipi .sign{position:relative;overflow:hidden;font:inherit;color:var(--fg);text-align:left;cursor:pointer;
+  background:color-mix(in srgb,var(--elc) 7%,var(--bg));border:1px solid color-mix(in srgb,var(--elc) 28%,var(--line));
+  border-top:3px solid var(--elc);border-radius:12px;transition:transform .25s ease,border-color .25s,background .25s;
+  animation:signIn .5s ease both;animation-delay:calc(var(--d,0) * 45ms)}
+#p-archetipi .sign:hover,#p-archetipi .sign:focus-visible{transform:translateY(-4px);border-color:var(--elc);background:color-mix(in srgb,var(--elc) 13%,var(--bg))}
+#p-archetipi .sign > span{position:relative}
+#p-archetipi .sign .wm{position:absolute;right:-.08em;bottom:-.28em;font:400 clamp(4.5rem,11vh,6.5rem)/1 var(--display);color:var(--elc);opacity:.12;pointer-events:none;transition:opacity .3s,transform .4s}
+#p-archetipi .sign:hover .wm{opacity:.22;transform:rotate(-8deg) scale(1.06)}
+#p-archetipi .sign .sym,#p-archetipi .sign .arc{color:var(--elc)}
+#p-archetipi .sign .el{color:var(--elc);opacity:.85}
+#p-archetipi .sign .nm{font:400 clamp(1.05rem,2.3vh,1.2rem)/1.15 var(--display)}
+#p-archetipi .sign .txt{font-size:clamp(.82rem,1.75vh,.9rem);line-height:1.45;color:var(--muted)}
+#p-archetipi .sign[hidden]{display:none}
+#p-archetipi .sign .top{justify-content:flex-start;gap:8px;align-items:center}
+#p-archetipi .sign .pol{font:400 1rem/1 "Segoe UI Symbol","DejaVu Sans",sans-serif;color:var(--muted);opacity:.55}
+.el-line.pol-line{color:var(--gold2)}
+@keyframes signIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.arch-dlg{border:0;padding:0;background:transparent;color:var(--fg);max-width:min(460px,calc(100vw - 32px));width:100%}
+.arch-dlg::backdrop{background:rgba(8,10,10,.72);backdrop-filter:blur(4px)}
+.arch-dlg[open]{animation:dlgIn .3s ease-out}
+@keyframes dlgIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.ad-card{position:relative;overflow:hidden;display:grid;gap:8px;padding:30px 28px 22px;border-radius:16px;
+  background:color-mix(in srgb,var(--elc) 9%,var(--bg));border:1px solid color-mix(in srgb,var(--elc) 40%,var(--line));border-top:4px solid var(--elc)}
+.ad-card > *{position:relative}
+.ad-card .wm{position:absolute;right:-.05em;top:-.12em;font:400 11rem/1 var(--display);color:var(--elc);opacity:.1;pointer-events:none}
+.ad-meta .nowrap{white-space:nowrap}
+.ad-meta{padding-right:40px;font:400 .95rem/1 var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--elc)}
+.ad-card h2{font-size:clamp(2rem,6vw,2.5rem);margin-top:4px}
+.ad-arc{font:400 1.2rem var(--label);letter-spacing:.08em;color:var(--elc)}
+.ad-txt{color:var(--muted)}
+.ad-q{font:italic 400 clamp(1.25rem,4vw,1.5rem)/1.4 var(--display);margin:10px 0 6px;padding-left:16px;border-left:2px solid var(--elc)}
+.ad-cta{display:grid;gap:12px;justify-items:start;margin-top:10px;padding-top:16px;border-top:1px solid var(--line)}
+.ad-cta p{font-size:.95rem;color:var(--muted)}
+.ad-nav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font:400 .95rem var(--label);letter-spacing:.12em;color:var(--muted)}
+.ad-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);font-size:1.1rem;cursor:pointer}
+.ad-nav button:hover{border-color:var(--elc);color:var(--elc)}
+.ad-close{position:absolute;top:10px;right:12px;z-index:2;margin:0}
+.ad-close button{width:38px;height:38px;border:0;background:transparent;color:var(--muted);font-size:1.7rem;line-height:1;cursor:pointer}
+.ad-close button:hover{color:var(--fg)}
+.ad-close button:focus-visible{border-radius:50%}
+.arch-dlg{position:fixed}
+@media (prefers-reduced-motion:reduce){#p-archetipi .sign,.arch-dlg[open]{animation:none}#p-archetipi .sign:hover{transform:none}}
+@media (max-width:760px){#p-archetipi .sign .txt{display:none}}
+#p-archetipi .sign .has-media{position:absolute;top:10px;right:12px;font-size:.7rem;color:var(--elc);opacity:.75}
+.ad-card .ad-media{margin:-30px -28px 10px;aspect-ratio:4/3;overflow:hidden;background:#0e1110;position:relative}
+.ad-card .ad-media img,.ad-card .ad-media video{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+.ad-card .ad-media::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,color-mix(in srgb,var(--elc) 9%,var(--bg)))}
+.ad-card .ad-media:not([hidden]) ~ .wm{display:none}
+.ad-gift{font-size:.98rem;color:var(--fg)}
+.ad-gift b{font-weight:400;font:italic 400 1.12rem var(--display);color:var(--elc)}
+.arch-note{font-size:.8rem;color:var(--muted);opacity:.8;margin-top:clamp(4px,1vh,10px)}
+.arch-dlg{max-height:calc(100svh - 24px);overflow-y:auto}
+@media (max-width:600px){.ad-card .ad-media{aspect-ratio:1/1}}
+@media (min-width:900px){
+  .arch-dlg.has-m{max-width:min(880px,calc(100vw - 48px))}
+  .ad-card.has-m{grid-template-columns:minmax(0,360px) minmax(0,1fr);column-gap:28px;align-content:center;padding-left:0}
+  .ad-card.has-m > *{grid-column:2}
+  .ad-card.has-m .ad-media{grid-column:1;grid-row:1 / span 20;margin:-30px 0 -22px;aspect-ratio:auto;min-height:100%}
+  .ad-card.has-m .ad-media::after{inset:0 0 0 auto;width:30%;height:auto;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--elc) 9%,var(--bg)))}
+}
+/* personaggio intero in miniatura a destra della carta; l'elemento lo dice il colore della cornice */
+.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#p-archetipi .zodiac{grid-template-columns:repeat(4,minmax(0,1fr))}
+#p-archetipi .sign{min-height:clamp(150px,22vh,190px)}
+#p-archetipi .sign .fig{position:absolute;right:0;bottom:0;top:0;width:44%;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 38%);mask-image:linear-gradient(90deg,transparent,#000 38%)}
+#p-archetipi .sign .fig img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;transition:transform .5s ease}
+#p-archetipi .sign:hover .fig img,#p-archetipi .sign:focus-visible .fig img{transform:scale(1.06) translateY(-3px)}
+#p-archetipi .sign.with-fig .wm{display:none}
+#p-archetipi .sign.with-fig > span:not(.fig){padding-right:40%}
+#p-archetipi .sign.with-fig .top{padding-right:0}
+@media (max-width:1100px){#p-archetipi .zodiac{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){#p-archetipi .zodiac{grid-template-columns:repeat(2,minmax(0,1fr))}#p-archetipi .sign{min-height:132px}
+  #p-archetipi .sign.with-fig > span:not(.fig){padding-right:36%}}
+@media (prefers-reduced-motion:reduce){#p-archetipi .sign:hover .fig img{transform:none}}
+/* Fuoco: cornice in alto che sfuma dall'oro al rosso */
+#p-archetipi .sign.el-fuoco{border-top-width:0;padding-top:calc(clamp(12px,2.2vh,22px) + 3px)}
+#p-archetipi .sign.el-fuoco::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:1;background:linear-gradient(90deg,var(--gold2),var(--fuoco) 70%)}
+.ad-card.el-fuoco{border-top-width:0;padding-top:34px}
+.ad-card.el-fuoco::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;z-index:3;background:linear-gradient(90deg,var(--gold2),var(--fuoco) 70%)}
+
+#adPol{letter-spacing:0;text-transform:none;opacity:.7}

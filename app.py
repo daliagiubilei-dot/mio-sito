@@ -22,7 +22,7 @@ import mailer
 import newsletter
 import seo
 from config import Config, SITE
-from content import FAQ_GROUPS, INTERESTS, SERVICES, SIGNS
+from content import ELEMENTS, POLARITIES, POLARITY, FAQ_GROUPS, INTERESTS, SERVICES, SIGN_DEEP, SIGN_MEDIA, SIGNS
 from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, Video, db, static_or_url
 from seed_data import seed_if_empty
 
@@ -193,10 +193,25 @@ def create_app():
         return render("service.html", key, ld_extra=ld, crumb=svc["name"], svc=svc, faqs=faqs, others=others,
                       faq_title="Domande su " + svc["name"].lower())
 
+    def _media(m):
+        """Immagine/video di un archetipo, solo se il file c'è davvero in static/."""
+        if not m or not os.path.isfile(os.path.join(app.static_folder, m["img"])):
+            return None
+        out = {"img": asset(m["img"]), "alt": m.get("alt", "")}
+        if m.get("video") and os.path.isfile(os.path.join(app.static_folder, m["video"])):
+            out["video"] = asset(m["video"])
+        if m.get("fig") and os.path.isfile(os.path.join(app.static_folder, m["fig"])):
+            out["fig"] = asset(m["fig"])
+        return out
+
     @app.route("/archetipi-astrologici")
     def archetipi():
-        signs = [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4]) for s in SIGNS]
-        return render("archetipi.html", "archetipi-astrologici", crumb="Archetipi astrologici", signs=signs)
+        signs = [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4],
+                      polarity=POLARITY[s[2]], pol_sym=POLARITIES[POLARITY[s[2]]][0],
+                      period=SIGN_DEEP[s[1]][0], gift=SIGN_DEEP[s[1]][1], question=SIGN_DEEP[s[1]][2],
+                      media=_media(SIGN_MEDIA.get(s[1]))) for s in SIGNS]
+        return render("archetipi.html", "archetipi-astrologici", crumb="Archetipi astrologici", signs=signs,
+                      elements=ELEMENTS, polarities={k: v[1] for k, v in POLARITIES.items()})
 
     @app.route("/eventi")
     def eventi():
