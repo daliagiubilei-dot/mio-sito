@@ -11,7 +11,7 @@ from functools import wraps
 from flask import (Blueprint, Response, abort, flash, redirect, render_template, request, session, url_for)
 
 from config import Config
-from models import AeoPhrase, Event, Lead, PageSEO, Post, Setting, Subscriber, Video, db
+from models import AeoPhrase, Event, Lead, PageSEO, Post, Setting, Subscriber, Video, VideoSeries, db
 import seo
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
@@ -45,16 +45,32 @@ ENTITIES = {
             F("published", "Pubblicato", "bool"),
             F("is_sample", "Mostra l'etichetta «Articolo di esempio»", "bool"),
         ]),
+    "serie": dict(
+        model=VideoSeries, title="Serie di video", one="serie", order=lambda: [VideoSeries.sort, VideoSeries.id],
+        cols=[("title", "Serie"), ("video_count", "Video"), ("cover_state", "Copertina"), ("published", "Pubblicata")],
+        intro="Le serie compaiono come riquadri nella prima schermata di «Video Social». Una serie senza video non si vede. "
+              "I video senza serie finiscono nella serie con indirizzo «vari».",
+        fields=[
+            F("title", "Titolo della serie", required=True, maxlength=200),
+            F("slug", "Indirizzo (URL)", help="Lascialo vuoto: lo creo dal titolo. Diventa /video-social/…", maxlength=160),
+            F("description", "Descrizione breve", "textarea", rows=2, help="Una o due frasi: compare nella pagina della serie e su Google."),
+            F("cover_upload", "Copertina", "image",
+              help="Carica la tua copertina (JPG o PNG, anche dal telefono). Formato consigliato verticale 4:5, ad esempio 1080×1350."),
+            F("sort", "Posizione (numero più basso = prima)", "int"),
+            F("published", "Pubblicata", "bool"),
+        ]),
     "video": dict(
         model=Video, title="Video social", one="video", order=lambda: [Video.sort, Video.id],
-        cols=[("title", "Titolo"), ("file", "File"), ("published", "Pubblicato")],
+        cols=[("title", "Titolo"), ("series_name", "Serie"), ("sort", "Posizione"), ("published", "Pubblicato")],
         fields=[
             F("title", "Titolo", required=True, maxlength=250),
+            F("series_id", "Serie", "fk", choices=lambda: [("", "(nessuna: va in «Vari»)")] +
+              [(str(x.id), x.title) for x in VideoSeries.query.order_by(VideoSeries.sort, VideoSeries.id).all()]),
             F("description", "Descrizione (testo letto da Google e dalle AI)", "textarea", rows=3),
             F("file", "File video", required=True, help="Percorso in static/ (es. video/stai-respirando.mp4) oppure link https:// diretto a un .mp4.", maxlength=300),
             F("poster", "Immagine di copertina", help="Es. video/stai-respirando.jpg", maxlength=300),
             F("upload_date", "Data di caricamento", "date"),
-            F("sort", "Posizione (numero più basso = prima)", "int"),
+            F("sort", "Posizione nella serie (numero più basso = prima)", "int"),
             F("published", "Pubblicato", "bool"),
         ]),
     "eventi": dict(
@@ -125,7 +141,8 @@ def parse_value(f, form):
     if k == "pages":
         return ",".join(form.getlist(name))
     raw = (form.get(name) or "").strip()
-    if k == "int":
+    if k == "fk":
+        return int(raw) if raw.isdigit() else None
         return int(raw) if raw.lstrip("-").isdigit() else None
     if k == "date":
         return date.fromisoformat(raw) if raw else None
@@ -135,7 +152,11 @@ def parse_value(f, form):
 
 
 def get_val(obj, f):
+    if f["kind"] == "image":
+        return ""
     v = getattr(obj, f["name"], None) if obj is not None else None
+    if f["kind"] == "fk":
+        return "" if v is None else str(v)
     if f["kind"] == "datetime" and v:
         return v.strftime("%Y-%m-%dT%H:%M")
     if f["kind"] == "date" and v:
@@ -168,6 +189,8 @@ def cell(obj, name):
         return ", ".join(obj.pages) or "—"
     if name == "seo_status":
         return seo_status(obj)
+    if name == "cover_state":
+        return "caricata" if obj.has_cover else "da caricare"
     v = getattr(obj, name, "")
     if isinstance(v, bool):
         return "sì" if v else "no"
@@ -182,6 +205,30 @@ def keywords_list():
     row = Setting.query.filter_by(key="keywords").first()
     text = row.value if row and row.value else "\n".join(seo.CORE_KEYWORDS)
     return [k.strip() for k in text.splitlines() if k.strip()]
+
+
+COVER_MAX_BYTES = 15 * 1024 * 1024
+
+
+def read_cover(file):
+    """Legge l'immagine caricata, la rimpicciolisce (lato lungo 1350 px) e la restituisce come (bytes, tipo).
+    Solleva ValueError con un messaggio comprensibile se il file non va bene."""
+    data = file.read(COVER_MAX_BYTES + 1)
+    if len(data) > COVER_MAX_BYTES:
+        raise ValueError("L'immagine è troppo grande (massimo 15 MB).")
+    try:
+        from PIL import Image, ImageOps
+        im = Image.open(io.BytesIO(data))
+        im = ImageOps.exif_transpose(im)
+    except Exception:
+        raise ValueError("Il file caricato non sembra un'immagine (usa JPG o PNG).")
+    im.thumbnail((1350, 1350))
+    out = io.BytesIO()
+    if im.mode in ("RGBA", "LA", "P") and "transparency" in im.info or im.mode in ("RGBA", "LA"):
+        im.save(out, "PNG", optimize=True)
+        return out.getvalue(), "image/png"
+    im.convert("RGB").save(out, "JPEG", quality=85, optimize=True, progressive=True)
+    return out.getvalue(), "image/jpeg"
 
 
 # ----------------------------------------------------------------------------- accesso
@@ -362,7 +409,16 @@ def _form(key, e, obj):
     if request.method == "POST":
         errors = []
         parsed = {}
+        cover = None
         for f in fields:
+            if f["kind"] == "image":
+                up = request.files.get(f["name"])
+                if up and up.filename:
+                    try:
+                        cover = read_cover(up)
+                    except ValueError as exc:
+                        errors.append(str(exc))
+                continue
             try:
                 parsed[f["name"]] = parse_value(f, request.form)
             except ValueError:
@@ -376,6 +432,20 @@ def _form(key, e, obj):
                 obj = e["model"]()
             for name, v in parsed.items():
                 setattr(obj, name, v)
+            if key == "serie":
+                base = slugify(parsed.get("slug") or parsed["title"])
+                slug, n = base, 2
+                while True:
+                    clash = VideoSeries.query.filter_by(slug=slug).first()
+                    if clash is None or (not new and clash.id == obj.id):
+                        break
+                    slug, n = "%s-%d" % (base, n), n + 1
+                obj.slug = slug
+                if cover:
+                    obj.cover_data, obj.cover_mime = cover
+                    obj.updated_at = datetime.utcnow()
+                elif request.form.get("cover_remove") == "1":
+                    obj.cover_data, obj.cover_mime, obj.cover = None, "", ""
             if key == "blog":
                 base = slugify(parsed.get("slug") or parsed["title"])
                 slug, n = base, 2
@@ -395,6 +465,8 @@ def _form(key, e, obj):
         for msg in errors:
             flash(msg, "err")
         values = {f["name"]: (request.form.getlist(f["name"]) if f["kind"] == "pages" else request.form.get(f["name"], "")) for f in fields}
+        if key == "serie":
+            flash("Se avevi scelto una copertina, selezionala di nuovo prima di salvare.", "err")
         values["__post"] = True
     else:
         for f in fields:
@@ -415,6 +487,7 @@ def _form(key, e, obj):
     selected = values.get("page_slugs", "")
     if isinstance(selected, str):
         selected = [s for s in selected.split(",") if s]
+    fields = [dict(f, choices=f["choices"]()) if f["kind"] == "fk" else f for f in fields]
     return render_template("admin/form.html", key=key, e=e, obj=obj, values=values, fields=fields,
                            page_choices=page_choices, selected=selected)
 

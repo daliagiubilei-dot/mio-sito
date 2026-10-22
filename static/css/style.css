@@ -914,3 +914,45 @@ small.soon{font-size:.7em}
 .ad-card.el-fuoco::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;z-index:3;background:linear-gradient(90deg,var(--gold2),var(--fuoco) 70%)}
 
 #adPol{letter-spacing:0;text-transform:none;opacity:.7}
+
+/* Video Social: le serie come riquadri con la copertina, tutte nella prima schermata */
+.vs-top{padding-block:clamp(16px,4vh,48px) 0}
+.vs-top h1{margin-top:8px}
+.vs-top p.intro{margin-top:10px}
+section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
+.series-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+.series-tile{display:grid;gap:6px;align-content:start;text-decoration:none;color:var(--fg)}
+.st-cover{position:relative;display:block;aspect-ratio:4/5;max-height:calc(100svh - var(--navh,65px) - 290px);min-height:200px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg2);transition:transform .3s ease,border-color .3s,box-shadow .3s}
+.st-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.series-tile:hover .st-cover,.series-tile:focus-visible .st-cover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(0,0,0,.45)}
+.series-tile:hover .st-cover img{transform:scale(1.04)}
+.st-ph{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;padding:16px;text-align:center;color:var(--gold2);
+  background:radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--gold) 22%,var(--bg2)),var(--bg2) 70%)}
+.st-ph svg{width:38px;height:38px;opacity:.8}
+.st-ph b{font:400 clamp(1.05rem,1.6vw,1.3rem)/1.2 var(--display);color:var(--fg)}
+.st-play{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--bg) 70%,transparent);color:var(--gold2);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
+.st-play svg{width:16px;height:16px;margin-left:2px}
+.series-tile:hover .st-play,.series-tile:focus-visible .st-play{opacity:1}
+.st-title{font:400 1.12rem/1.25 var(--display)}
+.st-count{font:400 .95rem/1 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.vs-back{display:inline-block;margin-bottom:10px;font:600 .9rem var(--body);text-decoration:none;color:var(--muted)}
+.vs-back:hover{color:var(--gold2)}
+.vs-count{margin-top:8px;font:400 1rem/1 var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.vnum{position:absolute;top:10px;left:10px;z-index:1;min-width:28px;height:28px;padding:0 8px;border-radius:99px;display:grid;place-items:center;
+  font:600 .85rem var(--body);background:color-mix(in srgb,var(--bg) 78%,transparent);color:var(--gold2);backdrop-filter:blur(4px);pointer-events:none}
+.vs-others{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.vs-others h2{font-size:1.5rem;margin-bottom:16px}
+.series-grid.small{grid-template-columns:repeat(auto-fill,minmax(130px,170px))}
+.series-grid.small .st-cover{min-height:0;max-height:none}
+.series-grid.small .st-title{font-size:1rem}
+@media (max-width:960px){.series-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.st-cover{max-height:none}}
+@media (max-width:600px){
+  .series-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .st-cover{min-height:0}
+  .st-play{opacity:1;width:30px;height:30px}
+  .st-title{font-size:1rem}
+  .series-grid.small{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){.series-tile:hover .st-cover,.series-tile:hover .st-cover img{transform:none}}

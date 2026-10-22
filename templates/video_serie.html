@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-top vs-top"><div class="wrap">
+  <a class="vs-back" href="{{ url_for('video_social') }}">&larr; Tutte le serie</a>
+  <p class="label">Video Social · serie</p>
+  <h1>{{ serie.title }}</h1>
+  {% if serie.description %}<p class="intro">{{ serie.description }}</p>{% endif %}
+  <p class="vs-count">{{ videos|length }} video</p>
+</div></section>
+<section class="block vs-list">
+  <div class="wrap">
+    <div class="vgrid">
+      {% for v in videos %}
+      <article class="vcard" id="video-{{ v.id }}">
+        <div class="vframe"><span class="vnum" aria-hidden="true">{{ loop.index }}</span><video src="{{ v.file_url }}"{% if v.poster_url %} poster="{{ v.poster_url }}"{% endif %} controls playsinline preload="none" aria-label="{{ v.title }}"></video></div>
+        <h2>{{ v.title }}</h2>
+        {% if v.description %}<p>{{ v.description }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if others %}
+    <div class="vs-others">
+      <h2>Altre serie</h2>
+      <div class="series-grid small">
+        {% for se in others %}
+        <a class="series-tile{% if not se.has_cover %} no-cover{% endif %}" href="{{ url_for('video_serie', slug=se.slug) }}">
+          <span class="st-cover">
+            {% if se.has_cover %}<img src="{{ se.cover_url }}" alt="Copertina della serie {{ se.title }}" loading="lazy">
+            {% else %}<span class="st-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg><b>Daliamae</b></span>{% endif %}
+          </span>
+          <span class="st-title">{{ se.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="vsocial">
+      {% if site.tiktok %}<a class="btn primary" href="{{ site.tiktok }}" target="_blank" rel="noopener">Altri video su TikTok</a>{% endif %}
+      {% if site.instagram %}<a class="btn ghost" href="{{ site.instagram }}" target="_blank" rel="noopener">Altri contenuti su Instagram</a>{% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

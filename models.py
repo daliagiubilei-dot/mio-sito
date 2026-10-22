@@ -89,6 +89,38 @@ class Post(db.Model):
         return static_or_url(self.cover)
 
 
+class VideoSeries(db.Model):
+    """Una serie di video (es. «La storia di Daliamae»), con la copertina caricata da Dalia dal pannello."""
+    __tablename__ = "video_series"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    slug = db.Column(db.String(160), unique=True, nullable=False)
+    description = db.Column(db.Text, default="")
+    cover = db.Column(db.String(300), default="")             # in alternativa: file in static/ o https://
+    cover_data = db.Column(db.LargeBinary)                     # copertina caricata dal pannello (salvata nel database)
+    cover_mime = db.Column(db.String(40), default="")
+    sort = db.Column(db.Integer, default=50)
+    published = db.Column(db.Boolean, default=True)
+    updated_at = db.Column(db.DateTime, default=_now, onupdate=_now)
+    videos = db.relationship("Video", back_populates="series", order_by="(Video.sort, Video.id)")
+
+    @property
+    def cover_url(self):
+        from flask import url_for
+        if self.cover_data:
+            v = int(self.updated_at.timestamp()) if self.updated_at else 0
+            return url_for("serie_cover", sid=self.id, v=v)
+        return static_or_url(self.cover)
+
+    @property
+    def has_cover(self):
+        return bool(self.cover_data) or bool(self.cover)
+
+    @property
+    def video_count(self):
+        return len([v for v in self.videos if v.published])
+
+
 class Video(db.Model):
     __tablename__ = "videos"
     id = db.Column(db.Integer, primary_key=True)
@@ -100,6 +132,12 @@ class Video(db.Model):
     sort = db.Column(db.Integer, default=50)
     published = db.Column(db.Boolean, default=True)
     updated_at = db.Column(db.DateTime, default=_now, onupdate=_now)
+    series_id = db.Column(db.Integer, db.ForeignKey("video_series.id", ondelete="SET NULL"), nullable=True)
+    series = db.relationship("VideoSeries", back_populates="videos")
+
+    @property
+    def series_name(self):
+        return self.series.title if self.series else "—"
 
     @property
     def file_url(self):
@@ -146,3 +184,14 @@ class Subscriber(db.Model):
     mailchimp_status = db.Column(db.String(80), default="")
     mailchimp_error = db.Column(db.String(300), default="")
     created_at = db.Column(db.DateTime, default=_now)
+
+
+def upgrade_schema():
+    """Aggiunge al database le colonne nuove che create_all() non aggiunge alle tabelle già esistenti."""
+    from sqlalchemy import inspect, text
+    insp = inspect(db.engine)
+    if "videos" in insp.get_table_names():
+        cols = {c["name"] for c in insp.get_columns("videos")}
+        if "series_id" not in cols:
+            with db.engine.begin() as conn:
+                conn.execute(text("ALTER TABLE videos ADD COLUMN series_id INTEGER REFERENCES video_series(id) ON DELETE SET NULL"))

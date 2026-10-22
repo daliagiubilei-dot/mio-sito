@@ -20,7 +20,7 @@
     </a>
     {% endif %}
     {% if latest_video %}
-    <a class="news-card" href="{{ url_for('video_social') }}#video-{{ latest_video.id }}">
+    <a class="news-card" href="{{ url_for('video_serie', slug=(latest_video.series.slug if latest_video.series else 'vari')) }}#video-{{ latest_video.id }}">
       <div class="news-media reel">
         {% if latest_video.poster %}<img class="blur" src="{{ latest_video.poster_url }}" alt="" loading="lazy"><img class="front" src="{{ latest_video.poster_url }}" alt="{{ latest_video.title }}" loading="lazy">{% endif %}
         <span class="news-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>

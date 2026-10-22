@@ -3,7 +3,7 @@ import json
 import os
 from datetime import date
 
-from models import db, PageSEO, AeoPhrase, Video, Setting
+from models import db, PageSEO, AeoPhrase, Video, VideoSeries, Setting
 from seo import PAGE_DEFAULTS, CORE_KEYWORDS
 
 SEED_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seed")
@@ -48,6 +48,7 @@ def seed_if_empty():
     except Exception:          # più processi che partono insieme: il primo vince
         db.session.rollback()
     _add_posts()
+    _add_video_series()
     _update_faq_progetto_animico()
     _update_seo_oroscopo()
     _update_massaggio_prossimamente()
@@ -150,6 +151,39 @@ VIDEOS = [
         sort=0,                      # 0 = primo della pagina Video Social
     ),
 ]
+
+
+# Serie iniziali della pagina Video Social. Create una sola volta: poi si modificano dal pannello /admin/serie
+# (titolo, descrizione, copertina, ordine). I video già presenti vengono assegnati alla loro serie.
+VIDEO_SERIES = [
+    ("la-storia-di-daliamae", "La storia di Daliamae", 1,
+     "Il mito da cui nasce il nome: la dalia, il colibrì e un amore che ritorna. Da guardare in ordine, dal primo all'ultimo.",
+     ["video/come-nasce-daliamae.mp4"]),
+    ("pensiero-della-sera", "Pensiero della sera", 2, "Un pensiero breve per chiudere la giornata e tornare a te.", []),
+    ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
+     "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
+     ["video/cambio-di-prospettiva.mp4"]),
+    ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
+    ("vari", "Vari", 9, "Momenti, incontri e pensieri sparsi.", []),
+]
+
+
+def _add_video_series():
+    try:
+        if not _first_time("video_series") or VideoSeries.query.count():
+            db.session.commit()
+            return
+        for slug, title, sort, desc, files in VIDEO_SERIES:
+            se = VideoSeries(slug=slug, title=title, sort=sort, description=desc, published=True)
+            db.session.add(se)
+            db.session.flush()
+            for f in files:
+                v = Video.query.filter_by(file=f).first()
+                if v is not None and v.series_id is None:
+                    v.series_id = se.id
+        db.session.commit()
+    except Exception:      # più processi che partono insieme: il primo vince
+        db.session.rollback()
 
 
 def _add_videos():

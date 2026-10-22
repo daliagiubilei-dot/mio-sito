@@ -23,7 +23,8 @@ import newsletter
 import seo
 from config import Config, SITE
 from content import ELEMENTS, POLARITIES, POLARITY, FAQ_GROUPS, INTERESTS, SERVICES, SIGN_DEEP, SIGN_MEDIA, SIGNS
-from models import AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, Video, db, static_or_url
+from models import (AeoPhrase, Event, Lead, Post, PageSEO, Setting, Subscriber, Video, VideoSeries, db, static_or_url,
+                    upgrade_schema)
 from seed_data import seed_if_empty
 
 log = logging.getLogger("daliamae")
@@ -60,6 +61,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        upgrade_schema()
         seed_if_empty()
         # Con gunicorn --preload questo codice gira prima di creare i processi: chiudiamo le connessioni al database
         # aperte qui, così ogni processo apre le sue (connessioni SSL condivise causano "bad record mac").
@@ -111,6 +113,8 @@ def create_app():
     # ------------------------------------------------------------------ sicurezza di base
     @app.before_request
     def check_csrf():
+        if request.method == "POST" and session.get("admin") and request.path.startswith("/admin/serie"):
+            request.max_content_length = 16 * 1024 * 1024   # copertine delle serie caricate dal telefono
         if request.method == "POST":
             sent = request.form.get("csrf", "")
             if not sent or not hmac.compare_digest(sent, session.get("csrf", "")):
@@ -243,17 +247,62 @@ def create_app():
               seo.ld_breadcrumb(base_url(), [("Blog", base_url() + "/blog"), (p.title, url)])]
         return render_template("blog_post.html", meta=meta, ld=[seo.ld_organization(SITE, base_url(), keywords_list())] + ld, post=p)
 
-    @app.route("/video-social")
-    def video_social():
-        vids = Video.query.filter_by(published=True).order_by(Video.sort, Video.id).all()
+    def _video_ld(vids, page_url):
         ld = []
         for v in vids:
             f = static_or_url(v.file)
             f = base_url() + f if f.startswith("/") else f
             pu = static_or_url(v.poster)
             pu = base_url() + pu if pu.startswith("/") else pu
-            ld.append(seo.ld_video(v, f, pu, base_url() + "/video-social"))
-        return render("video_social.html", "video-social", ld_extra=ld, crumb="Video Social", videos=vids)
+            ld.append(seo.ld_video(v, f, pu, page_url))
+        return ld
+
+    def _series_list():
+        """Serie pubblicate con almeno un video. I video senza serie finiscono in «Vari»."""
+        series = VideoSeries.query.filter_by(published=True).order_by(VideoSeries.sort, VideoSeries.id).all()
+        loose = Video.query.filter_by(published=True, series_id=None).count()
+        out = []
+        for se in series:
+            n = se.video_count + (loose if se.slug == "vari" else 0)
+            if n:
+                out.append((se, n))
+        return out
+
+    @app.route("/video-social")
+    def video_social():
+        series = _series_list()
+        return render("video_social.html", "video-social", crumb="Video Social", series=series)
+
+    @app.route("/video-social/<slug>")
+    def video_serie(slug):
+        se = VideoSeries.query.filter_by(slug=slug, published=True).first() or abort(404)
+        vids = [v for v in se.videos if v.published]
+        if slug == "vari":
+            vids += Video.query.filter_by(published=True, series_id=None).order_by(Video.sort, Video.id).all()
+        if not vids:
+            abort(404)
+        url = base_url() + "/video-social/" + se.slug
+        over = {"title": "%s – Video Social | Daliamae" % se.title, "canonical": url}
+        if se.description:
+            over["description"] = se.description[:155]
+        if se.has_cover:
+            cu = se.cover_url
+            over["image"] = base_url() + cu if cu.startswith("/") else cu
+        ld = _video_ld(vids, url) + [seo.ld_breadcrumb(base_url(), [("Video Social", base_url() + "/video-social"), (se.title, url)])]
+        others = [x for x, n in _series_list() if x.id != se.id]
+        return render_template("video_serie.html", meta=meta_for("video-social", **over),
+                               ld=[seo.ld_organization(SITE, base_url(), keywords_list())] + ld,
+                               serie=se, videos=vids, others=others)
+
+    @app.route("/video-social/serie/<int:sid>/copertina")
+    def serie_cover(sid):
+        se = db.session.get(VideoSeries, sid)
+        if not se or not se.cover_data:
+            abort(404)
+        resp = make_response(se.cover_data)
+        resp.headers["Content-Type"] = se.cover_mime or "image/jpeg"
+        resp.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return resp
 
     @app.route("/domande-frequenti")
     def domande():
@@ -354,6 +403,7 @@ def create_app():
                      "video-social", "domande-frequenti", "contatti"):
             urls.append(("/" + slug, None))
         urls += [("/percorsi/" + s, None) for s in SERVICES]
+        urls += [("/video-social/" + se.slug, None) for se, n in _series_list()]
         for p in Post.query.filter_by(published=True).all():
             urls.append(("/blog/" + p.slug, (p.updated_at or datetime.utcnow()).date().isoformat()))
         body = "".join("<url><loc>%s%s</loc>%s</url>" % (base_url(), u, "<lastmod>%s</lastmod>" % m if m else "") for u, m in urls)
