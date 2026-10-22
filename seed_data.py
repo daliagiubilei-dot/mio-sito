@@ -163,8 +163,11 @@ VIDEO_SERIES = [
      "img/serie/pensiero-della-sera.jpg"),
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
-     ["video/cambio-di-prospettiva.mp4"]),
+     ["video/cambio-di-prospettiva.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
     ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
+    ("ascoltiamoli", "Ascoltiamoli", 5,
+     "I ragazzi di oggi, i loro linguaggi e le loro ricerche: per comprendere invece di giudicare.", [],
+     "img/serie/ascoltiamoli.jpg"),
     ("vari", "Vari", 9, "Momenti, incontri e pensieri sparsi.", []),
 ]
 
