@@ -55,7 +55,7 @@ ENTITIES = {
             F("slug", "Indirizzo (URL)", help="Lascialo vuoto: lo creo dal titolo. Diventa /video-social/…", maxlength=160),
             F("description", "Descrizione breve", "textarea", rows=2, help="Una o due frasi: compare nella pagina della serie e su Google."),
             F("cover_upload", "Copertina", "image",
-              help="Carica la tua copertina (JPG o PNG, anche dal telefono). Formato consigliato verticale 4:5, ad esempio 1080×1350."),
+              help="Carica la tua copertina (JPG o PNG, anche dal telefono). Formato consigliato verticale come le storie (9:16), ad esempio 1080×1920."),
             F("sort", "Posizione (numero più basso = prima)", "int"),
             F("published", "Pubblicata", "bool"),
         ]),
@@ -211,7 +211,7 @@ COVER_MAX_BYTES = 15 * 1024 * 1024
 
 
 def read_cover(file):
-    """Legge l'immagine caricata, la rimpicciolisce (lato lungo 1350 px) e la restituisce come (bytes, tipo).
+    """Legge l'immagine caricata, la rimpicciolisce (al massimo 1080×1920 px) e la restituisce come (bytes, tipo).
     Solleva ValueError con un messaggio comprensibile se il file non va bene."""
     data = file.read(COVER_MAX_BYTES + 1)
     if len(data) > COVER_MAX_BYTES:
@@ -222,7 +222,7 @@ def read_cover(file):
         im = ImageOps.exif_transpose(im)
     except Exception:
         raise ValueError("Il file caricato non sembra un'immagine (usa JPG o PNG).")
-    im.thumbnail((1350, 1350))
+    im.thumbnail((1080, 1920))
     out = io.BytesIO()
     if im.mode in ("RGBA", "LA", "P") and "transparency" in im.info or im.mode in ("RGBA", "LA"):
         im.save(out, "PNG", optimize=True)

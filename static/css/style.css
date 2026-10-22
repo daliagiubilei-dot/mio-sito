@@ -921,8 +921,9 @@ small.soon{font-size:.7em}
 .vs-top p.intro{margin-top:10px}
 section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 .series-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+.st-cover img{object-position:50% 30%}
 .series-tile{display:grid;gap:6px;align-content:start;text-decoration:none;color:var(--fg)}
-.st-cover{position:relative;display:block;aspect-ratio:4/5;max-height:calc(100svh - var(--navh,65px) - 290px);min-height:200px;border-radius:12px;overflow:hidden;
+.st-cover{position:relative;display:block;aspect-ratio:9/16;max-height:calc(100svh - var(--navh,65px) - 290px);min-height:240px;border-radius:12px;overflow:hidden;
   border:1px solid var(--line);background:var(--bg2);transition:transform .3s ease,border-color .3s,box-shadow .3s}
 .st-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .series-tile:hover .st-cover,.series-tile:focus-visible .st-cover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(0,0,0,.45)}

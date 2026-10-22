@@ -159,7 +159,8 @@ VIDEO_SERIES = [
     ("la-storia-di-daliamae", "La storia di Daliamae", 1,
      "Il mito da cui nasce il nome: la dalia, il colibrì e un amore che ritorna. Da guardare in ordine, dal primo all'ultimo.",
      ["video/come-nasce-daliamae.mp4"]),
-    ("pensiero-della-sera", "Pensiero della sera", 2, "Un pensiero breve per chiudere la giornata e tornare a te.", []),
+    ("pensiero-della-sera", "Pensiero della sera", 2, "Un pensiero breve per chiudere la giornata e tornare a te.", [],
+     "img/serie/pensiero-della-sera.jpg"),
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
      ["video/cambio-di-prospettiva.mp4"]),
@@ -173,8 +174,9 @@ def _add_video_series():
         if not _first_time("video_series") or VideoSeries.query.count():
             db.session.commit()
             return
-        for slug, title, sort, desc, files in VIDEO_SERIES:
-            se = VideoSeries(slug=slug, title=title, sort=sort, description=desc, published=True)
+        for slug, title, sort, desc, files, *cover in VIDEO_SERIES:
+            se = VideoSeries(slug=slug, title=title, sort=sort, description=desc, published=True,
+                             cover=cover[0] if cover else "")
             db.session.add(se)
             db.session.flush()
             for f in files:
