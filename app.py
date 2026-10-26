@@ -202,6 +202,8 @@ def create_app():
         if not m or not os.path.isfile(os.path.join(app.static_folder, m["img"])):
             return None
         out = {"img": asset(m["img"]), "alt": m.get("alt", "")}
+        if m.get("pos"):
+            out["pos"] = m["pos"]
         if m.get("video") and os.path.isfile(os.path.join(app.static_folder, m["video"])):
             out["video"] = asset(m["video"])
         if m.get("fig") and os.path.isfile(os.path.join(app.static_folder, m["fig"])):

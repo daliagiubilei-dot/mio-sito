@@ -111,6 +111,7 @@
           el = document.createElement('img');
           el.src = md.img; el.alt = md.alt; el.decoding = 'async';
         }
+        if (md.pos) el.style.objectPosition = md.pos;
         m.appendChild(el);
         if (el.play) el.play().catch(function () {});
       }

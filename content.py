@@ -92,11 +92,12 @@ SIGN_DEEP = {
 }
 
 # Immagini e video degli archetipi (in static/): compaiono in alto nella carta aperta.
-# "fig" = personaggio in miniatura a destra sulla carta chiusa; "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina).
+# "fig" = personaggio in miniatura a destra sulla carta chiusa; "img" = immagine; "video" = video breve senza audio che parte da solo (con "img" come copertina);
+# "pos" (facoltativo) = quale parte dell'immagine/video mostrare nella carta aperta, es. "50% 70%" = più in basso.
 SIGN_MEDIA = {
     "Ariete": {"fig": "img/archetipi/ariete-figura.jpg", "img": "img/archetipi/ariete.jpg", "alt": "Illustrazione dell'Ariete come guerriero con lancia e scudo, accanto a un ariete"},
     "Leone": {"fig": "img/archetipi/leone-figura.jpg", "img": "img/archetipi/leone.jpg", "video": "video/archetipi/leone.mp4", "alt": "Video: il Leone si libera dalla catena e diventa luce, seduto in meditazione in un tempio dorato tra due leoni"},
-    "Vergine": {"fig": "img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "video": "video/archetipi/vergine.mp4", "alt": "Video: la Vergine nel suo studio, tra libri e semi sotto la costellazione, passa dall'ansia del controllo alla quiete quando un raggio di luce la raggiunge"},
+    "Vergine": {"fig": "img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "video": "video/archetipi/vergine.mp4", "pos": "50% 70%", "alt": "Video: la Vergine nel suo studio, tra libri e semi sotto la costellazione, passa dall'ansia del controllo alla quiete quando un raggio di luce la raggiunge"},
     "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
