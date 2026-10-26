@@ -863,8 +863,10 @@ small.soon{font-size:.7em}
 .ad-arc{font:400 1.2rem var(--label);letter-spacing:.08em;color:var(--elc)}
 .ad-txt{color:var(--muted)}
 .ad-q{font:italic 400 clamp(1.25rem,4vw,1.5rem)/1.4 var(--display);margin:10px 0 6px;padding-left:16px;border-left:2px solid var(--elc)}
-.ad-cta{display:grid;gap:12px;justify-items:start;margin-top:10px;padding-top:16px;border-top:1px solid var(--line)}
-.ad-cta p{font-size:.95rem;color:var(--muted)}
+/* tasto oroscopo evolutivo a destra, accanto al nome del segno */
+.ad-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.ad-head h2{margin-top:4px;margin-bottom:0}
+.ad-side{flex:none;font-size:.88rem;line-height:1.25;padding:10px 16px;text-align:center}
 .ad-nav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font:400 .95rem var(--label);letter-spacing:.12em;color:var(--muted)}
 .ad-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);font-size:1.1rem;cursor:pointer}
 .ad-nav button:hover{border-color:var(--elc);color:var(--elc)}
