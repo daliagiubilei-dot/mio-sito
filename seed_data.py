@@ -150,6 +150,18 @@ VIDEOS = [
         upload_date=date(2026, 10, 11),
         sort=0,                      # 0 = primo della pagina Video Social
     ),
+    dict(
+        key="cambio-di-prospettiva-ep2",
+        title="Cambio di prospettiva · Episodio 2: e se la crisi non fosse un errore?",
+        description="E se la crisi che stai vivendo fosse il modo che la vita ha per dare spazio a chi sei diventato? "
+                    "Quando saltano gli equilibri (un lavoro, una relazione, un cambio di città) ci giudichiamo. "
+                    "Ma il cambiamento non è una colpa da subire: è una trasformazione delle fondamenta della tua identità.",
+        file="video/cambio-di-prospettiva-ep2.mp4",
+        poster="video/cambio-di-prospettiva-ep2.jpg",
+        upload_date=date(2026, 11, 2),
+        sort=2,
+        series="cambio-di-prospettiva",   # slug della serie in cui compare
+    ),
 ]
 
 
@@ -163,7 +175,7 @@ VIDEO_SERIES = [
      "img/serie/pensiero-della-sera.jpg"),
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
-     ["video/cambio-di-prospettiva.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
+     ["video/cambio-di-prospettiva.mp4", "video/cambio-di-prospettiva-ep2.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
     ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
     ("ascoltiamoli", "Ascoltiamoli", 5,
      "I ragazzi di oggi, i loro linguaggi e le loro ricerche: per comprendere invece di giudicare.", [],
@@ -195,10 +207,15 @@ def _add_videos():
     for data in VIDEOS:
         data = dict(data)
         key = data.pop("key")
+        series_slug = data.pop("series", None)
         try:
             if not _first_time("video_" + key) or Video.query.filter_by(file=data["file"]).first():
                 db.session.commit()
                 continue
+            if series_slug:
+                se = VideoSeries.query.filter_by(slug=series_slug).first()
+                if se is not None:
+                    data["series_id"] = se.id
             db.session.add(Video(published=True, **data))
             db.session.commit()
         except Exception:      # più processi che partono insieme: il primo vince
