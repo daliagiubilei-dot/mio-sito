@@ -151,6 +151,18 @@ VIDEOS = [
         sort=0,                      # 0 = primo della pagina Video Social
     ),
     dict(
+        key="cambio-di-prospettiva-ep1",
+        title="Cambio di prospettiva · Episodio 1: sempre in ritardo su una tabella di marcia che non hai scelto",
+        description="Hai una casa, un lavoro, non ti manca niente, eppure ti senti sempre in ritardo. "
+                    "Corri per stare al passo con i social, con gli altri, persino con chi ami. "
+                    "E se il punto non fosse arrivare prima, ma essere consapevoli?",
+        file="video/cambio-di-prospettiva-ep1.mp4",
+        poster="video/cambio-di-prospettiva-ep1.jpg",
+        upload_date=date(2026, 11, 2),
+        sort=1,
+        series="cambio-di-prospettiva",
+    ),
+    dict(
         key="cambio-di-prospettiva-ep2",
         title="Cambio di prospettiva · Episodio 2: e se la crisi non fosse un errore?",
         description="E se la crisi che stai vivendo fosse il modo che la vita ha per dare spazio a chi sei diventato? "
@@ -175,7 +187,8 @@ VIDEO_SERIES = [
      "img/serie/pensiero-della-sera.jpg"),
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
-     ["video/cambio-di-prospettiva.mp4", "video/cambio-di-prospettiva-ep2.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
+     ["video/cambio-di-prospettiva.mp4", "video/cambio-di-prospettiva-ep1.mp4",
+      "video/cambio-di-prospettiva-ep2.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
     ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
     ("ascoltiamoli", "Ascoltiamoli", 5,
      "I ragazzi di oggi, i loro linguaggi e le loro ricerche: per comprendere invece di giudicare.", [],
