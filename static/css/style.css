@@ -1228,4 +1228,22 @@ a.hero-id .hero-plain{transition:transform .35s ease,box-shadow .35s ease}
 a.hero-id:hover .hero-plain,a.hero-id:focus-visible .hero-plain{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.22)}
 a.hero-id:hover .kicker{color:var(--gold2)}
 a.hero-id:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
-#chi-ti-accompagna{scroll-margin-top:calc(var(--navh,80px) + 8px)}
+/* telefono: la sezione delle carte sta tutta in uno schermo, con i due tasti visibili */
+@media (max-width:760px){
+  section.block.tarot-sec{padding-block:22px 28px}
+  .tarot-grid{row-gap:12px}
+  .tarot-head{gap:6px}
+  .tarot-head h2{font-size:clamp(1.6rem,7vw,2.1rem)}
+  .tarot-lead{display:none}
+  .tarot-deck{width:min(210px,54vw,calc((100svh - 420px) * .66))}
+  .tarot-q{margin-top:30px;font-size:.95rem;min-height:0}
+  .tarot-hint{margin-top:4px;font-size:.85rem}
+  .tarot-actions{gap:8px}
+  .tarot-actions .btn{min-height:44px;padding:10px 16px}
+}
+@media (max-width:760px){
+  .tarot-deck{width:min(190px,50vw,calc((100svh - 440px) * .62))}
+  .tarot-actions{flex-wrap:nowrap}
+  .tarot-actions .btn{flex:1 1 0;min-width:0;padding:10px 10px;font-size:.88rem;white-space:nowrap}
+  .tarot-actions .btn svg{width:16px;height:16px}
+}

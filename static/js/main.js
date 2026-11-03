@@ -337,6 +337,7 @@
       };
       if (reduce) { paint(next); done(); return; }
       tHint.classList.add('wait'); tHint.textContent = 'Mescolo le carte…'; tQ.classList.add('dim');
+      tKick.innerHTML = 'La tua carta · <span class="now">…</span>';
       tCard.classList.add('flip');                                                         // la carta si copre
       at(500, function () { tDeck.classList.add('mixing'); tCard.classList.add('out'); });  // il mazzo si mescola, la carta esce a sinistra
       at(1000, function () { tCard.classList.remove('out'); tCard.classList.add('out2'); }); // rientra e riesce a destra
@@ -344,7 +345,8 @@
       at(1900, function () { tCard.classList.add('out'); });                                 // un ultimo passaggio, sempre coperta
       at(2350, function () { tCard.classList.remove('out'); paint(next); });
       at(2750, function () { tDeck.classList.remove('mixing'); tHint.textContent = 'Ecco la tua carta'; });
-      at(3000, function () { tCard.classList.remove('flip'); tCard.classList.add('glow'); });  // si gira e si illumina
+      at(3000, function () { tCard.classList.remove('flip'); tCard.classList.add('glow');      // si gira e si illumina
+        tKick.innerHTML = 'La tua carta · <span class="now">' + esc(next.name) + '</span>'; });
       at(3400, function () { tQ.classList.remove('dim'); });
       at(3900, function () { tCard.classList.remove('glow'); done(); });
     });
