@@ -3,8 +3,16 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <img class="hero-logo" src="{{ url_for('static', filename='img/logo-daliamae.png') }}" alt="Logo Daliamae: fiore con spirale e goccia d'oro">
-      <p class="label kicker">Dalia Giubilei · Operatrice olistica</p>
+      <div class="hero-top">
+        <div class="hero-id">
+          <img class="hero-logo" src="{{ url_for('static', filename='img/logo-daliamae.png') }}" alt="Logo Daliamae: fiore con spirale e goccia d'oro">
+          <p class="label kicker">Dalia Giubilei<br>Operatrice olistica</p>
+        </div>
+        {% if tarot_month %}<a class="mini-deck" href="#tarot" id="miniDeck">
+          <span class="md-cards" aria-hidden="true"><span class="md-c c1"></span><span class="md-c c3"></span><span class="md-c c2 md-front">{% if tarot_month.fig %}<img src="{{ tarot_month.fig }}" alt="">{% else %}<i>{{ tarot_month.sym }}</i>{% endif %}</span></span>
+          <span class="md-txt"><b>Pesca la tua carta</b><small>{{ tarot_month.name }}, la carta del mese</small></span>
+        </a>{% endif %}
+      </div>
       <div class="h1-wrap">
         <h1><span class="l1">Smettila di seguire quel vuoto.</span><em>Abitalo.</em></h1>
         <a class="btn primary h1-cta" href="{{ url_for('contatti') }}">Primo colloquio gratuito</a>
@@ -30,6 +38,7 @@
 </section>
 
 <span id="dopo-hero"></span>
+{% if tarot_month %}{% include "partials/tarocchi_home.html" %}{% endif %}
 {% if latest_post or latest_video %}
 <section class="block news-sec">
   <div class="wrap">

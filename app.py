@@ -11,7 +11,7 @@ import secrets
 import threading
 import time
 from collections import defaultdict
-from datetime import datetime
+from datetime import date, datetime
 
 from flask import (Flask, abort, flash, jsonify, make_response, redirect, render_template, request,
                    session, url_for)
@@ -168,7 +168,9 @@ def create_app():
         # sezione «Novità»: si aggiorna da sola con l'ultimo articolo e l'ultimo video pubblicati
         latest_post = Post.query.filter_by(published=True).order_by(Post.published_at.desc(), Post.id.desc()).first()
         latest_video = Video.query.filter_by(published=True).order_by(Video.upload_date.desc(), Video.id.desc()).first()
-        return render("home.html", "home", latest_post=latest_post, latest_video=latest_video)
+        cards = tarot_cards()
+        return render("home.html", "home", latest_post=latest_post, latest_video=latest_video,
+                      tarot=cards, tarot_month=cards[_sun_sign_index()])
 
     @app.route("/la-visione")
     def visione():
@@ -212,12 +214,36 @@ def create_app():
             out["fig"] = asset(m["fig"])
         return out
 
+    def _signs():
+        return [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4],
+                     polarity=POLARITY[s[2]], pol_sym=POLARITIES[POLARITY[s[2]]][0],
+                     period=SIGN_DEEP[s[1]][0], gift=SIGN_DEEP[s[1]][1], question=SIGN_DEEP[s[1]][2],
+                     media=_media(SIGN_MEDIA.get(s[1]))) for s in SIGNS]
+
+    # inizio di ogni segno (mese, giorno), nello stesso ordine di SIGNS: serve per sapere in che segno è il Sole oggi
+    SIGN_STARTS = [(3, 21), (4, 20), (5, 21), (6, 21), (7, 23), (8, 23), (9, 23), (10, 23), (11, 22), (12, 22), (1, 20), (2, 19)]
+
+    def _sun_sign_index(d=None):
+        d = d or date.today()
+        best = None
+        for i, (m, g) in enumerate(SIGN_STARTS):
+            if (d.month, d.day) >= (m, g) and (best is None or (m, g) > SIGN_STARTS[best]):
+                best = i
+        return 9 if best is None else best          # prima del 20 gennaio è ancora Capricorno
+
+    def tarot_cards():
+        """Le carte per la sezione «Il cielo di questo mese» della Home."""
+        out = []
+        for i, s in enumerate(_signs()):
+            out.append({"n": i + 1, "sym": s["symbol"], "name": s["name"], "el": s["element"], "arc": s["archetype"],
+                        "q": s["question"], "start": list(SIGN_STARTS[i]),
+                        "fig": (s["media"] or {}).get("fig", ""),
+                        "href": url_for("archetipi") + "#" + s["name"].lower()})
+        return out
+
     @app.route("/archetipi-astrologici")
     def archetipi():
-        signs = [dict(symbol=s[0], name=s[1], element=s[2], archetype=s[3], text=s[4],
-                      polarity=POLARITY[s[2]], pol_sym=POLARITIES[POLARITY[s[2]]][0],
-                      period=SIGN_DEEP[s[1]][0], gift=SIGN_DEEP[s[1]][1], question=SIGN_DEEP[s[1]][2],
-                      media=_media(SIGN_MEDIA.get(s[1]))) for s in SIGNS]
+        signs = _signs()
         return render("archetipi.html", "archetipi-astrologici", crumb="Archetipi astrologici", signs=signs,
                       elements=ELEMENTS, polarities={k: v[1] for k, v in POLARITIES.items()})
 

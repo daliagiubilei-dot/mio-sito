@@ -1,0 +1,38 @@
+{# Home: «Il cielo di questo mese». La carta scoperta è il segno in cui si trova il Sole oggi; «Pesca la tua carta» mescola il mazzo e ne gira una a caso. #}
+{% set m = tarot_month %}
+{% set el_slug = {"Fuoco": "fuoco", "Terra": "terra", "Aria": "aria", "Acqua": "acqua"} %}
+{% set roman = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'] %}
+<section class="block tarot-sec el-{{ el_slug[m.el] }}" id="tarot" aria-labelledby="tarotTitle">
+  <div class="wrap tarot-grid">
+    <div class="tarot-head">
+      <p class="label" id="tarotKicker">Il cielo di questo mese · <span class="now">{{ m.name }}</span></p>
+      <h2 id="tarotTitle">Ciò che è nel cielo <em>vive anche in te</em></h2>
+      <p class="tarot-lead">Ogni mese il Sole accende uno dei dodici archetipi.<span class="long"> Guarda quello di questo mese, oppure pesca la tua carta e lascia che sia lei a farti una domanda.</span></p>
+    </div>
+    <div class="tarot-deck-col">
+      <div class="tarot-deck" id="tarotDeck">
+        <div class="tback b1"></div><div class="tback b2"></div><div class="tback b3"></div><div class="tback b4"></div>
+        <a class="tcard" id="tarotCard" href="{{ m.href }}" aria-label="{{ m.name }}, {{ m.arc }}. Apri questo archetipo">
+          <div class="tface" id="tarotFace">
+            <div class="tframe">
+              <div class="tnum"><i aria-hidden="true">✦</i>{{ roman[m.n - 1] }}<i aria-hidden="true">✦</i></div>
+              <div class="tpic">{% if m.fig %}<img src="{{ m.fig }}" alt="" loading="lazy">{% else %}<span class="twm ink-{{ el_slug[m.el] }}" aria-hidden="true">{{ m.sym }}</span>{% endif %}</div>
+              <div class="tttl"><div class="tarc">{{ m.arc }}</div><div class="tnm">{{ m.sym }} {{ m.name }} · <b class="ink-{{ el_slug[m.el] }}">{{ m.el }}</b></div></div>
+            </div>
+          </div>
+          <div class="tcback"><div class="tback"></div></div>
+        </a>
+      </div>
+      <p class="tarot-q" id="tarotQ">«{{ m.q }}»</p>
+      <p class="tarot-hint" id="tarotHint" aria-live="polite">Tocca la carta per aprirla</p>
+    </div>
+    <div class="tarot-actions">
+      <button class="btn primary" type="button" id="tarotDraw">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="11" height="16" rx="2"/><path d="M9 7.5h3M8 21h9a2 2 0 0 0 2-2V7"/></svg>
+        Pesca la tua carta
+      </button>
+      <a class="btn ghost" href="{{ url_for('archetipi') }}">Scopri i 12 archetipi</a>
+    </div>
+  </div>
+  <script type="application/json" id="tarotData">{{ tarot | tojson }}</script>
+</section>

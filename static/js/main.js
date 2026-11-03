@@ -158,6 +158,11 @@
     });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     dlg.addEventListener('close', function () { $('adMedia').innerHTML = ''; if (opener) opener.focus(); });
+    // arrivando da un link come /archetipi-astrologici#scorpione si apre subito quella scheda
+    var fromHash = decodeURIComponent((location.hash || '').slice(1)).toLowerCase();
+    if (fromHash) arch.signs.forEach(function (s, i) {
+      if (s.name.toLowerCase() === fromHash) { opener = z.querySelectorAll('.sign')[i] || null; show(i); dlg.showModal(); }
+    });
     // scorrere con il dito sulla scheda: sinistra/destra = archetipo successivo/precedente
     var x0 = null;
     dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
@@ -243,6 +248,86 @@
       document.removeEventListener('pointerdown', onFirstTouch);
       document.removeEventListener('keydown', onFirstTouch);
       if (hv.muted) unmute(); else { hv.muted = true; showSound(); }
+    });
+  }
+
+  // Home: «Il cielo di questo mese». Carta del segno del Sole oggi; «Pesca la tua carta» mescola il mazzo e ne gira una a caso.
+  var tSec = document.getElementById('tarot'), tDataEl = document.getElementById('tarotData');
+  if (tSec && tDataEl) {
+    var CARDS = []; try { CARDS = JSON.parse(tDataEl.textContent); } catch (e) {}
+    var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    var tCard = document.getElementById('tarotCard'), tFace = document.getElementById('tarotFace'), tDeck = document.getElementById('tarotDeck'),
+        tQ = document.getElementById('tarotQ'), tHint = document.getElementById('tarotHint'), tKick = document.getElementById('tarotKicker'),
+        tDraw = document.getElementById('tarotDraw');
+    var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+    var elSlug = function (e) { return (e || '').toLowerCase(); };
+    // dorso delle carte: cornice dorata, ruota dei dodici segni, stella al centro
+    var BACK = '<svg viewBox="0 0 200 300" aria-hidden="true" fill="none" stroke="currentColor">' +
+      '<rect x="9" y="9" width="182" height="282" rx="8" stroke-width="1.6"/><rect x="15" y="15" width="170" height="270" rx="5" stroke-width=".7"/>' +
+      '<circle cx="100" cy="150" r="64" stroke-width="1.2"/><circle cx="100" cy="150" r="47" stroke-width=".7"/><circle cx="100" cy="150" r="22" stroke-width=".7"/>' +
+      '<path d="M100 112 L106 144 L138 150 L106 156 L100 188 L94 156 L62 150 L94 144 Z" fill="currentColor" fill-opacity=".85" stroke="none"/>' +
+      '<path d="M100 126 L103 147 L124 150 L103 153 L100 174 L97 153 L76 150 L97 147 Z" transform="rotate(45 100 150)" fill="currentColor" fill-opacity=".45" stroke="none"/>' +
+      (function () { var g = '', sy = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
+        for (var i = 0; i < 12; i++) { var a = (i * 30 - 90) * Math.PI / 180;
+          g += '<text x="' + (100 + 55.5 * Math.cos(a)).toFixed(1) + '" y="' + (150 + 55.5 * Math.sin(a) + 4).toFixed(1) + '" font-size="11" text-anchor="middle" fill="currentColor" stroke="none" font-family="serif">' + sy[i] + '︎</text>'; }
+        return g; })() +
+      '<path d="M100 30 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z M100 242 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" fill="currentColor" stroke="none"/>' +
+      '<path d="M28 28 q14 0 14 14 M172 28 q-14 0 -14 14 M28 272 q14 0 14 -14 M172 272 q-14 0 -14 -14" stroke-width="1"/></svg>';
+    tSec.querySelectorAll('.tback').forEach(function (b) { b.innerHTML = BACK; });
+
+    var sunCard = function (d) {      // il segno del Sole oggi (calcolato anche qui, così resta giusto anche se la pagina è in memoria)
+      var m = d.getMonth() + 1, g = d.getDate(), best = null;
+      CARDS.forEach(function (c) {
+        var s = c.start;
+        if ((m > s[0] || (m === s[0] && g >= s[1])) && (!best || s[0] > best.start[0] || (s[0] === best.start[0] && s[1] > best.start[1]))) best = c;
+      });
+      return best || CARDS[9];
+    };
+    var paint = function (c) {
+      var ink = 'ink-' + elSlug(c.el);
+      tCard.className = 'tcard' + (tCard.classList.contains('flip') ? ' flip' : '');
+      tSec.className = tSec.className.replace(/\bel-\w+/g, '').trim() + ' el-' + elSlug(c.el);
+      tCard.href = c.href;
+      tCard.setAttribute('aria-label', c.name + ', ' + c.arc + '. Apri questo archetipo');
+      tFace.innerHTML = '<div class="tframe"><div class="tnum"><i aria-hidden="true">✦</i>' + ROMAN[c.n - 1] + '<i aria-hidden="true">✦</i></div>' +
+        '<div class="tpic">' + (c.fig ? '<img src="' + esc(c.fig) + '" alt="">' : '<span class="twm ' + ink + '" aria-hidden="true">' + c.sym + '</span>') + '</div>' +
+        '<div class="tttl"><div class="tarc">' + esc(c.arc) + '</div><div class="tnm">' + c.sym + ' ' + esc(c.name) + ' · <b class="' + ink + '">' + esc(c.el) + '</b></div></div></div>';
+      tQ.textContent = '«' + c.q + '»';
+    };
+    var cur = sunCard(new Date());
+    if (CARDS.length) { paint(cur); tKick.innerHTML = 'Il cielo di questo mese · <span class="now">' + esc(cur.name) + '</span>'; }
+    // le immagini delle carte, in anticipo, così la carta pescata compare già pronta
+    CARDS.forEach(function (c) { if (c.fig) { var im = new Image(); im.src = c.fig; } });
+
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, busy = false;
+    var at = function (ms, f) { setTimeout(f, ms); };
+    // il piccolo mazzo nell'apertura: scende alle carte e fa partire la pesca
+    var mini = document.getElementById('miniDeck');
+    if (mini) mini.addEventListener('click', function (e) {
+      e.preventDefault();
+      tSec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      setTimeout(function () { tDraw.click(); }, reduce ? 0 : 750);
+    });
+    tDraw.addEventListener('click', function () {
+      if (busy || !CARDS.length) return; busy = true; tDraw.disabled = true;
+      var pool = CARDS.filter(function (c) { return c !== cur; }), next = pool[Math.floor(Math.random() * pool.length)];
+      var done = function () {
+        cur = next; tKick.innerHTML = 'La tua carta · <span class="now">' + esc(next.name) + '</span>';
+        tHint.classList.remove('wait'); tHint.textContent = "Tocca la carta per aprirla, oppure pescane un'altra";
+        busy = false; tDraw.disabled = false;
+      };
+      if (reduce) { paint(next); done(); return; }
+      tHint.classList.add('wait'); tHint.textContent = 'Mescolo le carte…'; tQ.classList.add('dim');
+      tCard.classList.add('flip');                                                         // la carta si copre
+      at(500, function () { tDeck.classList.add('mixing'); tCard.classList.add('out'); });  // il mazzo si mescola, la carta esce a sinistra
+      at(1000, function () { tCard.classList.remove('out'); tCard.classList.add('out2'); }); // rientra e riesce a destra
+      at(1500, function () { tCard.classList.remove('out2'); tHint.textContent = 'Respira…'; });
+      at(1900, function () { tCard.classList.add('out'); });                                 // un ultimo passaggio, sempre coperta
+      at(2350, function () { tCard.classList.remove('out'); paint(next); });
+      at(2750, function () { tDeck.classList.remove('mixing'); tHint.textContent = 'Ecco la tua carta'; });
+      at(3000, function () { tCard.classList.remove('flip'); tCard.classList.add('glow'); });  // si gira e si illumina
+      at(3400, function () { tQ.classList.remove('dim'); });
+      at(3900, function () { tCard.classList.remove('glow'); done(); });
     });
   }
 })();
