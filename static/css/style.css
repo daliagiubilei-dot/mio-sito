@@ -1222,3 +1222,10 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 /* barra in alto: il logo grande della Home (rimpicciolito) e «Daliamae» al centro della barra */
 .brand img{width:62px;height:62px;border-radius:50%;object-fit:contain}
 
+/* foto e nome nella Home portano a «Chi ti accompagna» */
+a.hero-id{text-decoration:none;color:inherit;border-radius:12px}
+a.hero-id .hero-plain{transition:transform .35s ease,box-shadow .35s ease}
+a.hero-id:hover .hero-plain,a.hero-id:focus-visible .hero-plain{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.22)}
+a.hero-id:hover .kicker{color:var(--gold2)}
+a.hero-id:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
+#chi-ti-accompagna{scroll-margin-top:calc(var(--navh,80px) + 8px)}
