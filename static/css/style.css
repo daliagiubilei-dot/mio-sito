@@ -1188,3 +1188,8 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 .dt-ttl{border-top:2px solid var(--ink);padding:5px 4px 4px;text-align:center;font:400 .9rem/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
 @media (max-width:600px){.dalia-tarot{height:180px;padding:6px;border-radius:10px}.dt-ttl{font-size:.72rem;letter-spacing:.14em}.dt-num{font-size:.7rem;padding:3px 0 2px}}
 @media (max-width:400px){.dalia-tarot{height:164px}}
+/* foto di Dalia così com'è: intera, senza cornici né forme */
+.hero-top .hero-plain{display:block;flex:none;width:auto;height:calc(var(--logo) * 1.3);max-width:none;margin:0;aspect-ratio:auto;object-fit:contain;
+  border:0;border-radius:0;box-shadow:none;-webkit-mask:none;mask:none}
+@media (max-width:600px){.hero-top .hero-plain{height:180px}}
+@media (max-width:400px){.hero-top .hero-plain{height:164px}}
