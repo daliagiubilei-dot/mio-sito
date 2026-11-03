@@ -1135,3 +1135,14 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 .hero-top{align-items:stretch}
 .hero-top .hero-id{justify-content:space-between}
 .hero-top .mini-deck{align-self:stretch;justify-content:space-between;padding:0 6px}
+/* mazzo accanto al logo: la carta del mese in primo piano, più grande delle due coperte */
+.hero-top .md-c.c1,.hero-top .md-c.c3{top:20px}
+.hero-top .md-front{left:35px;top:0;width:114px;height:171px;border-radius:9px;z-index:2;box-shadow:0 10px 22px rgba(0,0,0,.4)}
+@media (max-width:600px){
+  .hero-top .md-c.c1,.hero-top .md-c.c3{top:16px}
+  .hero-top .md-front{left:26px;top:0;width:88px;height:132px;border-radius:7px}
+}
+@media (max-width:400px){
+  .hero-top .md-c.c1,.hero-top .md-c.c3{top:14px}
+  .hero-top .md-front{left:23px;top:0;width:78px;height:117px}
+}
