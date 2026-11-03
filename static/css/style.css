@@ -1195,3 +1195,6 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 @media (max-width:400px){.hero-top .hero-plain{height:164px}}
 /* foto di Dalia ad arco, come quella di «Chi ti accompagna» */
 .hero-top .hero-plain{aspect-ratio:3/4;object-fit:cover;object-position:50% 0;border-radius:999px 999px 8px 8px}
+/* mazzo centrato in altezza accanto alla foto; la scritta resta in basso, allineata al nome */
+.hero-top .mini-deck{justify-content:flex-end}
+.hero-top .mini-deck .md-cards{margin-block:auto}
