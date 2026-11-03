@@ -1171,3 +1171,9 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 /* foto di Dalia nel cerchio (scontornata da lei, su sfondo color miele): ripristina il cerchio */
 .hero-top .hero-photo{aspect-ratio:1;object-fit:cover;object-position:50% 50%;border-radius:50%;border:3px solid var(--gold);
   box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 10px 26px rgba(0,0,0,.25);-webkit-mask:none;mask:none}
+/* foto di Dalia intera, in un rettangolo verticale con angoli morbidi (nessun taglio) */
+.hero-top .hero-rect{display:block;width:auto;height:calc(var(--logo) * 1.3);aspect-ratio:auto;object-fit:contain;max-width:none;margin:0;
+  border-radius:16px;border:3px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 12px 28px rgba(0,0,0,.25);-webkit-mask:none;mask:none}
+@media (max-width:600px){.hero-top .hero-rect{height:200px}}
+@media (max-width:400px){.hero-top .hero-rect{height:180px}}
+.hero-top .hero-rect{border-radius:50% / 30%}
