@@ -258,6 +258,12 @@
       var r = document.createRange(); r.selectNodeContents(abEm);
       var w = r.getBoundingClientRect().width;
       if (w) abWrap.style.setProperty('--abitalo-w', Math.ceil(w) + 'px');
+      // «Abitalo.» + pulsante centrati insieme nella larghezza del titolo
+      var btn = abWrap.querySelector('.h1-cta');
+      if (w && btn && btn.offsetWidth) {
+        var off = Math.max(0, Math.floor((abWrap.clientWidth - (w + 18 + btn.offsetWidth)) / 2));
+        abWrap.style.setProperty('--ab-off', off + 'px');
+      }
     };
     fitCta();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCta);

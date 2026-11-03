@@ -1150,3 +1150,9 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 @media (max-width:600px){
   .h1-cta{right:auto;left:calc(var(--abitalo-w, 6.2rem) + 18px)}
 }
+/* telefono: titolo e «Abitalo. + colloquio» centrati come un unico blocco, in asse con logo e carte */
+@media (max-width:600px){
+  .hero h1 .l1{display:block;text-align:center}
+  .hero h1 em{padding-left:var(--ab-off,0px)}
+  .h1-cta{left:calc(var(--ab-off,0px) + var(--abitalo-w, 6.2rem) + 18px)}
+}
