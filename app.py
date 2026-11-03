@@ -206,6 +206,8 @@ def create_app():
             out["pos"] = m["pos"]
         if m.get("video") and os.path.isfile(os.path.join(app.static_folder, m["video"])):
             out["video"] = asset(m["video"])
+            if m.get("audio"):
+                out["audio"] = True
         if m.get("fig") and os.path.isfile(os.path.join(app.static_folder, m["fig"])):
             out["fig"] = asset(m["fig"])
         return out

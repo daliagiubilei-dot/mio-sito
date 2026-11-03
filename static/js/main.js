@@ -82,6 +82,7 @@
         .map(function (c) { return +c.dataset.i; });
     };
     var $ = function (id) { return document.getElementById(id); };
+    var soundOn = false;   // se la persona ha attivato l'audio, resta attivo passando alle altre carte
     var show = function (i) {
       var s = arch.signs[i], list = visible();
       cur = i;
@@ -101,7 +102,7 @@
       dlg.classList.toggle('has-m', !!md);
       if (md) {
         var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var el;
+        var el, paintSound = null;
         if (md.video && !still) {
           el = document.createElement('video');
           el.src = md.video; el.poster = md.img;
@@ -113,7 +114,30 @@
         }
         if (md.pos) el.style.objectPosition = md.pos;
         m.appendChild(el);
-        if (el.play) el.play().catch(function () {});
+        if (md.audio && el.tagName === 'VIDEO') {
+          var snd = document.createElement('button');
+          snd.type = 'button'; snd.className = 'ad-sound';
+          var paint = function () {
+            var on = !el.muted;
+            snd.setAttribute('aria-pressed', on ? 'true' : 'false');
+            snd.setAttribute('aria-label', on ? 'Togli l\'audio' : 'Attiva l\'audio');
+            snd.innerHTML = on
+              ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>'
+              : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></svg>';
+          };
+          if (soundOn) el.muted = false;
+          snd.addEventListener('click', function () {
+            el.muted = !el.muted; soundOn = !el.muted;
+            if (!el.muted) { el.currentTime = 0; el.play().catch(function () {}); }
+            paint();
+          });
+          paint(); paintSound = paint;
+          m.appendChild(snd);
+        }
+        if (el.play) el.play().catch(function () {
+          // il browser non lascia partire il video con l'audio: riparte muto e il tasto torna su «Attiva l'audio»
+          if (!el.muted) { el.muted = true; if (paintSound) paintSound(); el.play().catch(function () {}); }
+        });
       }
       $('adQ').textContent = '«' + s.question + '»';
       $('adCount').textContent = (list.indexOf(i) + 1) + ' / ' + list.length;
