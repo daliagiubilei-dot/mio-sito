@@ -101,6 +101,7 @@ SIGN_MEDIA = {
     "Cancro": {"fig": "img/archetipi/cancro-figura.jpg", "img": "img/archetipi/cancro.jpg", "pos": "50% 30%", "alt": "Illustrazione del Cancro: una giovane donna con scialle rosa ricamato di lune siede scalza sulla riva di un lago sotto la luna piena, con un ricamo in grembo e un coniglio accanto"},
     "Leone": {"fig": "img/archetipi/leone-figura.jpg", "img": "img/archetipi/leone.jpg", "video": "video/archetipi/leone.mp4", "alt": "Video: il Leone si libera dalla catena e diventa luce, seduto in meditazione in un tempio dorato tra due leoni"},
     "Vergine": {"fig": "img/archetipi/vergine-figura.jpg", "img": "img/archetipi/vergine.jpg", "video": "video/archetipi/vergine.mp4", "pos": "50% 70%", "alt": "Video: la Vergine nel suo studio, tra libri e semi sotto la costellazione, passa dall'ansia del controllo alla quiete quando un raggio di luce la raggiunge"},
+    "Bilancia": {"fig": "img/archetipi/bilancia-figura.jpg", "img": "img/archetipi/bilancia.jpg", "video": "video/archetipi/bilancia.mp4", "alt": "Video: la Bilancia, giovane uomo con gilet lilla e mantello verde di foglie d'autunno, chiude gli occhi mentre un nastro di luce dorata lo avvolge, e appare nel giardino di rose tra il giorno e la notte, con la bilancia in mano e una colomba sulla fontana"},
     "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
 }
 
