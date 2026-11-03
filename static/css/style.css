@@ -1116,3 +1116,18 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 .hero-top .mini-deck{align-self:center}
 @media (max-width:600px){.hero-id{gap:6px}.hero-id .kicker{font-size:.9rem}}
 .hero-top .md-txt b{white-space:nowrap}
+/* mazzo accanto al logo: carte più grandi */
+.hero-top .md-cards{width:184px;height:184px}
+.hero-top .md-c{left:46px;top:6px;width:92px;height:138px;border-radius:8px}
+.hero-top .md-c::after{font-size:26px}
+@media (max-width:600px){
+  .hero-top{gap:clamp(16px,6vw,32px)}
+  .hero-top .md-cards{width:140px;height:138px}
+  .hero-top .md-c{left:35px;top:4px;width:70px;height:105px}
+}
+@media (max-width:400px){
+  .hero-top{gap:10px}
+  .hero-id .kicker{font-size:.8rem;letter-spacing:.08em}
+  .hero-top .md-cards{width:124px;height:124px}
+  .hero-top .md-c{left:31px;top:4px;width:62px;height:93px}
+}
