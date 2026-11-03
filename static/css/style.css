@@ -1157,6 +1157,6 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
   .h1-cta{left:calc(var(--ab-off,0px) + var(--abitalo-w, 6.2rem) + 18px)}
 }
 /* Home: la foto di Dalia nel cerchio al posto del logo grande; il logo resta (più grande) nella barra in alto */
-.hero-photo{aspect-ratio:1;object-fit:cover;object-position:50% 0;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 10px 26px rgba(0,0,0,.25)}
+.hero-photo{aspect-ratio:1;object-fit:cover;object-position:50% 50%;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 10px 26px rgba(0,0,0,.25)}
 .brand img{width:48px;height:48px}
 .brand{font-size:1.35rem}
