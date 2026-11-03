@@ -974,3 +974,13 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
     background:color-mix(in srgb,var(--elc) 9%,var(--bg));border-top:1px solid color-mix(in srgb,var(--elc) 25%,var(--line))}
 }
 .ad-nav button{width:44px;height:44px}
+/* telefono/tablet in verticale: ogni scheda occupa tutta l'altezza dello schermo, uguale per tutti i segni, senza scorrere.
+   L'immagine/video si adatta allo spazio che resta dopo i testi. */
+@media (max-width:899px) and (min-height:540px){
+  .arch-dlg{height:calc(100svh - 24px);overflow:hidden}
+  .arch-dlg .ad-card{height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:8px}
+  .arch-dlg .ad-card .ad-media{flex:1 1 0;min-height:110px;aspect-ratio:auto;margin-bottom:6px}
+  .arch-dlg .ad-card:not(.has-m) .ad-meta{margin-top:auto}
+  .arch-dlg .ad-card .ad-nav{margin-top:auto}
+  .arch-dlg .ad-card .ad-q{margin-top:2px;margin-bottom:0}
+}
