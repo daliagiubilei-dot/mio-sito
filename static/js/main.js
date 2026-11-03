@@ -145,6 +145,7 @@
     var step = function (d) {
       var list = visible(), k = list.indexOf(cur);
       show(list[(k + d + list.length) % list.length]);
+      dlg.scrollTop = 0;   // la nuova scheda parte dall'inizio; le frecce restano fisse in basso
     };
     z.querySelectorAll('.sign').forEach(function (c) {
       c.addEventListener('click', function () { opener = c; show(+c.dataset.i); dlg.showModal(); });

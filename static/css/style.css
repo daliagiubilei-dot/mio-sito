@@ -966,3 +966,11 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 .ad-card .ad-media .ad-sound svg path:first-child{fill:currentColor;stroke:none}
 .ad-card .ad-media .ad-sound:hover{background:var(--gold2);border-color:var(--gold2)}
 .ad-card .ad-media .ad-sound:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+/* scheda aperta su telefono/tablet: le frecce restano sempre in basso, raggiungibili anche quando la scheda è più alta dello schermo */
+@media (max-width:899px){
+  .ad-card{overflow:clip}
+  .ad-card{grid-template-columns:minmax(0,1fr)}
+  .ad-card .ad-nav{position:sticky;bottom:0;z-index:3;margin:8px -28px -22px;padding:10px 28px 14px;
+    background:color-mix(in srgb,var(--elc) 9%,var(--bg));border-top:1px solid color-mix(in srgb,var(--elc) 25%,var(--line))}
+}
+.ad-nav button{width:44px;height:44px}
