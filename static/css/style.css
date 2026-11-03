@@ -1131,3 +1131,7 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
   .hero-top .md-cards{width:124px;height:124px}
   .hero-top .md-c{left:31px;top:4px;width:62px;height:93px}
 }
+/* logo e mazzo: la scritta sotto le carte allineata all'ultima riga del nome sotto il logo */
+.hero-top{align-items:stretch}
+.hero-top .hero-id{justify-content:space-between}
+.hero-top .mini-deck{align-self:stretch;justify-content:space-between;padding:0 6px}
