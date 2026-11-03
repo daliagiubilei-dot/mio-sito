@@ -251,6 +251,19 @@
     });
   }
 
+  // Home, telefono: il pulsante del colloquio si appoggia subito dopo «Abitalo.» (misura la parola reale)
+  var abEm = document.querySelector('.hero h1 em'), abWrap = document.querySelector('.h1-wrap');
+  if (abEm && abWrap) {
+    var fitCta = function () {
+      var r = document.createRange(); r.selectNodeContents(abEm);
+      var w = r.getBoundingClientRect().width;
+      if (w) abWrap.style.setProperty('--abitalo-w', Math.ceil(w) + 'px');
+    };
+    fitCta();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCta);
+    addEventListener('resize', fitCta);
+  }
+
   // Home: «Il cielo di questo mese». Carta del segno del Sole oggi; «Pesca la tua carta» mescola il mazzo e ne gira una a caso.
   var tSec = document.getElementById('tarot'), tDataEl = document.getElementById('tarotData');
   if (tSec && tDataEl) {

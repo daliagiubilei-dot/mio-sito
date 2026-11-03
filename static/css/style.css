@@ -1146,3 +1146,7 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
   .hero-top .md-c.c1,.hero-top .md-c.c3{top:14px}
   .hero-top .md-front{left:23px;top:0;width:78px;height:117px}
 }
+/* telefono: «Primo colloquio gratuito» subito accanto ad «Abitalo.» invece che spinto sul bordo destro */
+@media (max-width:600px){
+  .h1-cta{right:auto;left:calc(var(--abitalo-w, 6.2rem) + 18px)}
+}
