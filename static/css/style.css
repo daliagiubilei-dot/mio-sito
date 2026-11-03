@@ -1198,3 +1198,22 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
 /* mazzo centrato in altezza accanto alla foto; la scritta resta in basso, allineata al nome */
 .hero-top .mini-deck{justify-content:flex-end}
 .hero-top .mini-deck .md-cards{margin-block:auto}
+/* «Pesca la tua carta» come vero tasto, subito sotto il mazzo, con la manina */
+.hero-top .mini-deck{justify-content:center;gap:10px}
+.hero-top .mini-deck .md-cards{margin-block:0}
+.hero-top .md-btn{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--onGold);font:600 .95rem var(--body);
+  padding:9px 16px 9px 12px;border-radius:99px;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:background .3s,transform .3s;white-space:nowrap}
+.hero-top .mini-deck:hover .md-btn,.hero-top .mini-deck:focus-visible .md-btn{background:var(--gold2);transform:translateY(-1px)}
+.md-hand{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 90%}
+@media (prefers-reduced-motion:no-preference){.md-hand{animation:mdTap 2.6s ease-in-out 1s infinite}}
+@keyframes mdTap{0%,70%,100%{transform:translateY(0) scale(1)}78%{transform:translateY(-3px) scale(1.05)}86%{transform:translateY(1px) scale(.95)}}
+@media (max-width:600px){.hero-top .md-btn{font-size:.85rem;padding:8px 13px 8px 10px}.md-hand{width:16px;height:16px}}
+.hero-top .md-txt{align-items:center}
+.hero-top .md-btn{align-self:center;width:auto}
+@media (max-width:400px){
+  .hero-top{gap:8px}
+  .hero-id .kicker{font-size:.76rem;letter-spacing:.05em}
+  .hero-top .md-btn{font-size:.8rem;padding:7px 11px 7px 9px;gap:5px}
+  .md-hand{width:15px;height:15px}
+}
+@media (max-width:340px){.hero-top .md-btn{font-size:.72rem;padding:6px 9px}.hero-top .md-btn .md-hand{display:none}.hero-top .md-cards{width:110px}.hero-top .md-c.c1,.hero-top .md-c.c3{width:56px;left:27px}.hero-top .md-front{width:66px;height:99px;left:22px}}
