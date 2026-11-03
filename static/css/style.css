@@ -1217,3 +1217,5 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
   .md-hand{width:15px;height:15px}
 }
 @media (max-width:340px){.hero-top .md-btn{font-size:.72rem;padding:6px 9px}.hero-top .md-btn .md-hand{display:none}.hero-top .md-cards{width:110px}.hero-top .md-c.c1,.hero-top .md-c.c3{width:56px;left:27px}.hero-top .md-front{width:66px;height:99px;left:22px}}
+.hero-top .md-btn{background:transparent;color:var(--gold2);border:1px solid color-mix(in srgb,var(--gold) 70%,transparent);box-shadow:none}
+.hero-top .mini-deck:hover .md-btn,.hero-top .mini-deck:focus-visible .md-btn{background:color-mix(in srgb,var(--gold) 10%,transparent);border-color:var(--gold)}
