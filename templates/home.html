@@ -5,12 +5,12 @@
     <div>
       <div class="hero-top">
         <div class="hero-id">
-          <img class="hero-logo" src="{{ url_for('static', filename='img/logo-daliamae.png') }}" alt="Logo Daliamae: fiore con spirale e goccia d'oro">
+          <img class="hero-photo hero-plain" src="{{ asset('img/dalia-ritratto.jpg') }}" alt="Dalia Giubilei, operatrice olistica, sorride" width="480" height="872">
           <p class="label kicker">Dalia Giubilei<br>Operatrice olistica</p>
         </div>
         {% if tarot_month %}<a class="mini-deck" href="#tarot" id="miniDeck">
           <span class="md-cards" aria-hidden="true"><span class="md-c c1"></span><span class="md-c c3"></span><span class="md-c c2 md-front">{% if tarot_month.fig %}<img src="{{ tarot_month.fig }}" alt="">{% else %}<i>{{ tarot_month.sym }}</i>{% endif %}</span></span>
-          <span class="md-txt"><b>Pesca la tua carta</b><small>{{ tarot_month.name }}, la carta del mese</small></span>
+          <span class="md-txt"><b class="md-btn"><svg class="md-hand" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.6-2.2L4.4 15.3a1.6 1.6 0 0 1 2.4-2.1L9 15"/></svg>Pesca la tua carta</b><small>{{ tarot_month.name }}, la carta del mese</small></span>
         </a>{% endif %}
       </div>
       <div class="h1-wrap">

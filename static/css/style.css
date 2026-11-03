@@ -1156,3 +1156,69 @@ section.block.vs-list{padding-block:clamp(18px,3.5vh,36px) 72px}
   .hero h1 em{padding-left:var(--ab-off,0px)}
   .h1-cta{left:calc(var(--ab-off,0px) + var(--abitalo-w, 6.2rem) + 18px)}
 }
+/* Home: la foto di Dalia nel cerchio al posto del logo grande; il logo resta (più grande) nella barra in alto */
+.hero-photo{aspect-ratio:1;object-fit:cover;object-position:50% 50%;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 10px 26px rgba(0,0,0,.25)}
+.brand img{width:48px;height:48px}
+.brand{font-size:1.35rem}
+/* foto di Dalia in una forma morbida a macchia, più alta che larga, così si vede tutta */
+.hero-photo{aspect-ratio:4/5;object-position:50% 0;height:auto;
+  border-radius:47% 53% 44% 56% / 38% 41% 59% 62%;
+  border:3px solid var(--gold);box-shadow:0 0 0 7px color-mix(in srgb,var(--gold) 12%,transparent),0 12px 28px rgba(0,0,0,.25)}
+/* foto di Dalia a forma di macchia (maschera organica con piccoli schizzi), alone dorato che segue la forma */
+.hero-photo-wrap{display:block;width:var(--logo);max-width:100%;filter:drop-shadow(0 0 1.5px var(--gold)) drop-shadow(0 0 1.5px var(--gold)) drop-shadow(0 10px 18px rgba(0,0,0,.25))}
+.hero-photo-wrap .hero-photo{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 0;border:0;border-radius:0;box-shadow:none;margin:0;
+  -webkit-mask:url("../img/macchia-mask.svg") center/100% 100% no-repeat;mask:url("../img/macchia-mask.svg") center/100% 100% no-repeat}
+/* foto di Dalia nel cerchio (scontornata da lei, su sfondo color miele): ripristina il cerchio */
+.hero-top .hero-photo{aspect-ratio:1;object-fit:cover;object-position:50% 50%;border-radius:50%;border:3px solid var(--gold);
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 10px 26px rgba(0,0,0,.25);-webkit-mask:none;mask:none}
+/* foto di Dalia intera, in un rettangolo verticale con angoli morbidi (nessun taglio) */
+.hero-top .hero-rect{display:block;width:auto;height:calc(var(--logo) * 1.3);aspect-ratio:auto;object-fit:contain;max-width:none;margin:0;
+  border-radius:16px;border:3px solid var(--gold);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 14%,transparent),0 12px 28px rgba(0,0,0,.25);-webkit-mask:none;mask:none}
+@media (max-width:600px){.hero-top .hero-rect{height:200px}}
+@media (max-width:400px){.hero-top .hero-rect{height:180px}}
+.hero-top .hero-rect{border-radius:50% / 30%}
+/* foto di Dalia dentro un tarocco, come le carte del mazzo accanto */
+.dalia-tarot{display:block;flex:none;height:calc(var(--logo) * 1.3);aspect-ratio:2/3;background:var(--paper);
+  background-image:radial-gradient(ellipse at 50% 40%,transparent 55%,color-mix(in srgb,var(--paper2) 80%,transparent));
+  padding:8px;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.3)}
+.dt-frame{display:flex;flex-direction:column;height:100%;border:2px solid var(--ink);outline:1px solid var(--gilt);outline-offset:-6px;border-radius:8px;overflow:hidden}
+.dt-num{display:flex;justify-content:center;align-items:center;gap:10px;padding:4px 0 3px;font:400 .85rem/1 var(--display);color:var(--gilt);border-bottom:2px solid var(--ink)}
+.dt-num i{font-style:normal;font-size:.6rem}
+.dt-img{display:block;flex:1 1 auto;min-height:0;width:100%;object-fit:cover;object-position:50% 0;margin:0}
+.dt-ttl{border-top:2px solid var(--ink);padding:5px 4px 4px;text-align:center;font:400 .9rem/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+@media (max-width:600px){.dalia-tarot{height:180px;padding:6px;border-radius:10px}.dt-ttl{font-size:.72rem;letter-spacing:.14em}.dt-num{font-size:.7rem;padding:3px 0 2px}}
+@media (max-width:400px){.dalia-tarot{height:164px}}
+/* foto di Dalia così com'è: intera, senza cornici né forme */
+.hero-top .hero-plain{display:block;flex:none;width:auto;height:calc(var(--logo) * 1.3);max-width:none;margin:0;aspect-ratio:auto;object-fit:contain;
+  border:0;border-radius:0;box-shadow:none;-webkit-mask:none;mask:none}
+@media (max-width:600px){.hero-top .hero-plain{height:180px}}
+@media (max-width:400px){.hero-top .hero-plain{height:164px}}
+/* foto di Dalia ad arco, come quella di «Chi ti accompagna» */
+.hero-top .hero-plain{aspect-ratio:3/4;object-fit:cover;object-position:50% 0;border-radius:999px 999px 8px 8px}
+/* mazzo centrato in altezza accanto alla foto; la scritta resta in basso, allineata al nome */
+.hero-top .mini-deck{justify-content:flex-end}
+.hero-top .mini-deck .md-cards{margin-block:auto}
+/* «Pesca la tua carta» come vero tasto, subito sotto il mazzo, con la manina */
+.hero-top .mini-deck{justify-content:center;gap:10px}
+.hero-top .mini-deck .md-cards{margin-block:0}
+.hero-top .md-btn{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:var(--onGold);font:600 .95rem var(--body);
+  padding:9px 16px 9px 12px;border-radius:99px;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:background .3s,transform .3s;white-space:nowrap}
+.hero-top .mini-deck:hover .md-btn,.hero-top .mini-deck:focus-visible .md-btn{background:var(--gold2);transform:translateY(-1px)}
+.md-hand{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 90%}
+@media (prefers-reduced-motion:no-preference){.md-hand{animation:mdTap 2.6s ease-in-out 1s infinite}}
+@keyframes mdTap{0%,70%,100%{transform:translateY(0) scale(1)}78%{transform:translateY(-3px) scale(1.05)}86%{transform:translateY(1px) scale(.95)}}
+@media (max-width:600px){.hero-top .md-btn{font-size:.85rem;padding:8px 13px 8px 10px}.md-hand{width:16px;height:16px}}
+.hero-top .md-txt{align-items:center}
+.hero-top .md-btn{align-self:center;width:auto}
+@media (max-width:400px){
+  .hero-top{gap:8px}
+  .hero-id .kicker{font-size:.76rem;letter-spacing:.05em}
+  .hero-top .md-btn{font-size:.8rem;padding:7px 11px 7px 9px;gap:5px}
+  .md-hand{width:15px;height:15px}
+}
+@media (max-width:340px){.hero-top .md-btn{font-size:.72rem;padding:6px 9px}.hero-top .md-btn .md-hand{display:none}.hero-top .md-cards{width:110px}.hero-top .md-c.c1,.hero-top .md-c.c3{width:56px;left:27px}.hero-top .md-front{width:66px;height:99px;left:22px}}
+.hero-top .md-btn{background:transparent;color:var(--gold2);border:1px solid color-mix(in srgb,var(--gold) 70%,transparent);box-shadow:none}
+.hero-top .mini-deck:hover .md-btn,.hero-top .mini-deck:focus-visible .md-btn{background:color-mix(in srgb,var(--gold) 10%,transparent);border-color:var(--gold)}
+/* barra in alto: il logo grande della Home (rimpicciolito) e «Daliamae» al centro della barra */
+.brand img{width:62px;height:62px;border-radius:50%;object-fit:contain}
+
