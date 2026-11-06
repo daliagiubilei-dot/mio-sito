@@ -60,7 +60,7 @@ PAGE_DEFAULTS = {
         "massaggio psicosomatico, tocco consapevole, benessere corpo mente, benessere olistico"),
     "archetipi-astrologici": ("Archetipi astrologici",
         "Archetipi astrologici | I 12 segni zodiacali – Daliamae",
-        "Dodici archetipi astrologici, dal Guerriero al Mistico: i segni zodiacali letti con l'astrologia evolutiva come modi di stare al mondo e di crescere.",
+        "Dodici archetipi astrologici, dal Guerriero alla Mistica: i segni zodiacali letti con l'astrologia evolutiva come modi di stare al mondo e di crescere.",
         "archetipi astrologici, segni zodiacali, astrologia evolutiva, elementi fuoco terra aria acqua"),
     "eventi": ("Eventi",
         "Eventi olistici | Meditazioni di gruppo e incontri – Daliamae",

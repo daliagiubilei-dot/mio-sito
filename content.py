@@ -49,7 +49,7 @@ SERVICES = {
 # (simbolo, segno, elemento, archetipo, frase)
 SIGNS = [
     ("♈︎", "Ariete", "Fuoco", "Il Guerriero", "Il coraggio di iniziare e di affermare chi sei."),
-    ("♉︎", "Toro", "Terra", "Il Custode", "La calma di radicarsi e di coltivare ciò che ha valore."),
+    ("♉︎", "Toro", "Terra", "La Custode", "La calma di radicarsi e di coltivare ciò che ha valore."),
     ("♊︎", "Gemelli", "Aria", "Il Messaggero", "La curiosità che collega idee, persone e parole."),
     ("♋︎", "Cancro", "Acqua", "La Madre", "La capacità di accogliere, nutrire e proteggere."),
     ("♌︎", "Leone", "Fuoco", "Il Sovrano", "La luce di chi si esprime dal cuore."),
@@ -57,9 +57,9 @@ SIGNS = [
     ("♎︎", "Bilancia", "Aria", "L'Amante", "La ricerca di armonia, bellezza e relazione."),
     ("♏︎", "Scorpione", "Acqua", "L'Alchimista", "La forza di attraversare l'ombra e rinascere."),
     ("♐︎", "Sagittario", "Fuoco", "Il Cercatore", "Lo slancio verso il senso e l'orizzonte."),
-    ("♑︎", "Capricorno", "Terra", "Il Saggio", "La pazienza di costruire e la responsabilità."),
+    ("♑︎", "Capricorno", "Terra", "La Saggia", "La pazienza di costruire e la responsabilità."),
     ("♒︎", "Acquario", "Aria", "Il Visionario", "La libertà di pensare oltre le regole."),
-    ("♓︎", "Pesci", "Acqua", "Il Mistico", "L'empatia che scioglie i confini."),
+    ("♓︎", "Pesci", "Acqua", "La Mistica", "L'empatia che scioglie i confini."),
 ]
 
 # Quando si apre una carta: periodo, dono (dalla leggenda della creazione riportata da Martin Schulman,
@@ -105,7 +105,7 @@ SIGN_MEDIA = {
     "Bilancia": {"fig": "img/archetipi/bilancia-figura.jpg", "img": "img/archetipi/bilancia.jpg", "video": "video/archetipi/bilancia.mp4", "audio": True, "alt": "Video: la Bilancia, giovane uomo con gilet lilla e mantello verde di foglie d'autunno, chiude gli occhi mentre un nastro di luce dorata lo avvolge, e appare nel giardino di rose tra il giorno e la notte, con la bilancia in mano e una colomba sulla fontana"},
     "Scorpione": {"fig": "img/archetipi/scorpione-figura.jpg", "img": "img/archetipi/scorpione.jpg", "pos": "50% 12%", "alt": "Illustrazione dello Scorpione, l'Alchimista: una giovane donna dai lunghi capelli neri in abito bordeaux ricamato d'oro, inginocchiata sulla riva di un lago scuro in una grotta, tiene tra le mani un'ampolla di luce dorata. Sulla roccia accanto a lei uno scorpione, che riflesso nell'acqua diventa una fenice di fuoco. Sullo sfondo un vulcano e il simbolo dello Scorpione disegnato dalle stelle"},
     "Sagittario": {"fig": "img/archetipi/sagittario-figura.jpg", "img": "img/archetipi/sagittario.jpg", "video": "video/archetipi/sagittario.mp4", "audio": True, "alt": "Video: un centauro in un lago di montagna sotto la luna piena, tra cristalli verdi"},
-    "Capricorno": {"fig": "img/archetipi/capricorno-figura.jpg", "img": "img/archetipi/capricorno.jpg", "pos": "50% 30%", "alt": "Illustrazione del Capricorno, il Saggio: un uomo maturo con mantello verde scuro ricamato d'argento, in piedi sulla vetta innevata di una montagna all'alba d'inverno, tiene tra le mani un cristallo che si accende di luce dorata. Ai suoi piedi ha posato il sacco di tela portato durante la salita; accanto a lui uno stambecco, in cielo un corvo e il simbolo del Capricorno disegnato dalle stelle, mentre il sole sorge dietro le vette e scioglie il ghiaccio"},
+    "Capricorno": {"fig": "img/archetipi/capricorno-figura.jpg", "img": "img/archetipi/capricorno.jpg", "pos": "50% 30%", "alt": "Illustrazione del Capricorno, la Saggia: una donna matura dai capelli d'argento raccolti in una treccia, con mantello verde scuro ricamato e corde annodate sul petto, in piedi sulla vetta innevata di una montagna all'alba d'inverno, tiene in mano un cristallo che si accende di luce dorata. Ai suoi piedi ha posato il sacco di tela portato durante la salita; accanto a lei uno stambecco, in cielo un corvo e il simbolo del Capricorno disegnato dalle stelle, mentre il sole sorge dietro le vette"},
     "Acquario": {"fig": "img/archetipi/acquario-figura.jpg", "img": "img/archetipi/acquario.jpg", "pos": "50% 20%", "alt": "Illustrazione dell'Acquario, il Visionario: un giovane dai capelli chiari mossi dal vento, con un'aureola dorata e una tuta argentata a fulmini colorati, versa acqua luminosa da due anfore su un paesaggio di ghiaccio di notte. Nel cielo l'aurora boreale e la costellazione dell'Acquario, un dirigibile e un deltaplano; una zebra e un orso polare bevono dall'acqua"},
 }
 
