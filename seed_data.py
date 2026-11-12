@@ -106,6 +106,29 @@ CUFFIE_GIUDIZIO_BODY = """
 <p>E tu, da che parte stai? Ti fermi a giudicare la superficie o provi a guardare cosa c'è dietro?</p>
 """
 
+
+TALENTI_BODY = """
+<p>Nel Vangelo, un padrone affida dei talenti ai suoi servi. Due li fanno fruttare. Il terzo, per paura, nasconde il suo sotto terra.</p>
+
+<blockquote>«Ho avuto paura e sono andato a nascondere il tuo talento sotto terra.» (Matteo 25,25)</blockquote>
+
+<p>Non ti verrà chiesto se sei stata buona o cattiva.<br>
+Non ti verrà chiesto se ti sei comportata bene.<br>
+Non ti verrà chiesto se sei stata all'altezza delle aspettative altrui.<br>
+Non ti verrà chiesto se hai sempre fatto la cosa giusta.<br>
+Non ti verrà chiesto se hai accontentato tutti.</p>
+
+<p><strong>Ti verrà chiesto perché non sei stata ciò che solo tu potevi essere.</strong><br>
+Perché hai nascosto il tuo talento.</p>
+
+<p>Perché il tuo talento non è tuo, ti è stato affidato.<br>
+È sacro e va onorato.</p>
+
+<p>Non guardare il dito, destinazione Luna. 🚀🌙</p>
+
+<p>▶️ Guarda il video di questa riflessione nella serie <a href="/video-social/pillole-per-l-anima">Pillole per l'anima</a>.</p>
+"""
+
 POSTS = [
     dict(
         slug="crisi-vera-bussola",
@@ -136,6 +159,21 @@ POSTS = [
         meta_title="Aura battle: togliamoci le cuffie del giudizio – Daliamae",
         meta_description="Aura battle e six seven: cosa cercano davvero i ragazzi? Il significato di aura, la simbologia dei numeri 6 e 7 e l'invito a comprendere invece di giudicare.",
         keywords="aura battle, significato aura, six seven significato, adolescenti, generazione Z, giudizio, comprendere i giovani, numerologia, crescita personale",
+    ),
+    dict(
+        slug="parabola-dei-talenti-non-nascondere-il-tuo-talento",
+        title="La parabola dei talenti: non nascondere il tuo talento",
+        category="Crescita spirituale",
+        excerpt="Non ti verrà chiesto se sei stata buona o se hai accontentato tutti. Ti verrà chiesto perché hai nascosto il tuo talento.",
+        lead="Una parabola antica che parla di noi, oggi: della paura che ci spinge a nascondere proprio ciò che siamo venuti a portare.",
+        body_html=TALENTI_BODY.strip(),
+        cover="img/blog/parabola-talenti-cover.jpg",
+        cover_alt="Illustrazione ad acquerello: Dalia con il cagnolino Blanco, una luna piena e un razzo, con la scritta Non guardare il dito, destinazione Luna",
+        published_at=date(2026, 11, 12),
+        reading_min=2,
+        meta_title="La parabola dei talenti: non nascondere il tuo talento – Daliamae",
+        meta_description="La parabola dei talenti (Matteo 25) riletta per la crescita personale: il tuo talento ti è stato affidato, è sacro e va onorato. Non nasconderlo per paura.",
+        keywords="parabola dei talenti, Matteo 25, talento, crescita personale, crescita spirituale, paura, autenticità, Daliamae",
     ),
 ]
 
@@ -173,6 +211,18 @@ VIDEOS = [
         upload_date=date(2026, 11, 2),
         sort=2,
         series="cambio-di-prospettiva",   # slug della serie in cui compare
+    ),
+    dict(
+        key="pillole-ep1-talento",
+        title="Pillole per l'anima · Il tuo talento ti è stato affidato",
+        description="Dalla parabola dei talenti: non ti verrà chiesto se hai accontentato tutti, "
+                    "ma perché non sei stata ciò che solo tu potevi essere. Il tuo talento è sacro e va onorato. "
+                    "Non guardare il dito, destinazione Luna.",
+        file="video/pillole-ep1-talento.mp4",
+        poster="video/pillole-ep1-talento.jpg",
+        upload_date=date(2026, 11, 12),
+        sort=1,
+        series="pillole-per-l-anima",
     ),
 ]
 
@@ -216,6 +266,27 @@ def _add_video_series():
         db.session.rollback()
 
 
+# Serie aggiunte dopo il primo avvio: create una sola volta, poi si modificano dal pannello /admin/serie.
+NEW_SERIES = [
+    ("pillole-per-l-anima", "Pillole per l'anima", 4,
+     "Una pillola al giorno per l'anima: brevi video per ritrovare gioia, fiducia e il coraggio di essere te.",
+     "img/serie/pillole-per-l-anima.jpg"),
+]
+
+
+def _add_new_series():
+    for slug, title, sort, desc, cover in NEW_SERIES:
+        try:
+            if not _first_time("serie_" + slug) or VideoSeries.query.filter_by(slug=slug).first():
+                db.session.commit()
+                continue
+            db.session.add(VideoSeries(slug=slug, title=title, sort=sort, description=desc,
+                                       published=True, cover=cover))
+            db.session.commit()
+        except Exception:      # più processi che partono insieme: il primo vince
+            db.session.rollback()
+
+
 def _add_videos():
     for data in VIDEOS:
         data = dict(data)
@@ -236,6 +307,8 @@ def _add_videos():
 
 
 def _add_posts():
+    _add_video_series()
+    _add_new_series()
     _add_videos()
     from models import Post
     for data in POSTS:
