@@ -390,6 +390,7 @@ def create_app():
             flash("Inserisci un indirizzo email valido e accetta il consenso per iscriverti.", "err")
             return redirect(back)
         sub = Subscriber.query.filter_by(email=email).first()
+        is_new = sub is None
         if sub is None:
             sub = Subscriber(email=email, source=(request.form.get("source") or "")[:200],
                              consent_version=newsletter.CONSENT_VERSION)
@@ -397,6 +398,9 @@ def create_app():
         ok, status, err = newsletter.subscribe_mailchimp(email)
         sub.mailchimp_status, sub.mailchimp_error = status, err
         db.session.commit()
+        if is_new and mailer.is_configured():                   # avviso via email, in secondo piano
+            threading.Thread(target=mailer.send_subscriber_email, args=(email, sub.source, status),
+                             daemon=True).start()
         session["nl_confirm"] = bool(ok)
         return redirect(url_for("newsletter_thanks"))
 

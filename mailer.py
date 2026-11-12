@@ -101,3 +101,11 @@ def send_lead_email(lead):
         lead.name, lead.contact, lead.interest or "-", lead.message or "(nessun messaggio)")
     reply_to = lead.contact if _EMAIL.match(lead.contact or "") else None
     return _send(subject, body, reply_to)
+
+
+def send_subscriber_email(email, source, mailchimp_status):
+    """Avvisa Dalia di una nuova iscrizione alla newsletter. Ritorna (riuscito, spiegazione)."""
+    subject = "Nuova iscrizione alla newsletter: %s" % email
+    body = "Email: %s\nPagina da cui si è iscritto: %s\nStato Mailchimp: %s\n\n— Iscrizione ricevuta dal sito Daliamae." % (
+        email, source or "-", mailchimp_status or "-")
+    return _send(subject, body, email)
