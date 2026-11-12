@@ -52,6 +52,7 @@ def seed_if_empty():
     _update_faq_progetto_animico()
     _update_seo_oroscopo()
     _update_massaggio_prossimamente()
+    _update_titolo_talenti()
 
 
 # ---------------------------------------------------------------- articoli aggiunti dal codice
@@ -162,7 +163,7 @@ POSTS = [
     ),
     dict(
         slug="parabola-dei-talenti-non-nascondere-il-tuo-talento",
-        title="La parabola dei talenti: non nascondere il tuo talento",
+        title="Non guardare il dito, destinazione Luna",
         category="Crescita spirituale",
         excerpt="Non ti verrà chiesto se sei stata buona o se hai accontentato tutti. Ti verrà chiesto perché hai nascosto il tuo talento.",
         lead="Una parabola antica che parla di noi, oggi: della paura che ci spinge a nascondere proprio ciò che siamo venuti a portare.",
@@ -171,7 +172,7 @@ POSTS = [
         cover_alt="Illustrazione ad acquerello: Dalia con il cagnolino Blanco, una luna piena e un razzo, con la scritta Non guardare il dito, destinazione Luna",
         published_at=date(2026, 11, 12),
         reading_min=2,
-        meta_title="La parabola dei talenti: non nascondere il tuo talento – Daliamae",
+        meta_title="Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae",
         meta_description="La parabola dei talenti (Matteo 25) riletta per la crescita personale: il tuo talento ti è stato affidato, è sacro e va onorato. Non nasconderlo per paura.",
         keywords="parabola dei talenti, Matteo 25, talento, crescita personale, crescita spirituale, paura, autenticità, Daliamae",
     ),
@@ -421,6 +422,24 @@ def _update_massaggio_prossimamente():
                 row.title = new_t
             if row.meta_description in ("", old_d):
                 row.meta_description = new_d
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+
+# ---------------------------------------------------------------- titolo dell'articolo sulla parabola dei talenti
+# Aggiorna una sola volta titolo e meta title, solo se sono ancora quelli della prima pubblicazione.
+def _update_titolo_talenti():
+    try:
+        if not _first_time("titolo_talenti_luna"):
+            return
+        from models import Post
+        row = Post.query.filter_by(slug="parabola-dei-talenti-non-nascondere-il-tuo-talento").first()
+        if row:
+            if row.title == "La parabola dei talenti: non nascondere il tuo talento":
+                row.title = "Non guardare il dito, destinazione Luna"
+            if row.meta_title in ("", "La parabola dei talenti: non nascondere il tuo talento – Daliamae"):
+                row.meta_title = "Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae"
         db.session.commit()
     except Exception:
         db.session.rollback()
