@@ -9,6 +9,8 @@ import logging
 import os
 import secrets
 import threading
+
+import validators
 import time
 from collections import defaultdict
 from datetime import date, datetime
@@ -361,8 +363,11 @@ def create_app():
                 error = "Hai inviato troppe richieste: riprova tra qualche minuto."
             elif not (form.get("nome", "").strip() and form.get("contatto", "").strip() and form.get("consenso")):
                 error = "Compila nome e recapito e acconsenti al trattamento dei dati."
+            elif validators.check_contact(form["contatto"])[1]:
+                error = validators.check_contact(form["contatto"])[1]
             else:
-                lead = Lead(name=form["nome"].strip()[:120], contact=form["contatto"].strip()[:200],
+                contact = validators.check_contact(form["contatto"])[0]
+                lead = Lead(name=form["nome"].strip()[:120], contact=contact[:200],
                             interest=form.get("pratica", "")[:120], message=form.get("messaggio", "").strip()[:2000],
                             consent=True)
                 db.session.add(lead)
@@ -388,6 +393,10 @@ def create_app():
             return redirect(back)
         if not newsletter.EMAIL_RE.match(email) or not form.get("consenso"):
             flash("Inserisci un indirizzo email valido e accetta il consenso per iscriverti.", "err")
+            return redirect(back)
+        email_err = validators.check_email(email)[1]
+        if email_err:
+            flash(email_err, "err")
             return redirect(back)
         sub = Subscriber.query.filter_by(email=email).first()
         is_new = sub is None
