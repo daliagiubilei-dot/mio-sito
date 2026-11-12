@@ -53,6 +53,7 @@ def seed_if_empty():
     _update_seo_oroscopo()
     _update_massaggio_prossimamente()
     _update_titolo_talenti()
+    _update_talenti_seo_parabola()
 
 
 # ---------------------------------------------------------------- articoli aggiunti dal codice
@@ -172,9 +173,9 @@ POSTS = [
         cover_alt="Illustrazione ad acquerello: Dalia con il cagnolino Blanco, una luna piena e un razzo, con la scritta Non guardare il dito, destinazione Luna",
         published_at=date(2026, 11, 12),
         reading_min=2,
-        meta_title="Non guardare il dito, destinazione Luna – Daliamae",
-        meta_description="Il tuo talento non è tuo: ti è stato affidato. È sacro e va onorato. Una riflessione di crescita personale sulla paura che ci spinge a nasconderci.",
-        keywords="talento, non nascondere il tuo talento, crescita personale, crescita spirituale, paura, autenticità, coraggio di essere se stessi, Daliamae",
+        meta_title="Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae",
+        meta_description="La parabola dei talenti riletta per la crescita personale: il tuo talento ti è stato affidato, è sacro e va onorato. Non nasconderlo per paura.",
+        keywords="parabola dei talenti, significato parabola dei talenti, talento, non nascondere il tuo talento, crescita personale, crescita spirituale, paura, autenticità, Daliamae",
     ),
 ]
 
@@ -475,6 +476,24 @@ def _update_talenti_senza_parabola():
         v = Video.query.filter_by(file="video/pillole-ep1-talento.mp4").first()
         if v and v.description.startswith("Dalla parabola dei talenti"):
             v.description = next(x for x in VIDEOS if x["key"] == "pillole-ep1-talento")["description"]
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+
+# ---------------------------------------------------------------- articolo «Non guardare il dito»: SEO con «parabola dei talenti»
+# Nel testo visibile niente «parabola», ma per Google title, description e parole chiave la citano.
+def _update_talenti_seo_parabola():
+    try:
+        if not _first_time("talenti_seo_parabola"):
+            return
+        from models import Post
+        new = next(p for p in POSTS if p["slug"] == "non-guardare-il-dito-destinazione-luna")
+        row = Post.query.filter_by(slug=new["slug"]).first()
+        if row:
+            for field, old in (("meta_title", 'Non guardare il dito, destinazione Luna – Daliamae'), ("meta_description", 'Il tuo talento non è tuo: ti è stato affidato. È sacro e va onorato. Una riflessione di crescita personale sulla paura che ci spinge a nasconderci.'), ("keywords", 'talento, non nascondere il tuo talento, crescita personale, crescita spirituale, paura, autenticità, coraggio di essere se stessi, Daliamae')):
+                if getattr(row, field) in ("", old):
+                    setattr(row, field, new[field])
         db.session.commit()
     except Exception:
         db.session.rollback()
