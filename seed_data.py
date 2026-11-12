@@ -162,19 +162,19 @@ POSTS = [
         keywords="aura battle, significato aura, six seven significato, adolescenti, generazione Z, giudizio, comprendere i giovani, numerologia, crescita personale",
     ),
     dict(
-        slug="parabola-dei-talenti-non-nascondere-il-tuo-talento",
+        slug="non-guardare-il-dito-destinazione-luna",
         title="Non guardare il dito, destinazione Luna",
         category="Crescita spirituale",
         excerpt="Non ti verrà chiesto se sei stata buona o se hai accontentato tutti. Ti verrà chiesto perché hai nascosto il tuo talento.",
-        lead="Una parabola antica che parla di noi, oggi: della paura che ci spinge a nascondere proprio ciò che siamo venuti a portare.",
+        lead="Non ti verrà chiesto se hai accontentato tutti. Ti verrà chiesto se hai avuto il coraggio di essere ciò che solo tu potevi essere.",
         body_html=TALENTI_BODY.strip(),
         cover="img/blog/parabola-talenti-cover.jpg",
         cover_alt="Illustrazione ad acquerello: Dalia con il cagnolino Blanco, una luna piena e un razzo, con la scritta Non guardare il dito, destinazione Luna",
         published_at=date(2026, 11, 12),
         reading_min=2,
-        meta_title="Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae",
-        meta_description="La parabola dei talenti (Matteo 25) riletta per la crescita personale: il tuo talento ti è stato affidato, è sacro e va onorato. Non nasconderlo per paura.",
-        keywords="parabola dei talenti, Matteo 25, talento, crescita personale, crescita spirituale, paura, autenticità, Daliamae",
+        meta_title="Non guardare il dito, destinazione Luna – Daliamae",
+        meta_description="Il tuo talento non è tuo: ti è stato affidato. È sacro e va onorato. Una riflessione di crescita personale sulla paura che ci spinge a nasconderci.",
+        keywords="talento, non nascondere il tuo talento, crescita personale, crescita spirituale, paura, autenticità, coraggio di essere se stessi, Daliamae",
     ),
 ]
 
@@ -216,9 +216,7 @@ VIDEOS = [
     dict(
         key="pillole-ep1-talento",
         title="Pillole per l'anima · Il tuo talento ti è stato affidato",
-        description="Dalla parabola dei talenti: non ti verrà chiesto se hai accontentato tutti, "
-                    "ma perché non sei stata ciò che solo tu potevi essere. Il tuo talento è sacro e va onorato. "
-                    "Non guardare il dito, destinazione Luna.",
+        description="Non ti verrà chiesto se hai accontentato tutti, ma perché non sei stata ciò che solo tu potevi essere. Il tuo talento è sacro e va onorato. Non guardare il dito, destinazione Luna.",
         file="video/pillole-ep1-talento.mp4",
         poster="video/pillole-ep1-talento.jpg",
         upload_date=date(2026, 11, 12),
@@ -308,6 +306,7 @@ def _add_videos():
 
 
 def _add_posts():
+    _update_talenti_senza_parabola()
     _add_video_series()
     _add_new_series()
     _add_videos()
@@ -440,6 +439,42 @@ def _update_titolo_talenti():
                 row.title = "Non guardare il dito, destinazione Luna"
             if row.meta_title in ("", "La parabola dei talenti: non nascondere il tuo talento – Daliamae"):
                 row.meta_title = "Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae"
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+
+# ---------------------------------------------------------------- articolo «Non guardare il dito»: niente «parabola»
+# Una sola volta: nuovo indirizzo, testi SEO e descrizione del video senza riferimenti religiosi
+# (solo i campi ancora uguali a quelli della prima pubblicazione).
+TALENTI_OLD = dict(
+    lead=("Una parabola antica che parla di noi, oggi: della paura che ci spinge a nascondere proprio ciò che siamo venuti a portare.",),
+    meta_title=("", "La parabola dei talenti: non nascondere il tuo talento – Daliamae",
+                "Non guardare il dito, destinazione Luna – La parabola dei talenti | Daliamae"),
+    meta_description=("", "La parabola dei talenti (Matteo 25) riletta per la crescita personale: il tuo talento ti è stato affidato, è sacro e va onorato. Non nasconderlo per paura."),
+    keywords=("", "parabola dei talenti, Matteo 25, talento, crescita personale, crescita spirituale, paura, autenticità, Daliamae"),
+    title=("La parabola dei talenti: non nascondere il tuo talento",),
+)
+
+
+def _update_talenti_senza_parabola():
+    try:
+        if not _first_time("talenti_senza_parabola"):
+            db.session.commit()
+            return
+        from models import Post
+        new = next(p for p in POSTS if p["slug"] == "non-guardare-il-dito-destinazione-luna")
+        row = Post.query.filter_by(slug="parabola-dei-talenti-non-nascondere-il-tuo-talento").first()
+        if row and not Post.query.filter_by(slug=new["slug"]).first():
+            row.slug = new["slug"]
+            for field, olds in TALENTI_OLD.items():
+                if getattr(row, field) in olds:
+                    setattr(row, field, new[field])
+            # l'articolo con il nuovo indirizzo esiste già: non va reinserito
+            db.session.add(Setting(key="seeded_post_" + new["slug"], value="1"))
+        v = Video.query.filter_by(file="video/pillole-ep1-talento.mp4").first()
+        if v and v.description.startswith("Dalla parabola dei talenti"):
+            v.description = next(x for x in VIDEOS if x["key"] == "pillole-ep1-talento")["description"]
         db.session.commit()
     except Exception:
         db.session.rollback()
