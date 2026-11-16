@@ -215,6 +215,18 @@ VIDEOS = [
         series="cambio-di-prospettiva",   # slug della serie in cui compare
     ),
     dict(
+        key="cambio-di-prospettiva-ep3",
+        title="Cambio di prospettiva · Episodio 3: ti senti bloccato davanti a una scelta?",
+        description="Quando sei a un bivio, la paura di ferire gli altri o di perdere occasioni può diventare un blocco emotivo che ti paralizza. "
+                    "Ma questo stallo non è una condanna: è una sosta per un cambio di prospettiva, "
+                    "un'occasione per ritrovare la tua bussola interiore.",
+        file="video/cambio-di-prospettiva-ep3.mp4",
+        poster="video/cambio-di-prospettiva-ep3.jpg",
+        upload_date=date(2026, 11, 16),
+        sort=3,
+        series="cambio-di-prospettiva",
+    ),
+    dict(
         key="pillole-ep1-talento",
         title="Pillole per l'anima · Il tuo talento ti è stato affidato",
         description="Non ti verrà chiesto se hai accontentato tutti, ma perché non sei stata ciò che solo tu potevi essere. Il tuo talento è sacro e va onorato. Non guardare il dito, destinazione Luna.",
@@ -238,7 +250,8 @@ VIDEO_SERIES = [
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
      ["video/cambio-di-prospettiva.mp4", "video/cambio-di-prospettiva-ep1.mp4",
-      "video/cambio-di-prospettiva-ep2.mp4"], "img/serie/cambio-di-prospettiva.jpg"),
+      "video/cambio-di-prospettiva-ep2.mp4", "video/cambio-di-prospettiva-ep3.mp4"],
+     "img/serie/cambio-di-prospettiva.jpg"),
     ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
     ("ascoltiamoli", "Ascoltiamoli", 5,
      "I ragazzi di oggi, i loro linguaggi e le loro ricerche: per comprendere invece di giudicare.", [],
