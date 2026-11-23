@@ -227,6 +227,18 @@ VIDEOS = [
         series="cambio-di-prospettiva",
     ),
     dict(
+        key="cambio-di-prospettiva-ep4",
+        title="Cambio di prospettiva · Episodio 4: dispersione mentale, perché hai la mente sempre altrove?",
+        description="Mille schede aperte, mille cose iniziate e a fine giornata ti senti a pezzi. "
+                    "Non è mancanza di concentrazione: è dispersione mentale, il segno di un disallineamento interiore. "
+                    "Il rumore si spegne quando torni al centro e ricompatti la tua attenzione lavorando sulla tua energia interiore.",
+        file="video/cambio-di-prospettiva-ep4.mp4",
+        poster="video/cambio-di-prospettiva-ep4.jpg",
+        upload_date=date(2026, 11, 23),
+        sort=4,
+        series="cambio-di-prospettiva",
+    ),
+    dict(
         key="pillole-ep1-talento",
         title="Pillole per l'anima · Il tuo talento ti è stato affidato",
         description="Non ti verrà chiesto se hai accontentato tutti, ma perché non sei stata ciò che solo tu potevi essere. Il tuo talento è sacro e va onorato. Non guardare il dito, destinazione Luna.",
@@ -250,7 +262,8 @@ VIDEO_SERIES = [
     ("cambio-di-prospettiva", "Cambio di prospettiva", 3,
      "Guardare la stessa situazione da un altro punto di vista: piccoli spostamenti che cambiano tutto.",
      ["video/cambio-di-prospettiva.mp4", "video/cambio-di-prospettiva-ep1.mp4",
-      "video/cambio-di-prospettiva-ep2.mp4", "video/cambio-di-prospettiva-ep3.mp4"],
+      "video/cambio-di-prospettiva-ep2.mp4", "video/cambio-di-prospettiva-ep3.mp4",
+      "video/cambio-di-prospettiva-ep4.mp4"],
      "img/serie/cambio-di-prospettiva.jpg"),
     ("le-notti-di-luna-piena", "Le notti di luna piena", 4, "Riflessioni e pratiche per le notti di luna piena.", []),
     ("ascoltiamoli", "Ascoltiamoli", 5,
